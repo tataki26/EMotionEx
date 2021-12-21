@@ -91,9 +91,14 @@ namespace NetworkFrame01
 
         }
 
-        private void cnntBtn_Click(object sender, EventArgs e)
+        private void cnnt_Btn_Click(object sender, EventArgs e)
         {
-            
+            string host = "192.168.240.2";
+            int port = 2025;
+
+            virtualTableProtocol.Connect_Udp_Client(host, port);
+
+            MessageBox.Show("접속 완료!");
         }
     }
 }

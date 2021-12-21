@@ -57,7 +57,7 @@ namespace NetworkFrame01
             // 
             // writeQp
             // 
-            this.writeQp.Location = new System.Drawing.Point(326, 72);
+            this.writeQp.Location = new System.Drawing.Point(335, 133);
             this.writeQp.Name = "writeQp";
             this.writeQp.Size = new System.Drawing.Size(80, 21);
             this.writeQp.TabIndex = 0;
@@ -67,7 +67,7 @@ namespace NetworkFrame01
             // 
             // writeLp
             // 
-            this.writeLp.Location = new System.Drawing.Point(326, 117);
+            this.writeLp.Location = new System.Drawing.Point(335, 178);
             this.writeLp.Name = "writeLp";
             this.writeLp.Size = new System.Drawing.Size(80, 21);
             this.writeLp.TabIndex = 1;
@@ -77,7 +77,7 @@ namespace NetworkFrame01
             // 
             // readLp
             // 
-            this.readLp.Location = new System.Drawing.Point(326, 163);
+            this.readLp.Location = new System.Drawing.Point(335, 224);
             this.readLp.Name = "readLp";
             this.readLp.Size = new System.Drawing.Size(80, 21);
             this.readLp.TabIndex = 2;
@@ -87,7 +87,7 @@ namespace NetworkFrame01
             // 
             // readIp
             // 
-            this.readIp.Location = new System.Drawing.Point(326, 213);
+            this.readIp.Location = new System.Drawing.Point(335, 274);
             this.readIp.Name = "readIp";
             this.readIp.Size = new System.Drawing.Size(80, 21);
             this.readIp.TabIndex = 3;
@@ -97,7 +97,7 @@ namespace NetworkFrame01
             // 
             // addr_Qp
             // 
-            this.addr_Qp.Location = new System.Drawing.Point(125, 74);
+            this.addr_Qp.Location = new System.Drawing.Point(134, 135);
             this.addr_Qp.Name = "addr_Qp";
             this.addr_Qp.Size = new System.Drawing.Size(39, 21);
             this.addr_Qp.TabIndex = 4;
@@ -105,7 +105,7 @@ namespace NetworkFrame01
             // pointType1
             // 
             this.pointType1.AutoSize = true;
-            this.pointType1.Location = new System.Drawing.Point(29, 83);
+            this.pointType1.Location = new System.Drawing.Point(38, 144);
             this.pointType1.Name = "pointType1";
             this.pointType1.Size = new System.Drawing.Size(38, 12);
             this.pointType1.TabIndex = 8;
@@ -114,7 +114,7 @@ namespace NetworkFrame01
             // pointType2
             // 
             this.pointType2.AutoSize = true;
-            this.pointType2.Location = new System.Drawing.Point(29, 126);
+            this.pointType2.Location = new System.Drawing.Point(38, 187);
             this.pointType2.Name = "pointType2";
             this.pointType2.Size = new System.Drawing.Size(56, 12);
             this.pointType2.TabIndex = 9;
@@ -123,7 +123,7 @@ namespace NetworkFrame01
             // pointType3
             // 
             this.pointType3.AutoSize = true;
-            this.pointType3.Location = new System.Drawing.Point(29, 174);
+            this.pointType3.Location = new System.Drawing.Point(38, 235);
             this.pointType3.Name = "pointType3";
             this.pointType3.Size = new System.Drawing.Size(54, 12);
             this.pointType3.TabIndex = 10;
@@ -132,7 +132,7 @@ namespace NetworkFrame01
             // pointType4
             // 
             this.pointType4.AutoSize = true;
-            this.pointType4.Location = new System.Drawing.Point(29, 224);
+            this.pointType4.Location = new System.Drawing.Point(38, 285);
             this.pointType4.Name = "pointType4";
             this.pointType4.Size = new System.Drawing.Size(32, 12);
             this.pointType4.TabIndex = 11;
@@ -142,7 +142,7 @@ namespace NetworkFrame01
             // 
             this.label.AutoSize = true;
             this.label.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label.Location = new System.Drawing.Point(126, 35);
+            this.label.Location = new System.Drawing.Point(135, 96);
             this.label.Name = "label";
             this.label.Size = new System.Drawing.Size(38, 17);
             this.label.TabIndex = 13;
@@ -152,7 +152,7 @@ namespace NetworkFrame01
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(225, 33);
+            this.label2.Location = new System.Drawing.Point(234, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 17);
             this.label2.TabIndex = 14;
@@ -162,7 +162,7 @@ namespace NetworkFrame01
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(572, 32);
+            this.label3.Location = new System.Drawing.Point(581, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 17);
             this.label3.TabIndex = 15;
@@ -170,96 +170,96 @@ namespace NetworkFrame01
             // 
             // addr_Lpw
             // 
-            this.addr_Lpw.Location = new System.Drawing.Point(125, 117);
+            this.addr_Lpw.Location = new System.Drawing.Point(134, 178);
             this.addr_Lpw.Name = "addr_Lpw";
             this.addr_Lpw.Size = new System.Drawing.Size(39, 21);
             this.addr_Lpw.TabIndex = 16;
             // 
             // addr_Lpr
             // 
-            this.addr_Lpr.Location = new System.Drawing.Point(125, 165);
+            this.addr_Lpr.Location = new System.Drawing.Point(134, 226);
             this.addr_Lpr.Name = "addr_Lpr";
             this.addr_Lpr.Size = new System.Drawing.Size(39, 21);
             this.addr_Lpr.TabIndex = 17;
             // 
             // addr_Ip
             // 
-            this.addr_Ip.Location = new System.Drawing.Point(125, 215);
+            this.addr_Ip.Location = new System.Drawing.Point(134, 276);
             this.addr_Ip.Name = "addr_Ip";
             this.addr_Ip.Size = new System.Drawing.Size(39, 21);
             this.addr_Ip.TabIndex = 18;
             // 
             // ip_Result
             // 
-            this.ip_Result.Location = new System.Drawing.Point(432, 214);
+            this.ip_Result.Location = new System.Drawing.Point(441, 275);
             this.ip_Result.Name = "ip_Result";
             this.ip_Result.Size = new System.Drawing.Size(320, 21);
             this.ip_Result.TabIndex = 27;
             // 
             // lpr_Result
             // 
-            this.lpr_Result.Location = new System.Drawing.Point(432, 164);
+            this.lpr_Result.Location = new System.Drawing.Point(441, 225);
             this.lpr_Result.Name = "lpr_Result";
             this.lpr_Result.Size = new System.Drawing.Size(320, 21);
             this.lpr_Result.TabIndex = 26;
             // 
             // lpw_Result
             // 
-            this.lpw_Result.Location = new System.Drawing.Point(432, 116);
+            this.lpw_Result.Location = new System.Drawing.Point(441, 177);
             this.lpw_Result.Name = "lpw_Result";
             this.lpw_Result.Size = new System.Drawing.Size(320, 21);
             this.lpw_Result.TabIndex = 25;
             // 
             // qp_Result
             // 
-            this.qp_Result.Location = new System.Drawing.Point(432, 73);
+            this.qp_Result.Location = new System.Drawing.Point(441, 134);
             this.qp_Result.Name = "qp_Result";
             this.qp_Result.Size = new System.Drawing.Size(320, 21);
             this.qp_Result.TabIndex = 24;
             // 
             // data_Ip
             // 
-            this.data_Ip.Location = new System.Drawing.Point(192, 214);
+            this.data_Ip.Location = new System.Drawing.Point(201, 275);
             this.data_Ip.Name = "data_Ip";
             this.data_Ip.Size = new System.Drawing.Size(103, 21);
             this.data_Ip.TabIndex = 31;
             // 
             // data_Lpr
             // 
-            this.data_Lpr.Location = new System.Drawing.Point(192, 165);
+            this.data_Lpr.Location = new System.Drawing.Point(201, 226);
             this.data_Lpr.Name = "data_Lpr";
             this.data_Lpr.Size = new System.Drawing.Size(103, 21);
             this.data_Lpr.TabIndex = 30;
             // 
             // data_Lpw
             // 
-            this.data_Lpw.Location = new System.Drawing.Point(192, 116);
+            this.data_Lpw.Location = new System.Drawing.Point(201, 177);
             this.data_Lpw.Name = "data_Lpw";
             this.data_Lpw.Size = new System.Drawing.Size(103, 21);
             this.data_Lpw.TabIndex = 29;
             // 
             // data_Qp
             // 
-            this.data_Qp.Location = new System.Drawing.Point(192, 73);
+            this.data_Qp.Location = new System.Drawing.Point(201, 134);
             this.data_Qp.Name = "data_Qp";
             this.data_Qp.Size = new System.Drawing.Size(103, 21);
             this.data_Qp.TabIndex = 28;
             // 
             // cnntBtn
             // 
-            this.cnntBtn.Location = new System.Drawing.Point(646, 260);
+            this.cnntBtn.Location = new System.Drawing.Point(40, 32);
             this.cnntBtn.Name = "cnntBtn";
-            this.cnntBtn.Size = new System.Drawing.Size(108, 35);
+            this.cnntBtn.Size = new System.Drawing.Size(699, 35);
             this.cnntBtn.TabIndex = 32;
             this.cnntBtn.Text = "Connect";
             this.cnntBtn.UseVisualStyleBackColor = true;
-            this.cnntBtn.Click += new System.EventHandler(this.cnntBtn_Click);
+            this.cnntBtn.Click += new System.EventHandler(this.cnnt_Btn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 317);
+            this.ClientSize = new System.Drawing.Size(784, 338);
             this.Controls.Add(this.cnntBtn);
             this.Controls.Add(this.data_Ip);
             this.Controls.Add(this.data_Lpr);

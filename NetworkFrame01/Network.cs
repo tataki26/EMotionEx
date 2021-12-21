@@ -5,11 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
+using System.Windows.Forms;
 
 namespace NetworkFrame01
 {
     class Network
-    {   
+    {
+        UdpClient cli = new UdpClient();
+
+        public void Connect(string host, int port)
+        {
+            cli.Connect(host, port);
+        }
+
         private byte frame_Len(bool isWrite, int bit)
         {
             byte frmLen;
@@ -143,22 +151,21 @@ namespace NetworkFrame01
             return netFrame;
         }
 
-        public void connect_Udp_Client(byte[] netFrame)
+
+        public void send_Udp_Client(byte[] netFrame)
         {
-            UdpClient cli = new UdpClient();
-
-            string host = "192.168.240.2";
-            int port = 2050;
-
-            cli.Send(netFrame, netFrame.Length, host, port);
-            Console.WriteLine("[Send] {0}:{1}로 {2} 바이트 전송", host,port,netFrame.Length);
-
-            IPEndPoint epRemote = new IPEndPoint(IPAddress.Any, 0);
-            byte[] dataBytes = cli.Receive(ref epRemote);
-            Console.WriteLine("[Receive] {0}로부터 {1} 바이트 전송", epRemote.ToString(), dataBytes.Length);
-
-            cli.Close();
+            cli.Send(netFrame, netFrame.Length);
+            //Console.WriteLine("[Send] {0}:{1}로 {2} 바이트 전송", host, port, netFrame.Length);
+            MessageBox.Show("전송 완료!");
         }
 
+        public void receive_Udp_Client(byte[] netFrame)
+        {
+            IPEndPoint epRemote = new IPEndPoint(IPAddress.Any, 0);
+
+            byte[] dataBytes = cli.Receive(ref epRemote);
+            Console.WriteLine("[Receive] {0}로부터 {1} 바이트 전송", epRemote.ToString(), dataBytes.Length);
+        }
+        
     }
 }
