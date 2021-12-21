@@ -8,3 +8,13 @@ D:\LYS\NetworkFrame\NetworkFrame01\obj\Debug\NetworkFrame01.csproj.CoreCompileIn
 D:\LYS\NetworkFrame\NetworkFrame01\obj\Debug\NetworkFrame01.exe
 D:\LYS\NetworkFrame\NetworkFrame01\obj\Debug\NetworkFrame01.pdb
 D:\LYS\NetworkFrame\NetworkFrame01\obj\Debug\NetworkFrame01.Form1.resources
+D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\NetworkFrame01.exe.config
+D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\NetworkFrame01.exe
+D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\NetworkFrame01.pdb
+D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame01.csproj.AssemblyReference.cache
+D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame01.Form1.resources
+D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame01.Properties.Resources.resources
+D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame01.csproj.GenerateResource.cache
+D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame01.csproj.CoreCompileInputs.cache
+D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame01.exe
+D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame01.pdb

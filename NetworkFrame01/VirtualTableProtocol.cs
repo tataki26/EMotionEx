@@ -19,6 +19,8 @@ namespace NetworkFrame01
 
             byte[] result = network.make_Net_Frame(isWrite, 16, virtualAddr, data);
 
+            result = result.Take(18).ToArray();
+
             network.send_Udp_Client(result);
 
             return result;
@@ -30,7 +32,9 @@ namespace NetworkFrame01
             int virtualAddr = (2 * addr) + 400000;
 
             byte[] result = network.make_Net_Frame(isWrite, 32, virtualAddr, data);
-            
+
+            result = result.Take(22).ToArray();
+
             network.send_Udp_Client(result);
 
             return result;
