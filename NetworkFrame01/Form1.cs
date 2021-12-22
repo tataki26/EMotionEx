@@ -59,11 +59,9 @@ namespace NetworkFrame01
         private void read_Lp_Click(object sender, EventArgs e)
         {
             int.TryParse(addr_Lpr.Text, out addr);
-            // int.TryParse(data_Lpr.Text, out data);
 
             string tempText = string.Empty;
-            string tempData = string.Empty;
-
+            
             byte[] msgArr = virtualTableProtocol.Set_LR_Var(addr);
             foreach (byte tempByte in msgArr)
             {
@@ -73,24 +71,37 @@ namespace NetworkFrame01
 
             lpr_Result.Text = tempText;
 
+            string tempData = string.Empty;
+
             byte[] dtArr = virtualTableProtocol.Get_LR_Var(addr);
-            foreach (byte tempByte in dtArr)
+
+            int[] numArr = new int[16];
+            char[] charArr = new char[16];
+
+            for (int i = 3; i <=6; i++)
             {
-                tempData += tempByte.ToString("X2");
-                tempData += " ";
+                numArr[i - 3] = Convert.ToInt32(dtArr[i+4]);
+                charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
+
+                tempData += charArr[i - 3].ToString();
             }
 
-            data_Lpr.Text = tempData;
+            for (int i = 7; i < (dtArr.Length) - 2; i++)
+            {
+                numArr[i - 3] = Convert.ToInt32(dtArr[i-4]);
+                charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
+
+                tempData += charArr[i - 3].ToString();
+            }
+
+            data_Lpr.Text = Convert.ToInt32(tempData, 16).ToString();
         }
 
         private void read_Ip_Click(object sender, EventArgs e)
         {
-
             int.TryParse(addr_Ip.Text, out addr);
-            // int.TryParse(data_Ip.Text, out data);
 
             string tempText = string.Empty;
-            string tempData = string.Empty;
 
             byte[] msgArr = virtualTableProtocol.Set_I_Var(addr);
             foreach (byte tempByte in msgArr)
@@ -101,14 +112,22 @@ namespace NetworkFrame01
 
             ip_Result.Text = tempText;
 
+            string tempData = string.Empty;
+
             byte[] dtArr = virtualTableProtocol.Get_I_Var(addr);
-            foreach (byte tempByte in dtArr)
+
+            int[] numArr = new int[4];
+            char[] charArr = new char[4];
+
+            for (int i = 3; i <(dtArr.Length)-2; i++)
             {
-                tempData += tempByte.ToString("X2");
-                tempData += " ";
+                numArr[i-3] = Convert.ToInt32(dtArr[i]);
+                charArr[i-3] = Convert.ToChar(numArr[i-3]);
+
+                tempData += charArr[i-3].ToString();
             }
 
-            data_Ip.Text = tempData;
+            data_Ip.Text = Convert.ToInt32(tempData, 16).ToString();
         }
 
         private void cnnt_Btn_Click(object sender, EventArgs e)
