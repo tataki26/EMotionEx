@@ -170,9 +170,10 @@ namespace NetworkFrame01
         {
             cli.Send(netFrame, netFrame.Length);
             MessageBox.Show("전송 완료!");
+
         }
 
-        public byte[] receive_Udp_Client(byte[] netFrame)
+        public byte[] receive_Udp_Client()
         {
             IPEndPoint epRemote = new IPEndPoint(IPAddress.Any, 0);
 

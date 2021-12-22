@@ -31,6 +31,8 @@ namespace NetworkFrame01
 
             network.send_Udp_Client(result);
 
+            byte[] rData = network.receive_Udp_Client(); // 문제 코드
+
             return result;
         }
         public byte[] Set_LR_Var(int addr)
@@ -43,15 +45,14 @@ namespace NetworkFrame01
 
             return result;
         }
-        public byte[] Get_LR_Var(int addr)
+        public void Get_LR_Var(int addr, ref byte[] result)
         {
             int virtualAddr = (2 * addr) + 400000;
+            byte[] frame;
+            frame = network.make_Net_Frame(32, virtualAddr);
 
-            byte[] result = network.make_Net_Frame(32, virtualAddr);
+            result = network.receive_Udp_Client();
 
-            byte[] data = network.receive_Udp_Client(result);
-
-            return data;
         }
         public byte[] Set_I_Var(int addr)
         {
@@ -61,18 +62,18 @@ namespace NetworkFrame01
 
             network.send_Udp_Client(result);
 
+
             return result;
         }
 
-        public byte[] Get_I_Var(int addr)
+        public void Get_I_Var(int addr, ref byte[] result)
         {
             int virtualAddr = addr + 120000;
-            
-            byte[] result = network.make_Net_Frame(16, virtualAddr);
 
-            byte[] data = network.receive_Udp_Client(result);
+            byte[] frame;
+            frame = network.make_Net_Frame(16, virtualAddr);
 
-            return data;
+            result = network.receive_Udp_Client();
         }
 
         public void Connect_Udp_Client(string host, int port)

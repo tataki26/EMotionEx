@@ -73,10 +73,11 @@ namespace NetworkFrame01
 
             string tempData = string.Empty;
 
-            byte[] dtArr = virtualTableProtocol.Get_LR_Var(addr);
+            byte[] dtArr = null;
+            virtualTableProtocol.Get_LR_Var(addr, ref dtArr);
 
-            int[] numArr = new int[16];
-            char[] charArr = new char[16];
+            int[] numArr = new int[8];
+            char[] charArr = new char[8];
 
             for (int i = 3; i <=6; i++)
             {
@@ -114,7 +115,8 @@ namespace NetworkFrame01
 
             string tempData = string.Empty;
 
-            byte[] dtArr = virtualTableProtocol.Get_I_Var(addr);
+            byte[] dtArr = null;
+            virtualTableProtocol.Get_I_Var(addr, ref dtArr);
 
             int[] numArr = new int[4];
             char[] charArr = new char[4];
