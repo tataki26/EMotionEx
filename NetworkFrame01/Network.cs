@@ -177,7 +177,6 @@ namespace NetworkFrame01
             IPEndPoint epRemote = new IPEndPoint(IPAddress.Any, 0);
 
             byte[] dataBytes = cli.Receive(ref epRemote);
-            // Console.WriteLine("[Receive] {0}로부터 {1} 바이트 전송", epRemote.ToString(), dataBytes.Length);
 
             return dataBytes;
         }

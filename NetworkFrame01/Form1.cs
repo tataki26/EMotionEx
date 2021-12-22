@@ -59,9 +59,11 @@ namespace NetworkFrame01
         private void read_Lp_Click(object sender, EventArgs e)
         {
             int.TryParse(addr_Lpr.Text, out addr);
-            int.TryParse(data_Lpr.Text, out data);
+            // int.TryParse(data_Lpr.Text, out data);
 
             string tempText = string.Empty;
+            string tempData = string.Empty;
+
             byte[] msgArr = virtualTableProtocol.Set_LR_Var(addr);
             foreach (byte tempByte in msgArr)
             {
@@ -71,15 +73,25 @@ namespace NetworkFrame01
 
             lpr_Result.Text = tempText;
 
+            byte[] dtArr = virtualTableProtocol.Get_LR_Var(addr);
+            foreach (byte tempByte in dtArr)
+            {
+                tempData += tempByte.ToString("X2");
+                tempData += " ";
+            }
+
+            data_Lpr.Text = tempData;
         }
 
         private void read_Ip_Click(object sender, EventArgs e)
         {
 
             int.TryParse(addr_Ip.Text, out addr);
-            int.TryParse(data_Ip.Text, out data);
+            // int.TryParse(data_Ip.Text, out data);
 
             string tempText = string.Empty;
+            string tempData = string.Empty;
+
             byte[] msgArr = virtualTableProtocol.Set_I_Var(addr);
             foreach (byte tempByte in msgArr)
             {
@@ -89,6 +101,14 @@ namespace NetworkFrame01
 
             ip_Result.Text = tempText;
 
+            byte[] dtArr = virtualTableProtocol.Get_I_Var(addr);
+            foreach (byte tempByte in dtArr)
+            {
+                tempData += tempByte.ToString("X2");
+                tempData += " ";
+            }
+
+            data_Ip.Text = tempData;
         }
 
         private void cnnt_Btn_Click(object sender, EventArgs e)

@@ -43,15 +43,36 @@ namespace NetworkFrame01
 
             return result;
         }
+        public byte[] Get_LR_Var(int addr)
+        {
+            int virtualAddr = (2 * addr) + 400000;
 
+            byte[] result = network.make_Net_Frame(32, virtualAddr);
+
+            byte[] data = network.receive_Udp_Client(result);
+
+            return data;
+        }
         public byte[] Set_I_Var(int addr)
         {
             int virtualAddr = addr + 120000;
+            
             byte[] result = network.make_Net_Frame(16, virtualAddr);
 
             network.send_Udp_Client(result);
 
             return result;
+        }
+
+        public byte[] Get_I_Var(int addr)
+        {
+            int virtualAddr = addr + 120000;
+            
+            byte[] result = network.make_Net_Frame(16, virtualAddr);
+
+            byte[] data = network.receive_Udp_Client(result);
+
+            return data;
         }
 
         public void Connect_Udp_Client(string host, int port)
