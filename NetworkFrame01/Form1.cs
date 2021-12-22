@@ -62,7 +62,7 @@ namespace NetworkFrame01
             int.TryParse(data_Lpr.Text, out data);
 
             string tempText = string.Empty;
-            byte[] msgArr = virtualTableProtocol.Set_LR_Var(addr, data);
+            byte[] msgArr = virtualTableProtocol.Set_LR_Var(addr);
             foreach (byte tempByte in msgArr)
             {
                 tempText += tempByte.ToString("X2");
@@ -80,7 +80,7 @@ namespace NetworkFrame01
             int.TryParse(data_Ip.Text, out data);
 
             string tempText = string.Empty;
-            byte[] msgArr = virtualTableProtocol.Set_I_Var(addr, data);
+            byte[] msgArr = virtualTableProtocol.Set_I_Var(addr);
             foreach (byte tempByte in msgArr)
             {
                 tempText += tempByte.ToString("X2");

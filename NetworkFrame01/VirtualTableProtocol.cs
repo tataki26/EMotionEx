@@ -14,12 +14,9 @@ namespace NetworkFrame01
 
         public byte[] Set_Q_Var(int addr, int data)
         {
-            bool isWrite = true;
             int virtualAddr = addr + 130000;
 
-            byte[] result = network.make_Net_Frame(isWrite, 16, virtualAddr, data);
-
-            result = result.Take(18).ToArray();
+            byte[] result = network.make_Net_Frame(16, virtualAddr, data);
 
             network.send_Udp_Client(result);
 
@@ -28,37 +25,31 @@ namespace NetworkFrame01
 
         public byte[] Set_LW_Var(int addr, int data)
         {
-            bool isWrite = true;
             int virtualAddr = (2 * addr) + 400000;
 
-            byte[] result = network.make_Net_Frame(isWrite, 32, virtualAddr, data);
+            byte[] result = network.make_Net_Frame(32, virtualAddr, data);
 
-            result = result.Take(22).ToArray();
+            network.send_Udp_Client(result);
+
+            return result;
+        }
+        public byte[] Set_LR_Var(int addr)
+        {
+            int virtualAddr = (2 * addr) + 400000;
+            
+            byte[] result = network.make_Net_Frame(32, virtualAddr);
 
             network.send_Udp_Client(result);
 
             return result;
         }
 
-        public byte[] Set_LR_Var(int addr, int data)
+        public byte[] Set_I_Var(int addr)
         {
-            bool isWrite = false;
-            int virtualAddr = (2 * addr) + 400000;
-            
-            byte[] result = network.make_Net_Frame(isWrite, 32, virtualAddr, data);
-
-            network.receive_Udp_Client(result);
-
-            return result;
-        }
-
-        public byte[] Set_I_Var(int addr, int data)
-        {
-            bool isWrite = false;
             int virtualAddr = addr + 120000;
-            byte[] result = network.make_Net_Frame(isWrite, 16, virtualAddr, data);
+            byte[] result = network.make_Net_Frame(16, virtualAddr);
 
-            network.receive_Udp_Client(result);
+            network.send_Udp_Client(result);
 
             return result;
         }

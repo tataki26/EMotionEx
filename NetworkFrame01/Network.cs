@@ -18,28 +18,22 @@ namespace NetworkFrame01
             cli.Connect(host, port);
         }
 
-        private byte frame_Len(bool isWrite, int bit)
+        private byte frame_Len(int bit)
         {
             byte frmLen;
 
-            if (isWrite == true)
+            if (bit == 16)
             {
-                if (bit == 16)
-                {
-                    frmLen = 0x0E;
-                }
-                else
-                {
-                    frmLen = 0x12;
-                }
+                frmLen = 0x0E;
             }
             else
             {
-                frmLen = 0x0A;
+                frmLen = 0x12;
             }
 
             return frmLen;
         }
+
         private byte[] change_Addr(int addr) // 자리 교환
         {
             byte[] tempBytes = BitConverter.GetBytes(addr);
@@ -87,22 +81,13 @@ namespace NetworkFrame01
             return chksum[3];
         }
 
-        public byte[] make_Net_Frame(bool isWrite, int bit, int addr, int data)
+        public byte[] make_Net_Frame(int bit, int addr, int data)
         {
             byte[] netFrame = new byte[1500];
 
             netFrame[0] = 0x07;
-            netFrame[1] = frame_Len(isWrite, bit);
-
-            if (isWrite == true)
-            {
-                netFrame[2] = 0x77;
-            }
-            else
-            {
-                netFrame[2] = 0x72;
-            }
-
+            netFrame[1] = frame_Len(bit);
+            netFrame[2] = 0x77;
             netFrame[3] = 0x54;
 
             byte[] newAddr = change_Addr(addr);
@@ -130,9 +115,11 @@ namespace NetworkFrame01
 
                 netFrame[16] = cal_Chksum(netFrame);
                 netFrame[17] = 0xF0;
+
                 netFrame = netFrame.Take(18).ToArray();
             }
-            else
+
+            if (bit == 32)
             {
                 for (int i = 4; i <= 7; i++)
                 {
@@ -146,25 +133,53 @@ namespace NetworkFrame01
 
                 netFrame[20] = cal_Chksum(netFrame);
                 netFrame[21] = 0xF0;
+
+                netFrame = netFrame.Take(22).ToArray();
             }
 
             return netFrame;
         }
 
+        public byte[] make_Net_Frame(int bit, int addr)
+        {
+            byte[] netFrame = new byte[1500];
+
+            netFrame[0] = 0x07;
+            netFrame[1] = 0x0A;
+            netFrame[2] = 0x72;
+            netFrame[3] = 0x54;
+
+            byte[] newAddr = change_Addr(addr);
+
+            for (int i = 4; i <= 9; i++)
+            {
+                netFrame[i] = cnvt_To_Ascii(newAddr)[i - 4];
+            }
+
+            netFrame[10] = 0x30;
+            netFrame[11] = data_Len(bit);
+            netFrame[12] = cal_Chksum(netFrame);
+            netFrame[13] = 0xF0;
+
+            netFrame = netFrame.Take(14).ToArray();
+
+            return netFrame;
+        }
 
         public void send_Udp_Client(byte[] netFrame)
         {
             cli.Send(netFrame, netFrame.Length);
-            //Console.WriteLine("[Send] {0}:{1}로 {2} 바이트 전송", host, port, netFrame.Length);
             MessageBox.Show("전송 완료!");
         }
 
-        public void receive_Udp_Client(byte[] netFrame)
+        public byte[] receive_Udp_Client(byte[] netFrame)
         {
             IPEndPoint epRemote = new IPEndPoint(IPAddress.Any, 0);
 
             byte[] dataBytes = cli.Receive(ref epRemote);
-            Console.WriteLine("[Receive] {0}로부터 {1} 바이트 전송", epRemote.ToString(), dataBytes.Length);
+            // Console.WriteLine("[Receive] {0}로부터 {1} 바이트 전송", epRemote.ToString(), dataBytes.Length);
+
+            return dataBytes;
         }
         
     }
