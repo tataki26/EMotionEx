@@ -31,8 +31,6 @@ namespace NetworkFrame01
         {
             this.writeQp = new System.Windows.Forms.Button();
             this.writeLp = new System.Windows.Forms.Button();
-            this.readLp = new System.Windows.Forms.Button();
-            this.readIp = new System.Windows.Forms.Button();
             this.addr_Qp = new System.Windows.Forms.TextBox();
             this.pointType1 = new System.Windows.Forms.Label();
             this.pointType2 = new System.Windows.Forms.Label();
@@ -41,13 +39,13 @@ namespace NetworkFrame01
             this.label = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.addr_Lpw = new System.Windows.Forms.TextBox();
-            this.addr_Lpr = new System.Windows.Forms.TextBox();
-            this.addr_Ip = new System.Windows.Forms.TextBox();
             this.data_Ip = new System.Windows.Forms.TextBox();
             this.data_Lpr = new System.Windows.Forms.TextBox();
             this.data_Lpw = new System.Windows.Forms.TextBox();
             this.data_Qp = new System.Windows.Forms.TextBox();
             this.cnntBtn = new System.Windows.Forms.Button();
+            this.addr_Lpr = new System.Windows.Forms.ComboBox();
+            this.addr_Ip = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // writeQp
@@ -69,26 +67,6 @@ namespace NetworkFrame01
             this.writeLp.Text = "Write";
             this.writeLp.UseVisualStyleBackColor = true;
             this.writeLp.Click += new System.EventHandler(this.write_Lp_Click);
-            // 
-            // readLp
-            // 
-            this.readLp.Location = new System.Drawing.Point(335, 224);
-            this.readLp.Name = "readLp";
-            this.readLp.Size = new System.Drawing.Size(80, 21);
-            this.readLp.TabIndex = 2;
-            this.readLp.Text = "Read";
-            this.readLp.UseVisualStyleBackColor = true;
-            this.readLp.Click += new System.EventHandler(this.read_Lp_Click);
-            // 
-            // readIp
-            // 
-            this.readIp.Location = new System.Drawing.Point(335, 274);
-            this.readIp.Name = "readIp";
-            this.readIp.Size = new System.Drawing.Size(80, 21);
-            this.readIp.TabIndex = 3;
-            this.readIp.Text = "Read";
-            this.readIp.UseVisualStyleBackColor = true;
-            this.readIp.Click += new System.EventHandler(this.read_Ip_Click);
             // 
             // addr_Qp
             // 
@@ -160,20 +138,6 @@ namespace NetworkFrame01
             this.addr_Lpw.Size = new System.Drawing.Size(39, 21);
             this.addr_Lpw.TabIndex = 16;
             // 
-            // addr_Lpr
-            // 
-            this.addr_Lpr.Location = new System.Drawing.Point(134, 226);
-            this.addr_Lpr.Name = "addr_Lpr";
-            this.addr_Lpr.Size = new System.Drawing.Size(39, 21);
-            this.addr_Lpr.TabIndex = 17;
-            // 
-            // addr_Ip
-            // 
-            this.addr_Ip.Location = new System.Drawing.Point(134, 276);
-            this.addr_Ip.Name = "addr_Ip";
-            this.addr_Ip.Size = new System.Drawing.Size(39, 21);
-            this.addr_Ip.TabIndex = 18;
-            // 
             // data_Ip
             // 
             this.data_Ip.Location = new System.Drawing.Point(201, 275);
@@ -212,18 +176,50 @@ namespace NetworkFrame01
             this.cnntBtn.UseVisualStyleBackColor = true;
             this.cnntBtn.Click += new System.EventHandler(this.cnnt_Btn_Click);
             // 
+            // addr_Lpr
+            // 
+            this.addr_Lpr.FormattingEnabled = true;
+            this.addr_Lpr.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.addr_Lpr.Location = new System.Drawing.Point(134, 227);
+            this.addr_Lpr.Name = "addr_Lpr";
+            this.addr_Lpr.Size = new System.Drawing.Size(38, 20);
+            this.addr_Lpr.TabIndex = 33;
+            this.addr_Lpr.SelectedIndexChanged += new System.EventHandler(this.addr_Lrw_SelectedIndexChanged);
+            // 
+            // addr_Ip
+            // 
+            this.addr_Ip.FormattingEnabled = true;
+            this.addr_Ip.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.addr_Ip.Location = new System.Drawing.Point(134, 276);
+            this.addr_Ip.Name = "addr_Ip";
+            this.addr_Ip.Size = new System.Drawing.Size(38, 20);
+            this.addr_Ip.TabIndex = 34;
+            this.addr_Ip.SelectedIndexChanged += new System.EventHandler(this.addr_Ip_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 331);
+            this.ClientSize = new System.Drawing.Size(465, 332);
+            this.Controls.Add(this.addr_Ip);
+            this.Controls.Add(this.addr_Lpr);
             this.Controls.Add(this.cnntBtn);
             this.Controls.Add(this.data_Ip);
             this.Controls.Add(this.data_Lpr);
             this.Controls.Add(this.data_Lpw);
             this.Controls.Add(this.data_Qp);
-            this.Controls.Add(this.addr_Ip);
-            this.Controls.Add(this.addr_Lpr);
             this.Controls.Add(this.addr_Lpw);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label);
@@ -232,8 +228,6 @@ namespace NetworkFrame01
             this.Controls.Add(this.pointType2);
             this.Controls.Add(this.pointType1);
             this.Controls.Add(this.addr_Qp);
-            this.Controls.Add(this.readIp);
-            this.Controls.Add(this.readLp);
             this.Controls.Add(this.writeLp);
             this.Controls.Add(this.writeQp);
             this.Name = "Form1";
@@ -247,8 +241,6 @@ namespace NetworkFrame01
 
         private System.Windows.Forms.Button writeQp;
         private System.Windows.Forms.Button writeLp;
-        private System.Windows.Forms.Button readLp;
-        private System.Windows.Forms.Button readIp;
         private System.Windows.Forms.TextBox addr_Qp;
         private System.Windows.Forms.Label pointType1;
         private System.Windows.Forms.Label pointType2;
@@ -257,13 +249,13 @@ namespace NetworkFrame01
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox addr_Lpw;
-        private System.Windows.Forms.TextBox addr_Lpr;
-        private System.Windows.Forms.TextBox addr_Ip;
         private System.Windows.Forms.TextBox data_Ip;
         private System.Windows.Forms.TextBox data_Lpr;
         private System.Windows.Forms.TextBox data_Lpw;
         private System.Windows.Forms.TextBox data_Qp;
         private System.Windows.Forms.Button cnntBtn;
+        private System.Windows.Forms.ComboBox addr_Lpr;
+        private System.Windows.Forms.ComboBox addr_Ip;
     }
 }
 

@@ -32,7 +32,7 @@ namespace NetworkFrame01
             network.send_Udp_Client(netFrame);
             network.receive_Udp_Client();
         }
-
+        
         public byte[] Set_LR_Var(int addr)
         {
             int virtualAddr = (2*addr) + 400000;
@@ -45,7 +45,7 @@ namespace NetworkFrame01
 
             return result;
         }
-
+        
         public byte[] Set_I_Var(int addr)
         {
             int virtualAddr = addr + 120000;
@@ -58,6 +58,8 @@ namespace NetworkFrame01
 
             return result;
         }
+        
+
         public void Connect_Udp_Client(string host, int port)
         {
             network.Connect(host, port);

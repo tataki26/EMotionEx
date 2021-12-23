@@ -38,18 +38,18 @@ namespace NetworkFrame01
             virtualTableProtocol.Set_LW_Var(addr, data);
         }
 
-        private void read_Lp_Click(object sender, EventArgs e)
+        private void addr_Lrw_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int.TryParse(addr_Lpr.Text, out addr);
-
-            string tempData = string.Empty;
+            string selectedDt = addr_Lpr.SelectedIndex.ToString();
+            int.TryParse(selectedDt, out addr);
 
             byte[] dtArr = virtualTableProtocol.Set_LR_Var(addr);
-
             int count = dtArr.Length;
 
             int[] numArr = new int[count];
             char[] charArr = new char[count];
+
+            string tempData = string.Empty;
 
             for (int i = 3; i <= 6; i++)
             {
@@ -70,18 +70,18 @@ namespace NetworkFrame01
             data_Lpr.Text = Convert.ToInt32(tempData, 16).ToString();
         }
 
-        private void read_Ip_Click(object sender, EventArgs e)
+        private void addr_Ip_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int.TryParse(addr_Ip.Text, out addr);
-
-            string tempData = string.Empty;
+            string selectedDt = addr_Ip.SelectedIndex.ToString();
+            int.TryParse(selectedDt, out addr);
 
             byte[] dtArr = virtualTableProtocol.Set_I_Var(addr);
-
             int count = dtArr.Length;
 
             int[] numArr = new int[count];
             char[] charArr = new char[count];
+
+            string tempData = string.Empty;
 
             for (int i = 3; i < (dtArr.Length) - 2; i++)
             {
@@ -92,7 +92,9 @@ namespace NetworkFrame01
             }
 
             data_Ip.Text = Convert.ToInt32(tempData, 16).ToString();
+
         }
+
         private void cnnt_Btn_Click(object sender, EventArgs e)
         {
             string host = "192.168.240.2";
@@ -102,5 +104,6 @@ namespace NetworkFrame01
 
             MessageBox.Show("접속 완료!");
         }
+
     }
 }
