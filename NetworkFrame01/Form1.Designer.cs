@@ -216,7 +216,7 @@ namespace NetworkFrame01
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 338);
+            this.ClientSize = new System.Drawing.Size(465, 331);
             this.Controls.Add(this.cnntBtn);
             this.Controls.Add(this.data_Ip);
             this.Controls.Add(this.data_Lpr);

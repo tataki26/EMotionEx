@@ -20,6 +20,7 @@ namespace NetworkFrame01
             byte[] netFrame = frame.make_Net_Frame(16, virtualAddr, data);
 
             network.send_Udp_Client(netFrame);
+            network.receive_Udp_Client();
         }
 
         public void Set_LW_Var(int addr, int data)
@@ -29,27 +30,9 @@ namespace NetworkFrame01
             byte[] netFrame = frame.make_Net_Frame(32, virtualAddr, data);
 
             network.send_Udp_Client(netFrame);
+            network.receive_Udp_Client();
         }
-        /*
-        public byte[] Set_LR_Var(int addr)
-        {
-            int virtualAddr = (2 * addr) + 400000;
-            
-            byte[] result = frame.make_Net_Frame(32, virtualAddr);
 
-            network.send_Udp_Client(result);
-
-            return result;
-        }
-        public void Get_LR_Var(int addr, ref byte[] result)
-        {
-            int virtualAddr = (2 * addr) + 400000;
-            byte[] tempFrame;
-            tempFrame = frame.make_Net_Frame(32, virtualAddr);
-
-            //result = network.receive_Udp_Client();
-        }
-        */
         public byte[] Set_LR_Var(int addr)
         {
             int virtualAddr = (2*addr) + 400000;
