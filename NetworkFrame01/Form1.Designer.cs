@@ -40,14 +40,9 @@ namespace NetworkFrame01
             this.pointType4 = new System.Windows.Forms.Label();
             this.label = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.addr_Lpw = new System.Windows.Forms.TextBox();
             this.addr_Lpr = new System.Windows.Forms.TextBox();
             this.addr_Ip = new System.Windows.Forms.TextBox();
-            this.ip_Result = new System.Windows.Forms.TextBox();
-            this.lpr_Result = new System.Windows.Forms.TextBox();
-            this.lpw_Result = new System.Windows.Forms.TextBox();
-            this.qp_Result = new System.Windows.Forms.TextBox();
             this.data_Ip = new System.Windows.Forms.TextBox();
             this.data_Lpr = new System.Windows.Forms.TextBox();
             this.data_Lpw = new System.Windows.Forms.TextBox();
@@ -114,7 +109,7 @@ namespace NetworkFrame01
             // pointType2
             // 
             this.pointType2.AutoSize = true;
-            this.pointType2.Location = new System.Drawing.Point(38, 187);
+            this.pointType2.Location = new System.Drawing.Point(38, 188);
             this.pointType2.Name = "pointType2";
             this.pointType2.Size = new System.Drawing.Size(56, 12);
             this.pointType2.TabIndex = 9;
@@ -132,7 +127,7 @@ namespace NetworkFrame01
             // pointType4
             // 
             this.pointType4.AutoSize = true;
-            this.pointType4.Location = new System.Drawing.Point(38, 285);
+            this.pointType4.Location = new System.Drawing.Point(38, 283);
             this.pointType4.Name = "pointType4";
             this.pointType4.Size = new System.Drawing.Size(32, 12);
             this.pointType4.TabIndex = 11;
@@ -158,19 +153,9 @@ namespace NetworkFrame01
             this.label2.TabIndex = 14;
             this.label2.Text = "Data";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(581, 93);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Result";
-            // 
             // addr_Lpw
             // 
-            this.addr_Lpw.Location = new System.Drawing.Point(134, 178);
+            this.addr_Lpw.Location = new System.Drawing.Point(134, 180);
             this.addr_Lpw.Name = "addr_Lpw";
             this.addr_Lpw.Size = new System.Drawing.Size(39, 21);
             this.addr_Lpw.TabIndex = 16;
@@ -189,34 +174,6 @@ namespace NetworkFrame01
             this.addr_Ip.Size = new System.Drawing.Size(39, 21);
             this.addr_Ip.TabIndex = 18;
             // 
-            // ip_Result
-            // 
-            this.ip_Result.Location = new System.Drawing.Point(441, 275);
-            this.ip_Result.Name = "ip_Result";
-            this.ip_Result.Size = new System.Drawing.Size(320, 21);
-            this.ip_Result.TabIndex = 27;
-            // 
-            // lpr_Result
-            // 
-            this.lpr_Result.Location = new System.Drawing.Point(441, 225);
-            this.lpr_Result.Name = "lpr_Result";
-            this.lpr_Result.Size = new System.Drawing.Size(320, 21);
-            this.lpr_Result.TabIndex = 26;
-            // 
-            // lpw_Result
-            // 
-            this.lpw_Result.Location = new System.Drawing.Point(441, 177);
-            this.lpw_Result.Name = "lpw_Result";
-            this.lpw_Result.Size = new System.Drawing.Size(320, 21);
-            this.lpw_Result.TabIndex = 25;
-            // 
-            // qp_Result
-            // 
-            this.qp_Result.Location = new System.Drawing.Point(441, 134);
-            this.qp_Result.Name = "qp_Result";
-            this.qp_Result.Size = new System.Drawing.Size(320, 21);
-            this.qp_Result.TabIndex = 24;
-            // 
             // data_Ip
             // 
             this.data_Ip.Location = new System.Drawing.Point(201, 275);
@@ -233,7 +190,7 @@ namespace NetworkFrame01
             // 
             // data_Lpw
             // 
-            this.data_Lpw.Location = new System.Drawing.Point(201, 177);
+            this.data_Lpw.Location = new System.Drawing.Point(201, 179);
             this.data_Lpw.Name = "data_Lpw";
             this.data_Lpw.Size = new System.Drawing.Size(103, 21);
             this.data_Lpw.TabIndex = 29;
@@ -249,7 +206,7 @@ namespace NetworkFrame01
             // 
             this.cnntBtn.Location = new System.Drawing.Point(40, 32);
             this.cnntBtn.Name = "cnntBtn";
-            this.cnntBtn.Size = new System.Drawing.Size(699, 35);
+            this.cnntBtn.Size = new System.Drawing.Size(375, 35);
             this.cnntBtn.TabIndex = 32;
             this.cnntBtn.Text = "Connect";
             this.cnntBtn.UseVisualStyleBackColor = true;
@@ -259,20 +216,15 @@ namespace NetworkFrame01
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 338);
+            this.ClientSize = new System.Drawing.Size(456, 338);
             this.Controls.Add(this.cnntBtn);
             this.Controls.Add(this.data_Ip);
             this.Controls.Add(this.data_Lpr);
             this.Controls.Add(this.data_Lpw);
             this.Controls.Add(this.data_Qp);
-            this.Controls.Add(this.ip_Result);
-            this.Controls.Add(this.lpr_Result);
-            this.Controls.Add(this.lpw_Result);
-            this.Controls.Add(this.qp_Result);
             this.Controls.Add(this.addr_Ip);
             this.Controls.Add(this.addr_Lpr);
             this.Controls.Add(this.addr_Lpw);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label);
             this.Controls.Add(this.pointType4);
@@ -285,7 +237,7 @@ namespace NetworkFrame01
             this.Controls.Add(this.writeLp);
             this.Controls.Add(this.writeQp);
             this.Name = "Form1";
-            this.Text = "Network Frame Maker";
+            this.Text = "MCS Network Program";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,14 +256,9 @@ namespace NetworkFrame01
         private System.Windows.Forms.Label pointType4;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox addr_Lpw;
         private System.Windows.Forms.TextBox addr_Lpr;
         private System.Windows.Forms.TextBox addr_Ip;
-        private System.Windows.Forms.TextBox ip_Result;
-        private System.Windows.Forms.TextBox lpr_Result;
-        private System.Windows.Forms.TextBox lpw_Result;
-        private System.Windows.Forms.TextBox qp_Result;
         private System.Windows.Forms.TextBox data_Ip;
         private System.Windows.Forms.TextBox data_Lpr;
         private System.Windows.Forms.TextBox data_Lpw;
