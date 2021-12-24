@@ -46,32 +46,9 @@ namespace NetworkFrame01
             string selectedDt = addr_Lpr.SelectedIndex.ToString();
             int.TryParse(selectedDt, out addr);
 
-            byte[] dtArr = virtualTableProtocol.Set_LR_Var(addr);
-            int count = dtArr.Length;
-
-            int[] numArr = new int[count];
-            char[] charArr = new char[count];
-
-            string tempData = string.Empty;
-
-            for (int i = 3; i <= 6; i++)
-            {
-                numArr[i - 3] = Convert.ToInt32(dtArr[i + 4]);
-                charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
-
-                tempData += charArr[i - 3].ToString();
-            }
-
-            for (int i = 7; i < (dtArr.Length) - 2; i++)
-            {
-                numArr[i - 3] = Convert.ToInt32(dtArr[i - 4]);
-                charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
-
-                tempData += charArr[i - 3].ToString();
-            }
-
-            data_Lpr.Text = Convert.ToInt32(tempData, 16).ToString();
-           
+            data = virtualTableProtocol.Set_LR_Var(addr);
+ 
+            data_Lpr.Text = data.ToString();
         }
 
         private void addr_Ip_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,25 +56,10 @@ namespace NetworkFrame01
             string selectedDt = addr_Ip.SelectedIndex.ToString();
             int.TryParse(selectedDt, out addr);
 
-            byte[] dtArr = virtualTableProtocol.Set_I_Var(addr);
-            int count = dtArr.Length;
-
-            int[] numArr = new int[count];
-            char[] charArr = new char[count];
-
-            string tempData = string.Empty;
-
-            for (int i = 3; i < (dtArr.Length) - 2; i++)
-            {
-                numArr[i - 3] = Convert.ToInt32(dtArr[i]);
-                charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
-
-                tempData += charArr[i - 3].ToString();
-            }
-
-            data_Ip.Text = Convert.ToInt32(tempData, 16).ToString();
+            data = virtualTableProtocol.Set_I_Var(addr);
+ 
+            data_Ip.Text = data.ToString();
         }
-
         private void cnnt_Btn_Click(object sender, EventArgs e)
         {
             string host = "192.168.240.2";

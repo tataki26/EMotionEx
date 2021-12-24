@@ -33,35 +33,32 @@ namespace NetworkFrame01
             network.receive_Udp_Client();
         }
         
-        public byte[] Set_LR_Var(int addr)
+        public int Set_LR_Var(int addr)
         {
             int virtualAddr = (2*addr) + 400000;
-
             byte[] netFrame = frame.make_Net_Frame(32, virtualAddr);
 
             network.send_Udp_Client(netFrame);
+            byte[] data = network.receive_Udp_Client();
 
-            byte[] result = network.receive_Udp_Client();
+            int deData = frame.decode_Net_Frame(32, data);
 
-            frame.decode_Net_Frame(result);
-
-            return result;
+            return deData;
         }
         
-        public byte[] Set_I_Var(int addr)
+        public int Set_I_Var(int addr)
         {
             int virtualAddr = addr + 120000;
-
             byte[] netFrame = frame.make_Net_Frame(16, virtualAddr);
 
             network.send_Udp_Client(netFrame);
+            byte[] data = network.receive_Udp_Client();
 
-            byte[] result = network.receive_Udp_Client();
+            int deData = frame.decode_Net_Frame(16, data);
 
-            return result;
+            return deData;
         }
         
-
         public void Connect_Udp_Client(string host, int port)
         {
             network.Connect(host, port);
