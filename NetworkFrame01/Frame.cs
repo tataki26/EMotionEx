@@ -24,7 +24,7 @@ namespace NetworkFrame01
             return frmLen;
         }
 
-        private byte[] change_Addr(int addr) // 자리 교환
+        private byte[] change_Addr(int addr)
         {
             byte[] tempBytes = BitConverter.GetBytes(addr);
 
@@ -154,6 +154,51 @@ namespace NetworkFrame01
             netFrame = netFrame.Take(14).ToArray();
 
             return netFrame;
+        }
+
+        public int decode_Net_Frame(int bit, byte[] netFrame)
+        {
+            int count = netFrame.Length;
+            
+            int[] numArr = new int[count];
+            char[] charArr = new char[count];
+
+            string tempData = string.Empty;
+
+            if (bit == 16)
+            {
+                for (int i = 3; i < (netFrame.Length) - 2; i++)
+                {
+                    numArr[i - 3] = Convert.ToInt32(netFrame[i]);
+                    charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
+
+                    tempData += charArr[i - 3].ToString();
+                }
+            }
+
+            if (bit == 32)
+            {
+
+                for (int i = 3; i <= 6; i++)
+                {
+                    numArr[i - 3] = Convert.ToInt32(netFrame[i + 4]);
+                    charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
+
+                    tempData += charArr[i - 3].ToString();
+                }
+
+                for (int i = 7; i < (netFrame.Length) - 2; i++)
+                {
+                    numArr[i - 3] = Convert.ToInt32(netFrame[i - 4]);
+                    charArr[i - 3] = Convert.ToChar(numArr[i - 3]);
+
+                    tempData += charArr[i - 3].ToString();
+                }
+            }
+
+            int data = Convert.ToInt32(tempData, 16);
+
+            return data;
         }
     }
 }
