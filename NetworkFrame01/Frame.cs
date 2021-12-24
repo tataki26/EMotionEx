@@ -155,5 +155,14 @@ namespace NetworkFrame01
 
             return netFrame;
         }
+
+        public int decode_Net_Frame(byte[] msg)
+        {
+            int data = 0;
+
+
+
+            return data;
+        }
     }
 }

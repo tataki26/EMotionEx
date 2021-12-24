@@ -29,6 +29,7 @@ namespace NetworkFrame01
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.writeQp = new System.Windows.Forms.Button();
             this.writeLp = new System.Windows.Forms.Button();
             this.addr_Qp = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@ namespace NetworkFrame01
             this.cnntBtn = new System.Windows.Forms.Button();
             this.addr_Lpr = new System.Windows.Forms.ComboBox();
             this.addr_Ip = new System.Windows.Forms.ComboBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // writeQp
@@ -208,6 +210,10 @@ namespace NetworkFrame01
             this.addr_Ip.TabIndex = 34;
             this.addr_Ip.SelectedIndexChanged += new System.EventHandler(this.addr_Ip_SelectedIndexChanged);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -256,6 +262,7 @@ namespace NetworkFrame01
         private System.Windows.Forms.Button cnntBtn;
         private System.Windows.Forms.ComboBox addr_Lpr;
         private System.Windows.Forms.ComboBox addr_Ip;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +18,7 @@ namespace NetworkFrame01
         public Form1()
         {
             InitializeComponent();
+            timer1.Start();
         }
 
         int data;
@@ -36,6 +38,7 @@ namespace NetworkFrame01
             int.TryParse(data_Lpw.Text, out data);
 
             virtualTableProtocol.Set_LW_Var(addr, data);
+
         }
 
         private void addr_Lrw_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,6 +71,7 @@ namespace NetworkFrame01
             }
 
             data_Lpr.Text = Convert.ToInt32(tempData, 16).ToString();
+           
         }
 
         private void addr_Ip_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,7 +96,6 @@ namespace NetworkFrame01
             }
 
             data_Ip.Text = Convert.ToInt32(tempData, 16).ToString();
-
         }
 
         private void cnnt_Btn_Click(object sender, EventArgs e)
@@ -105,5 +108,9 @@ namespace NetworkFrame01
             MessageBox.Show("접속 완료!");
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

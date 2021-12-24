@@ -43,6 +43,8 @@ namespace NetworkFrame01
 
             byte[] result = network.receive_Udp_Client();
 
+            frame.decode_Net_Frame(result);
+
             return result;
         }
         
