@@ -77,5 +77,11 @@ namespace NetworkFrame01
             data_Lpr.Text = threadingData.lVar.ToString();
             data_Ip.Text = threadingData.iVar.ToString();
         }
+
+        private void Disconnect_Click(object sender, EventArgs e)
+        {
+            threadingData.Disconnect();
+            MessageBox.Show("접속 종료!");
+        }
     }
 }

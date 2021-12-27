@@ -48,6 +48,7 @@ namespace NetworkFrame01
             this.addr_Lpr = new System.Windows.Forms.ComboBox();
             this.addr_Ip = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.Disconnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // writeQp
@@ -214,11 +215,22 @@ namespace NetworkFrame01
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // Disconnect
+            // 
+            this.Disconnect.Location = new System.Drawing.Point(335, 226);
+            this.Disconnect.Name = "Disconnect";
+            this.Disconnect.Size = new System.Drawing.Size(80, 70);
+            this.Disconnect.TabIndex = 35;
+            this.Disconnect.Text = "Disconnect";
+            this.Disconnect.UseVisualStyleBackColor = true;
+            this.Disconnect.Click += new System.EventHandler(this.Disconnect_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 332);
+            this.Controls.Add(this.Disconnect);
             this.Controls.Add(this.addr_Ip);
             this.Controls.Add(this.addr_Lpr);
             this.Controls.Add(this.cnntBtn);
@@ -263,6 +275,7 @@ namespace NetworkFrame01
         private System.Windows.Forms.ComboBox addr_Lpr;
         private System.Windows.Forms.ComboBox addr_Ip;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button Disconnect;
     }
 }
 
