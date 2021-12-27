@@ -14,6 +14,7 @@ namespace NetworkFrame01
     public partial class Form1 : Form
     {
         private VirtualTableProtocol virtualTableProtocol = new VirtualTableProtocol();
+        private ThreadingData threadingData = new ThreadingData();
 
         public Form1()
         {
@@ -38,16 +39,16 @@ namespace NetworkFrame01
             int.TryParse(data_Lpw.Text, out data);
 
             virtualTableProtocol.Set_LW_Var(addr, data);
-
+           
         }
 
         private void addr_Lrw_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedDt = addr_Lpr.SelectedIndex.ToString();
             int.TryParse(selectedDt, out addr);
+            
+            threadingData.lVarAddress = addr;
 
-            data = virtualTableProtocol.Set_LR_Var(addr);
- 
             data_Lpr.Text = data.ToString();
         }
 
@@ -55,9 +56,9 @@ namespace NetworkFrame01
         {
             string selectedDt = addr_Ip.SelectedIndex.ToString();
             int.TryParse(selectedDt, out addr);
+            
+            threadingData.iVarAddress = addr;
 
-            data = virtualTableProtocol.Set_I_Var(addr);
- 
             data_Ip.Text = data.ToString();
         }
         private void cnnt_Btn_Click(object sender, EventArgs e)
@@ -66,13 +67,15 @@ namespace NetworkFrame01
             int port = 2025;
 
             virtualTableProtocol.Connect_Udp_Client(host, port);
+            threadingData.Connect(host, port);
 
             MessageBox.Show("접속 완료!");
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            data_Lpr.Text = threadingData.lVar.ToString();
+            data_Ip.Text = threadingData.iVar.ToString();
         }
     }
 }

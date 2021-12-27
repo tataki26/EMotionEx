@@ -21,7 +21,6 @@ namespace NetworkFrame01
         public void send_Udp_Client(byte[] netFrame)
         {
             cli.Send(netFrame, netFrame.Length);
-            MessageBox.Show("전송 완료!");
         }
 
         public byte[] receive_Udp_Client()
