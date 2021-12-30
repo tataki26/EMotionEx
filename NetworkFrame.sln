@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkFrame01", "NetworkFrame01\NetworkFrame01.csproj", "{070B9EFC-01A8-4FAE-B0C9-2D99C8DCB545}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkFrame", "NetworkFrame01\NetworkFrame.csproj", "{070B9EFC-01A8-4FAE-B0C9-2D99C8DCB545}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A53847AF-03F8-4402-9034-7A981BD927D4} = {A53847AF-03F8-4402-9034-7A981BD927D4}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McsProgram", "VirtualTableProtocol\McsProgram.csproj", "{A53847AF-03F8-4402-9034-7A981BD927D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{070B9EFC-01A8-4FAE-B0C9-2D99C8DCB545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{070B9EFC-01A8-4FAE-B0C9-2D99C8DCB545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{070B9EFC-01A8-4FAE-B0C9-2D99C8DCB545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A53847AF-03F8-4402-9034-7A981BD927D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A53847AF-03F8-4402-9034-7A981BD927D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A53847AF-03F8-4402-9034-7A981BD927D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A53847AF-03F8-4402-9034-7A981BD927D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

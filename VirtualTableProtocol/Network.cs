@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
-using System.Windows.Forms;
 
-namespace NetworkFrame01
+namespace McsProgram
 {
     class Network
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using McsProgram;
 
 namespace NetworkFrame01
 {
@@ -15,7 +16,7 @@ namespace NetworkFrame01
         public int lVarAddress;
         public int iVarAddress; // 버튼
 
-        bool flag=true;     
+        bool flag=true;
 
         VirtualTableProtocol virtualTableProtocol = new VirtualTableProtocol();
         Thread thread;

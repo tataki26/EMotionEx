@@ -1,0 +1,6 @@
+D:\LYS\EMotionEx\VirtualTableProtocol\bin\Debug\VirtualTableProtocol.dll
+D:\LYS\EMotionEx\VirtualTableProtocol\bin\Debug\VirtualTableProtocol.pdb
+D:\LYS\EMotionEx\VirtualTableProtocol\obj\Debug\VirtualTableProtocol.csproj.AssemblyReference.cache
+D:\LYS\EMotionEx\VirtualTableProtocol\obj\Debug\VirtualTableProtocol.csproj.CoreCompileInputs.cache
+D:\LYS\EMotionEx\VirtualTableProtocol\obj\Debug\VirtualTableProtocol.dll
+D:\LYS\EMotionEx\VirtualTableProtocol\obj\Debug\VirtualTableProtocol.pdb
