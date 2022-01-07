@@ -14,12 +14,13 @@ namespace NetworkFrame01
 {
     public partial class Form1 : Form
     {
-        private VirtualTableProtocol virtualTableProtocol = new VirtualTableProtocol();
-        private ThreadingData threadingData = new ThreadingData();
+        private IMcs virtualTableProtocol = new VirtualTableProtocol();
+        private ThreadingData threadingData;
 
         public Form1()
         {
             InitializeComponent();
+            threadingData = new ThreadingData(virtualTableProtocol);
             timer1.Start();
         }
 
@@ -67,7 +68,7 @@ namespace NetworkFrame01
             string host = "192.168.240.2";
             int port = 2025;
 
-            virtualTableProtocol.Connect_Udp_Client(host, port);
+            //virtualTableProtocol.Connect_Udp_Client(host, port); >> 중복
             threadingData.Connect(host, port);
 
             MessageBox.Show("접속 완료!");

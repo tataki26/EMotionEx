@@ -18,8 +18,13 @@ namespace NetworkFrame01
 
         bool flag=true;
 
-        VirtualTableProtocol virtualTableProtocol = new VirtualTableProtocol();
+        IMcs virtualTableProtocol;
         Thread thread;
+
+        public ThreadingData(IMcs imcs)
+        {
+            virtualTableProtocol = imcs;
+        }
 
         public void Connect(string host, int port)
         {

@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace McsProgram
 {
-    public class VirtualTableProtocol
+    public interface IMcs
+    {
+        void Set_Q_Var(int addr, int data);
+        void Set_LW_Var(int addr, int data);
+        int Set_LR_Var(int addr);
+        int Set_I_Var(int addr);
+        void Connect_Udp_Client(string host, int port);
+    }
+    public class VirtualTableProtocol : IMcs
     {
         private Network network = new Network();
         private Frame frame = new Frame();
