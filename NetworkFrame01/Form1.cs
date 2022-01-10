@@ -14,7 +14,8 @@ namespace NetworkFrame01
 {
     public partial class Form1 : Form
     {
-        private IMcs virtualTableProtocol = new VirtualTableProtocol();
+        // private IMcs virtualTableProtocol = new VirtualTableProtocol();
+        private IMcs virtualTableProtocol = new DllProtocol();
         private ThreadingData threadingData;
 
         public Form1()
