@@ -44,6 +44,11 @@ namespace NetworkFrame01
             virtualTableProtocol.Set_LW_Var(addr, data);
            
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            addr_Lpr.SelectedIndex = 0;
+            addr_Ip.SelectedIndex = 0;
+        }
 
         private void addr_Lrw_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -86,5 +91,6 @@ namespace NetworkFrame01
             threadingData.Disconnect();
             MessageBox.Show("접속 종료!");
         }
+
     }
 }
