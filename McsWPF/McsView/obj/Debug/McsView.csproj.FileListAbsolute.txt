@@ -1,0 +1,15 @@
+D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\McsView.exe.config
+D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\McsView.exe
+D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\McsView.pdb
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.csproj.AssemblyReference.cache
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\MainWindow.g.cs
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\App.g.cs
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView_MarkupCompile.cache
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView_MarkupCompile.lref
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\MainWindow.baml
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.g.resources
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.Properties.Resources.resources
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.csproj.GenerateResource.cache
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.csproj.CoreCompileInputs.cache
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.exe
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.pdb
