@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace NetworkFrame01
 {
@@ -25,10 +26,20 @@ namespace NetworkFrame01
 
         public byte[] receive_Udp_Client()
         {
+            cli.Client.ReceiveTimeout = 5000;
             IPEndPoint epRemote = new IPEndPoint(IPAddress.Any, 0);
 
-            byte[] dataBytes = cli.Receive(ref epRemote);
+            byte[] dataBytes = null;
 
+            try
+            {
+                dataBytes = cli.Receive(ref epRemote);
+            }
+            catch(SocketException se)
+            {
+                Debug.WriteLine($"{se.Message}: {se.ErrorCode}");
+            }
+            
             return dataBytes;
         }
         

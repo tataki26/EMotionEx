@@ -63,7 +63,8 @@ namespace NetworkFrame01
         }
         private void cnnt_Btn_Click(object sender, EventArgs e)
         {
-            string host = "192.168.240.2";
+            // string host = "192.168.240.2";
+            string host = "192.168.140.2";
             int port = 2025;
 
             virtualTableProtocol.Connect_Udp_Client(host, port);
