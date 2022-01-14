@@ -9,8 +9,13 @@ namespace NetworkFrame01
 {
     class ThreadingData
     {
-        public int lVar;
-        public int iVar; // 타이머
+        public int lnum;
+        public string lstr;
+        public bool lflag=true;
+
+        public int inum;
+        public string istr;
+        public bool iflag=true;
 
         public int lVarAddress;
         public int iVarAddress; // 버튼
@@ -38,8 +43,8 @@ namespace NetworkFrame01
         {
             while(flag)
             {
-                lVar = virtualTableProtocol.Set_LR_Var(lVarAddress);
-                iVar = virtualTableProtocol.Set_I_Var(iVarAddress);
+                virtualTableProtocol.Set_LR_Var(lVarAddress, ref lflag, ref lnum, ref lstr);
+                virtualTableProtocol.Set_I_Var(iVarAddress, ref iflag, ref inum, ref istr);
             }
 
         }

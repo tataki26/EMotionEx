@@ -74,8 +74,11 @@ namespace NetworkFrame01
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            data_Lpr.Text = threadingData.lVar.ToString();
-            data_Ip.Text = threadingData.iVar.ToString();
+            if (threadingData.lflag == false) data_Lpr.Text = threadingData.lstr;
+            else data_Lpr.Text = threadingData.lnum.ToString();
+
+            if (threadingData.iflag == false) data_Ip.Text = threadingData.istr;
+            else data_Ip.Text = threadingData.inum.ToString();
         }
 
         private void Disconnect_Click(object sender, EventArgs e)
