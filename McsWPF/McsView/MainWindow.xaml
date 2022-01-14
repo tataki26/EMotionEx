@@ -155,30 +155,30 @@
                     VerticalAlignment="Top"
                     Margin="0,18,0,0">
 
-            <Button x:Name="Qp_Btn" 
+            <Button x:Name="qpBtn_Button" 
                 Content="Write" 
                 VerticalAlignment="Center"
                 Height="20"
                 Width="80"
                 FontSize="13"
-                Margin="0,0,14,28"/>
+                Margin="0,0,14,28" Click="qpBtn_Button_Click"/>
 
-            <Button x:Name="Lpw_Btn" 
+            <Button x:Name="lpBtn_Button" 
                 Content="Write" 
                 VerticalAlignment="Center"
                 Height="20"
                 Width="80"
                 FontSize="13"
-                Margin="0,0,14,28"/>
+                Margin="0,0,14,28" Click="lpBtn_Button_Click"/>
 
-            <Button x:Name="dnn_Btn" 
+            <Button x:Name="dnnBtn_Button" 
                 Content="Disconnect" 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Height="70"
                 Width="80"
                 FontSize="13"
-                Margin="0,0,14,0"/>
+                Margin="0,0,14,0" Click="dnnBtn_Button_Click"/>
 
         </StackPanel>
 

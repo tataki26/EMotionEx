@@ -31,5 +31,23 @@ namespace McsView
             Button btn = sender as Button;
             MessageBox.Show("접속 완료!");
         }
+
+        private void qpBtn_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            MessageBox.Show("Q접점");
+        }
+
+        private void lpBtn_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            MessageBox.Show("L접점");
+        }
+
+        private void dnnBtn_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            MessageBox.Show("접속 종료!");
+        }
     }
 }
