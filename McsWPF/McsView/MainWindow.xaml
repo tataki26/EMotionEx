@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:McsView"
         mc:Ignorable="d"
-        Title="MCS Network Program" Height="450" Width="800">
-    
+        Title="MCS Network Program" Height="370" Width="540">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
             <RowDefinition/>
+            <RowDefinition Height="220"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="140"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -25,22 +25,25 @@
                 Content="Connect" 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Height="50"
-                Width="150"
-                FontSize="20"
+                Height="35"
+                Width="280"
+                FontSize="13"
                 Click="cnnBtn_Button_Click_1"
                 Grid.Column="1"
-                Grid.ColumnSpan="2"/>
+                Grid.ColumnSpan="2"
+                Margin="0,5,0,0"/>
 
         <StackPanel Grid.Row="1"
                     Grid.Column="1"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,5">
 
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Addr"
-                               FontSize="20"/>
+                               FontSize="13"
+                               FontWeight="Bold"/>
                 </StackPanel>
             </StackPanel>
 
@@ -49,12 +52,14 @@
         <StackPanel Grid.Row="1"
                     Grid.Column="2"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,5">
 
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Data"
-                               FontSize="20"/>
+                               FontSize="13"
+                               FontWeight="Bold"/>
                 </StackPanel>
             </StackPanel>
 
@@ -63,24 +68,123 @@
         <StackPanel Grid.Row="2"
                     Grid.Column="0"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Top"
+                    Margin="0,20,0,0">
 
             <TextBlock Text="Q접점"
-                       FontSize="20"
-                       Margin="0,10,0,10"/>
+                       FontSize="13"
+                       Margin="10,0,0,30"/>
             <TextBlock Text="L접점(W)"
-                       FontSize="20"
-                       Margin="0,10,0,10"/>
-            <TextBlock Text="Q접점(R)"
-                       FontSize="20"
-                       Margin="0,10,0,10"/>
+                       FontSize="13"
+                       Margin="10,0,0,30"/>
+            <TextBlock Text="L접점(R)"
+                       FontSize="13"
+                       Margin="10,0,0,30"/>
             <TextBlock Text="I접점"
-                       FontSize="20"
-                       Margin="0,10,0,10"/>
+                       FontSize="13"
+                       Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,18,0,0">
+
+            <TextBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,28"/>
+
+            <TextBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,28"/>
+
+            <ComboBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,26"/>
+
+            <ComboBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,0"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,18,0,0">
+
+            <TextBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,28"/>
+
+            <TextBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,28"/>
+
+            <TextBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,26"/>
+
+            <TextBox Width="100"
+                     Height="20"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,0"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,18,0,0">
+
+            <Button x:Name="Qp_Btn" 
+                Content="Write" 
+                VerticalAlignment="Center"
+                Height="20"
+                Width="80"
+                FontSize="13"
+                Margin="0,0,14,28"/>
+
+            <Button x:Name="Lpw_Btn" 
+                Content="Write" 
+                VerticalAlignment="Center"
+                Height="20"
+                Width="80"
+                FontSize="13"
+                Margin="0,0,14,28"/>
+
+            <Button x:Name="dnn_Btn" 
+                Content="Disconnect" 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="70"
+                Width="80"
+                FontSize="13"
+                Margin="0,0,14,0"/>
+
         </StackPanel>
 
 
     </Grid>
 
-   
+
+
 </Window>
