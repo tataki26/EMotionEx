@@ -91,13 +91,17 @@
                     VerticalAlignment="Top"
                     Margin="0,18,0,0">
 
-            <TextBox Width="100"
+            <TextBox x:Name="qpAddr"
+                     Text="{Binding QpAddr, UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
                      Margin="0,0,0,28"/>
 
-            <TextBox Width="100"
+            <TextBox x:Name="lpwAddr"
+                     Text="{Binding LpwAddr, UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"

@@ -1,47 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using McsView.ViewModel;
 
 namespace McsView
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Loaded += OnLoaded;
+            this.DataContext = new MainViewModel();
         }
 
-        // Button 컨트롤 클릭 이벤트 핸들러
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Keyboard.Focus(this.qpAddr);
+        }
+
         private void cnnBtn_Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            // Button btn = sender as Button;
             MessageBox.Show("접속 완료!");
         }
 
         private void qpBtn_Button_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            MessageBox.Show("Q접점");
+            var viewModel = this.DataContext as MainViewModel;
+
+            if (string.IsNullOrEmpty(viewModel.QpAddr))
+            {
+                MessageBox.Show("Q접점 주소를 입력해주세요.");
+                Keyboard.Focus(this.qpAddr);
+                return;
+            }
+
+            qpWrite();
+
         }
 
         private void lpBtn_Button_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            MessageBox.Show("L접점");
+            var viewModel = this.DataContext as MainViewModel;
+
+            if (string.IsNullOrEmpty(viewModel.LpwAddr))
+            {
+                MessageBox.Show("L접점 주소를 입력해주세요.");
+                Keyboard.Focus(this.lpwAddr);
+                return;
+            }
+
+            lpWrite();
+        }
+
+        private bool qpWrite()
+        {
+            var viewModel = this.DataContext as MainViewModel;
+            MessageBox.Show(string.Format("Q접점: {0}", viewModel.QpAddr));
+            return true;
+        }
+
+        private bool lpWrite()
+        {
+            var viewModel = this.DataContext as MainViewModel;
+            MessageBox.Show(string.Format("L접점: {0}", viewModel.LpwAddr));
+            return true;
         }
 
         private void dnnBtn_Button_Click(object sender, RoutedEventArgs e)
