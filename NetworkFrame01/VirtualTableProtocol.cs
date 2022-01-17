@@ -33,7 +33,7 @@ namespace NetworkFrame01
             network.receive_Udp_Client();
         }
         
-        public void Set_LR_Var(int addr, ref bool flag, ref int num, ref string str)
+        public void Set_LR_Var(int addr, ref object result)
         {
             int virtualAddr = (2*addr) + 400000;
             byte[] netFrame = frame.make_Net_Frame(32, virtualAddr);
@@ -43,17 +43,13 @@ namespace NetworkFrame01
 
             if (data[0] != 7)
             {
-                flag = false;
-
-                if (data[0]!=245) str = "NACK";
-                else str = "Wrong Type";
-               
+                if (data[0]!=245) result = "NACK";
+                else result = "Wrong Type";    
             }
-
-            else num = frame.decode_Net_Frame(32, data);
+            else result = frame.decode_Net_Frame(32, data);
         }
-        
-        public void Set_I_Var(int addr, ref bool flag, ref int num, ref string str)
+
+        public void Set_I_Var(int addr, ref object result)
         {
             int virtualAddr = addr + 120000;
             byte[] netFrame = frame.make_Net_Frame(16, virtualAddr);
@@ -61,13 +57,8 @@ namespace NetworkFrame01
             network.send_Udp_Client(netFrame);
             byte[] data = network.receive_Udp_Client();
 
-            if (data[0] == 7)
-            {
-                flag = false;
-                str = "NACK";
-            }
-            
-            else num = frame.decode_Net_Frame(16, data);
+            if (data[0] == 7) result = "NACK";
+            else result = frame.decode_Net_Frame(16, data);
         }
         
         public void Connect_Udp_Client(string host, int port)

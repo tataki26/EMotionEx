@@ -39,7 +39,7 @@ namespace NetworkFrame01
             int.TryParse(data_Lpw.Text, out data);
 
             virtualTableProtocol.Set_LW_Var(addr, data);
-           
+
         }
 
         private void addr_Lrw_SelectedIndexChanged(object sender, EventArgs e)
@@ -63,8 +63,8 @@ namespace NetworkFrame01
         }
         private void cnnt_Btn_Click(object sender, EventArgs e)
         {
-            // string host = "192.168.240.2";
-            string host = "192.168.140.2";
+            string host = "192.168.240.2";
+            // string host = "192.168.140.2"; // 연결 오류 확인용 코드
             int port = 2025;
 
             virtualTableProtocol.Connect_Udp_Client(host, port);
@@ -75,17 +75,20 @@ namespace NetworkFrame01
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (threadingData.lflag == false) data_Lpr.Text = threadingData.lstr;
-            else data_Lpr.Text = threadingData.lnum.ToString();
-
-            if (threadingData.iflag == false) data_Ip.Text = threadingData.istr;
-            else data_Ip.Text = threadingData.inum.ToString();
+            if (threadingData.lresult != null) data_Lpr.Text = threadingData.lresult.ToString();
+            if (threadingData.iresult != null) data_Ip.Text = threadingData.iresult.ToString();
         }
 
         private void Disconnect_Click(object sender, EventArgs e)
         {
             threadingData.Disconnect();
             MessageBox.Show("접속 종료!");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            addr_Lpr.SelectedIndex = 0;
+            addr_Ip.SelectedIndex = 0;
         }
     }
 }
