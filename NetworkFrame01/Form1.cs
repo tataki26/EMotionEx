@@ -70,7 +70,6 @@ namespace NetworkFrame01
             virtualTableProtocol.Connect_Udp_Client(host, port);
             threadingData.Connect(host, port);
 
-            MessageBox.Show("접속 완료!");
         }
 
         private void timer1_Tick(object sender, EventArgs e)

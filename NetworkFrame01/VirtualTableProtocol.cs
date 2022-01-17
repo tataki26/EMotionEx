@@ -55,7 +55,7 @@ namespace NetworkFrame01
             byte[] netFrame = frame.make_Net_Frame(16, virtualAddr);
 
             network.send_Udp_Client(netFrame);
-            byte[] data = network.receive_Udp_Client();
+            byte[] data = network.receive_Udp_Client(); 
 
             if (data[0] == 7) result = "NACK";
             else result = frame.decode_Net_Frame(16, data);

@@ -13,6 +13,7 @@ namespace NetworkFrame01
     class Network
     {
         UdpClient cli = new UdpClient();
+        public bool flag = true;
 
         public void Connect(string host, int port)
         {
@@ -26,20 +27,21 @@ namespace NetworkFrame01
 
         public byte[] receive_Udp_Client()
         {
-            cli.Client.ReceiveTimeout = 5000;
+            cli.Client.ReceiveTimeout = 1000;
             IPEndPoint epRemote = new IPEndPoint(IPAddress.Any, 0);
 
             byte[] dataBytes = null;
-
+            
             try
             {
                 dataBytes = cli.Receive(ref epRemote);
             }
             catch(SocketException se)
             {
+                MessageBox.Show("통신 에러 - TimeOut");
                 Debug.WriteLine($"{se.Message}: {se.ErrorCode}");
             }
-            
+
             return dataBytes;
         }
         
