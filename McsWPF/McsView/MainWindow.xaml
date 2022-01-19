@@ -107,11 +107,13 @@
                      HorizontalAlignment="Center"
                      Margin="0,0,0,28"/>
 
-            <ComboBox Width="100"
+            <ComboBox x:Name="lprAddr"
+                     Text="{Binding LprAddr, UpdateSourceTrigger=PropertyChanged}" 
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
-                     Margin="0,0,0,26">
+                     Margin="0,0,0,26" SelectionChanged="lprAddr_SelectionChanged">
                 <ComboBoxItem Content="0" IsSelected="True"/>
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
@@ -120,11 +122,13 @@
                 <ComboBoxItem Content="5"/>
             </ComboBox>
 
-            <ComboBox Width="100"
+            <ComboBox x:Name="ipAddr"
+                     Text="{Binding IpAddr, UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
-                     Margin="0,0,0,0">
+                     Margin="0,0,0,0" SelectionChanged="ipAddr_SelectionChanged">
                 <ComboBoxItem Content="0" IsSelected="True"/>
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
@@ -141,25 +145,33 @@
                     VerticalAlignment="Top"
                     Margin="0,18,0,0">
 
-            <TextBox Width="100"
+            <TextBox x:Name="qpData"
+                     Text="{Binding QpData, UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
                      Margin="0,0,0,28"/>
 
-            <TextBox Width="100"
+            <TextBox x:Name="lpwData"
+                     Text="{Binding LpwData, UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
                      Margin="0,0,0,28"/>
 
-            <TextBox Width="100"
+            <TextBox x:Name="lprData"
+                     Text="{Binding LprData, UpdateSourceTrigger=PropertyChanged}" 
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
                      Margin="0,0,0,26"/>
 
-            <TextBox Width="100"
+            <TextBox x:Name="ipData"
+                     Text="{Binding IpData, UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
                      Height="20"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"

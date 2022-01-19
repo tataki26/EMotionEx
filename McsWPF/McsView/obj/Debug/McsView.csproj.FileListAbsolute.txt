@@ -13,3 +13,6 @@ D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.csproj.GenerateResource.cache
 D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.csproj.CoreCompileInputs.cache
 D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.exe
 D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.pdb
+D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\McsLibrary.dll
+D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\McsLibrary.dll.config
+D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.csproj.CopyComplete
