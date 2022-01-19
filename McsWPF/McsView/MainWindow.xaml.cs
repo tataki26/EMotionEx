@@ -92,6 +92,8 @@ namespace McsView
             int.TryParse(viewModel.QpAddr, out addr);
             int.TryParse(viewModel.QpData, out data);
 
+            vtp.Set_Q_Var(addr, data);
+
             return true;
         }
 
@@ -102,6 +104,8 @@ namespace McsView
             // MessageBox.Show(string.Format("L접점: {0}", viewModel.LpwAddr));
             int.TryParse(viewModel.LpwAddr, out addr);
             int.TryParse(viewModel.LpwData, out data);
+
+            vtp.Set_LW_Var(addr, data);
 
             return true;
         }
