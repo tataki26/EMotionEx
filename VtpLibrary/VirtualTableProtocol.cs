@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace McsProgram
+namespace VtpLibrary
 {
     public interface IMcs
     {
         void Set_Q_Var(int addr, int data);
         void Set_LW_Var(int addr, int data);
-        int Set_LR_Var(int addr);
-        int Set_I_Var(int addr);
+        void Set_LR_Var(int addr, ref bool flag, ref int num, ref string str);
+        void Set_I_Var(int addr, ref bool flag, ref int num, ref string str);
         void Connect_Udp_Client(string host, int port);
     }
     public class VirtualTableProtocol : IMcs
@@ -39,7 +35,7 @@ namespace McsProgram
             network.receive_Udp_Client();
         }
 
-        public int Set_LR_Var(int addr)
+        public void Set_LR_Var(int addr, ref bool flag, ref int num, ref string str)
         {
             int virtualAddr = (2 * addr) + 400000;
             byte[] netFrame = frame.make_Net_Frame(32, virtualAddr);
@@ -47,12 +43,18 @@ namespace McsProgram
             network.send_Udp_Client(netFrame);
             byte[] data = network.receive_Udp_Client();
 
-            int deData = frame.decode_Net_Frame(32, data);
+            if (data[0] != 7)
+            {
+                flag = false;
 
-            return deData;
+                if (data[0] != 245) str = "NACK";
+                else str = "Wrong Type";
+            }
+            else num = frame.decode_Net_Frame(32, data);
+
         }
 
-        public int Set_I_Var(int addr)
+        public void Set_I_Var(int addr, ref bool flag, ref int num, ref string str)
         {
             int virtualAddr = addr + 120000;
             byte[] netFrame = frame.make_Net_Frame(16, virtualAddr);
@@ -60,9 +62,13 @@ namespace McsProgram
             network.send_Udp_Client(netFrame);
             byte[] data = network.receive_Udp_Client();
 
-            int deData = frame.decode_Net_Frame(16, data);
+            if (data[0] == 7)
+            {
+                flag = false;
+                str = "NACK";
+            }
+            else num = frame.decode_Net_Frame(16, data);
 
-            return deData;
         }
 
         public void Connect_Udp_Client(string host, int port)

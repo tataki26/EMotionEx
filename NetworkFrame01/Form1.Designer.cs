@@ -250,6 +250,7 @@ namespace NetworkFrame01
             this.Controls.Add(this.writeQp);
             this.Name = "Form1";
             this.Text = "MCS Network Program";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

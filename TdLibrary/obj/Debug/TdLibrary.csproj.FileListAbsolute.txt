@@ -1,0 +1,11 @@
+D:\LYS\EMotionEx\TdLibrary\bin\Debug\TdLibrary.dll
+D:\LYS\EMotionEx\TdLibrary\bin\Debug\TdLibrary.pdb
+D:\LYS\EMotionEx\TdLibrary\bin\Debug\VirtualTableProtocol.dll
+D:\LYS\EMotionEx\TdLibrary\bin\Debug\VtpLibrary.dll
+D:\LYS\EMotionEx\TdLibrary\bin\Debug\VirtualTableProtocol.pdb
+D:\LYS\EMotionEx\TdLibrary\bin\Debug\VtpLibrary.pdb
+D:\LYS\EMotionEx\TdLibrary\obj\Debug\TdLibrary.csproj.AssemblyReference.cache
+D:\LYS\EMotionEx\TdLibrary\obj\Debug\TdLibrary.csproj.CoreCompileInputs.cache
+D:\LYS\EMotionEx\TdLibrary\obj\Debug\TdLibrary.csproj.CopyComplete
+D:\LYS\EMotionEx\TdLibrary\obj\Debug\TdLibrary.dll
+D:\LYS\EMotionEx\TdLibrary\obj\Debug\TdLibrary.pdb

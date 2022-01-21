@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using VtpLibrary;
 
 namespace McsProgram
 {
@@ -31,24 +28,34 @@ namespace McsProgram
             eMcsConnectByUDP(Convert.ToInt32(hosts[0]), Convert.ToInt32(hosts[1]), Convert.ToInt32(hosts[2]), Convert.ToInt32(hosts[3]), port);
         }
 
-        public int Set_I_Var(int addr)
+        public void Set_I_Var(int addr, ref bool flag, ref int num, ref string str)
         {
-            int data = 0;
-            int ret = 0;
+            int ret;
 
-            ret = eMcsGetIPoint(addr, out data);
+            ret = eMcsGetIPoint(addr, out num);
 
-            return data;
+            if (ret != 0)
+            {
+                flag = false;
+                
+                if (ret == 20) str = "NACK";
+                else str = "Invaild Argument";
+            }
+            
         }
 
-        public int Set_LR_Var(int addr)
+        public void Set_LR_Var(int addr, ref bool flag, ref int num, ref string str)
         {
-            int data = 0;
-            int ret = 0;
+            int ret;
 
-            ret = eMcsGetLVariable(addr, out data);
+            ret = eMcsGetLVariable(addr, out num);
 
-            return data;
+            if (ret == 0)
+            {
+                flag = false;
+                str = "NACK";
+            }
+
         }
 
         public void Set_LW_Var(int addr, int data)

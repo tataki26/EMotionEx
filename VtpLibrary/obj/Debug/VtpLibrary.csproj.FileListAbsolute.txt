@@ -1,0 +1,6 @@
+D:\LYS\EMotionEx\VtpLibrary\bin\Debug\VtpLibrary.dll
+D:\LYS\EMotionEx\VtpLibrary\bin\Debug\VtpLibrary.pdb
+D:\LYS\EMotionEx\VtpLibrary\obj\Debug\VtpLibrary.csproj.AssemblyReference.cache
+D:\LYS\EMotionEx\VtpLibrary\obj\Debug\VtpLibrary.csproj.CoreCompileInputs.cache
+D:\LYS\EMotionEx\VtpLibrary\obj\Debug\VtpLibrary.dll
+D:\LYS\EMotionEx\VtpLibrary\obj\Debug\VtpLibrary.pdb

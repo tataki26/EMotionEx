@@ -1,0 +1,20 @@
+13:27:12.723 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 54038). send index 0 to server
+13:27:13.753 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 54038). send index 1 to server
+13:27:14.770 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 54038). send index 2 to server
+13:27:14.771 EVENT0(00000000) UdpClient::SendAndReplyData : No reply data from server. The number of trying to send data is reached max count of trying to send data to server...
+13:27:39.387 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 56860). send index 0 to server
+13:27:40.417 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 56860). send index 1 to server
+13:27:41.445 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 56860). send index 2 to server
+13:27:41.446 EVENT0(00000000) UdpClient::SendAndReplyData : No reply data from server. The number of trying to send data is reached max count of trying to send data to server...
+13:33:09.102 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 56740). send index 0 to server
+13:33:10.120 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 56740). send index 1 to server
+13:33:11.140 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 56740). send index 2 to server
+13:33:11.141 EVENT0(00000000) UdpClient::SendAndReplyData : No reply data from server. The number of trying to send data is reached max count of trying to send data to server...
+13:34:12.138 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 53655). send index 0 to server
+13:34:13.166 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 53655). send index 1 to server
+13:34:14.184 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 53655). send index 2 to server
+13:34:14.184 EVENT0(00000000) UdpClient::SendAndReplyData : No reply data from server. The number of trying to send data is reached max count of trying to send data to server...
+13:34:35.954 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 61914). send index 0 to server
+13:34:36.970 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 61914). send index 1 to server
+13:34:37.995 EVENT0(00000102) UdpClient::SendAndReplyData : No reply data from server to client(port : 61914). send index 2 to server
+13:34:37.995 EVENT0(00000000) UdpClient::SendAndReplyData : No reply data from server. The number of trying to send data is reached max count of trying to send data to server...
