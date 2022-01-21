@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using VtpLib;
 
-namespace TdLibrary
+namespace TdLib
 {
     public class ThreadingData
     {
