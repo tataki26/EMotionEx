@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using McsProgram;
 using VtpLibrary;
 using TdLibrary;
 
@@ -16,14 +15,13 @@ namespace NetworkFrame01
 {
     public partial class Form1 : Form
     {
-        // private IMcs virtualTableProtocol = new VirtualTableProtocol();
-        private IMcs dllProtocol = new DllProtocol();
+        private IMcs vtp = new VirtualTableProtocol();
         private ThreadingData td;
 
         public Form1()
         {
             InitializeComponent();
-            td = new ThreadingData(dllProtocol);
+            td = new ThreadingData(vtp);
             timer1.Start();
         }
 
@@ -35,7 +33,7 @@ namespace NetworkFrame01
             int.TryParse(addr_Qp.Text, out addr);
             int.TryParse(data_Qp.Text, out data);
             
-            dllProtocol.Set_Q_Var(addr, data);
+            vtp.Set_Q_Var(addr, data);
         }
 
         private void write_Lp_Click(object sender, EventArgs e)
@@ -43,7 +41,7 @@ namespace NetworkFrame01
             int.TryParse(addr_Lpw.Text, out addr);
             int.TryParse(data_Lpw.Text, out data);
 
-            dllProtocol.Set_LW_Var(addr, data);
+            vtp.Set_LW_Var(addr, data);
            
         }
         private void Form1_Load(object sender, EventArgs e)

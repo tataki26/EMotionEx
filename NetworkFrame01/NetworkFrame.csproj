@@ -85,11 +85,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VirtualTableProtocol\McsProgram.csproj">
-      <Project>{a53847af-03f8-4402-9034-7a981bd927d4}</Project>
-      <Name>McsProgram</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

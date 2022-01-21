@@ -18,12 +18,12 @@ namespace TdLibrary
 
         public bool flag=false;
 
-        IMcs dllProtocol;
+        IMcs virtualTableProtocol;
         Thread thread;
 
         public ThreadingData(IMcs imcs)
         {
-            dllProtocol = imcs;
+            virtualTableProtocol = imcs;
         }
 
         public void Connect(string host, int port)
@@ -31,7 +31,7 @@ namespace TdLibrary
             if (!flag)
             {
                 flag = true;
-                dllProtocol.Connect_Udp_Client(host, port);
+                virtualTableProtocol.Connect_Udp_Client(host, port);
                 thread = new Thread(new ThreadStart(ThreadGetData));
                 thread.Start();
             }
@@ -48,8 +48,8 @@ namespace TdLibrary
         {
             while(flag)
             {
-                dllProtocol.Set_LR_Var(lUpdatedAddr, ref lflag, ref lnum, ref lstr);
-                dllProtocol.Set_I_Var(iUpdatedAddr, ref iflag, ref inum, ref istr);
+                virtualTableProtocol.Set_LR_Var(lUpdatedAddr, ref lflag, ref lnum, ref lstr);
+                virtualTableProtocol.Set_I_Var(iUpdatedAddr, ref iflag, ref inum, ref istr);
 
             }
 
