@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VtpLibrary;
 using TdLibrary;
@@ -82,11 +74,8 @@ namespace NetworkFrame01
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (td.lflag == false) data_Lpr.Text = td.lstr;
-            else data_Lpr.Text = td.lnum.ToString();
-
-            if (td.iflag == false) data_Ip.Text = td.istr;
-            else data_Ip.Text = td.inum.ToString();
+            if (td.lUpdateData!=null) data_Lpr.Text = td.lUpdateData.ToString();
+            if (td.iUpdateData!=null) data_Ip.Text = td.iUpdateData.ToString();
 
         }
 

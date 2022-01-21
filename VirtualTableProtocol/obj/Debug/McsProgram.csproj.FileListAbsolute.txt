@@ -6,4 +6,3 @@ D:\LYS\EMotionEx\VirtualTableProtocol\obj\Debug\VirtualTableProtocol.pdb
 D:\LYS\EMotionEx\VirtualTableProtocol\bin\Debug\VtpLibrary.dll
 D:\LYS\EMotionEx\VirtualTableProtocol\bin\Debug\VtpLibrary.pdb
 D:\LYS\EMotionEx\VirtualTableProtocol\obj\Debug\McsProgram.csproj.CopyComplete
-D:\LYS\EMotionEx\VirtualTableProtocol\obj\Debug\McsProgram.csproj.AssemblyReference.cache

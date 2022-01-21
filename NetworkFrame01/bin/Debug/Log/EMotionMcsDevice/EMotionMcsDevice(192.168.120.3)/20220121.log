@@ -1,3 +1,6 @@
 13:46:16.291 SYSTEM(00000058) McsProtocol::SendFrame : Failed to send frame or to receive frame(Com Error Code : -22).
 13:46:16.291 SYSTEM(000013AB) McsProtocol::GetHardwareVersion : Failed to send frame(Protocol Error Code : -6).
 13:46:16.316 SYSTEM(000013AB) McsProtocol::Init : Failed to get controller version(Protocol Error Code : -6).
+14:55:38.917 SYSTEM(00000058) McsProtocol::SendFrame : Failed to send frame or to receive frame(Com Error Code : -22).
+14:55:38.917 SYSTEM(000013AB) McsProtocol::GetHardwareVersion : Failed to send frame(Protocol Error Code : -6).
+14:55:38.948 SYSTEM(000013AB) McsProtocol::Init : Failed to get controller version(Protocol Error Code : -6).

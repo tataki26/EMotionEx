@@ -6,8 +6,8 @@ namespace VtpLibrary
     {
         void Set_Q_Var(int addr, int data);
         void Set_LW_Var(int addr, int data);
-        void Set_LR_Var(int addr, ref bool flag, ref int num, ref string str);
-        void Set_I_Var(int addr, ref bool flag, ref int num, ref string str);
+        void Set_LR_Var(int addr, ref object result);
+        void Set_I_Var(int addr, ref object result);
         void Connect_Udp_Client(string host, int port);
     }
     public class VirtualTableProtocol : IMcs
@@ -35,7 +35,7 @@ namespace VtpLibrary
             network.receive_Udp_Client();
         }
 
-        public void Set_LR_Var(int addr, ref bool flag, ref int num, ref string str)
+        public void Set_LR_Var(int addr, ref object result)
         {
             int virtualAddr = (2 * addr) + 400000;
             byte[] netFrame = frame.make_Net_Frame(32, virtualAddr);
@@ -45,16 +45,14 @@ namespace VtpLibrary
 
             if (data[0] != 7)
             {
-                flag = false;
-
-                if (data[0] != 245) str = "NACK";
-                else str = "Wrong Type";
+                if (data[0] != 245) result = "NACK";
+                else result = "Wrong Frame";
             }
-            else num = frame.decode_Net_Frame(32, data);
+            else result = frame.decode_Net_Frame(32, data);
 
         }
 
-        public void Set_I_Var(int addr, ref bool flag, ref int num, ref string str)
+        public void Set_I_Var(int addr, ref object result)
         {
             int virtualAddr = addr + 120000;
             byte[] netFrame = frame.make_Net_Frame(16, virtualAddr);
@@ -64,10 +62,9 @@ namespace VtpLibrary
 
             if (data[0] == 7)
             {
-                flag = false;
-                str = "NACK";
+                result = "NACK";
             }
-            else num = frame.decode_Net_Frame(16, data);
+            else result = frame.decode_Net_Frame(16, data);
 
         }
 

@@ -5,16 +5,11 @@ namespace TdLibrary
 {
     public class ThreadingData
     {
-        public int lnum;
-        public string lstr;
-        public bool lflag = true;
-
-        public int inum;
-        public string istr;
-        public bool iflag = true;
-
         public int lUpdatedAddr;
         public int iUpdatedAddr;
+
+        public object lUpdateData;
+        public object iUpdateData;
 
         public bool flag=false;
 
@@ -48,8 +43,8 @@ namespace TdLibrary
         {
             while(flag)
             {
-                virtualTableProtocol.Set_LR_Var(lUpdatedAddr, ref lflag, ref lnum, ref lstr);
-                virtualTableProtocol.Set_I_Var(iUpdatedAddr, ref iflag, ref inum, ref istr);
+                virtualTableProtocol.Set_LR_Var(lUpdatedAddr, ref lUpdateData);
+                virtualTableProtocol.Set_I_Var(iUpdatedAddr, ref iUpdateData);
 
             }
 

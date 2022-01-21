@@ -8,7 +8,6 @@ namespace VtpLibrary
     class Network
     {
         UdpClient cli = new UdpClient();
-        // public bool flag = true;
 
         public void Connect(string host, int port)
         {

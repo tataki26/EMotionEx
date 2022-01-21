@@ -11,5 +11,5 @@ D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\NetworkFrame01.pdb
 D:\LYS\EMotionEx\NetworkFrame01\obj\Debug\NetworkFrame.csproj.CopyComplete
 D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\TdLibrary.dll
 D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\VtpLibrary.dll
-D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\TdLibrary.pdb
-D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\VtpLibrary.pdb
+D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\VirtualTableProtocol.dll
+D:\LYS\EMotionEx\NetworkFrame01\bin\Debug\VirtualTableProtocol.pdb

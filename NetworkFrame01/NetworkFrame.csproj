@@ -44,11 +44,13 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TdLibrary">
-      <HintPath>..\TdLibrary\bin\Debug\TdLibrary.dll</HintPath>
+    <Reference Include="TdLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\emotion_No.23\OneDrive\바탕 화면\dll\TdLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="VtpLibrary">
-      <HintPath>..\VtpLibrary\bin\Debug\VtpLibrary.dll</HintPath>
+    <Reference Include="VtpLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\emotion_No.23\OneDrive\바탕 화면\dll\VtpLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +86,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualTableProtocol\McsProgram.csproj">
+      <Project>{a53847af-03f8-4402-9034-7a981bd927d4}</Project>
+      <Name>McsProgram</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

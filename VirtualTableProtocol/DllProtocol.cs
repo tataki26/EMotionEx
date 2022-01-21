@@ -28,33 +28,34 @@ namespace McsProgram
             eMcsConnectByUDP(Convert.ToInt32(hosts[0]), Convert.ToInt32(hosts[1]), Convert.ToInt32(hosts[2]), Convert.ToInt32(hosts[3]), port);
         }
 
-        public void Set_I_Var(int addr, ref bool flag, ref int num, ref string str)
+        public void Set_I_Var(int addr, ref object result)
         {
+            int data;
             int ret;
 
-            ret = eMcsGetIPoint(addr, out num);
+            ret = eMcsGetIPoint(addr, out data);
 
             if (ret != 0)
             {
-                flag = false;
-                
-                if (ret == 20) str = "NACK";
-                else str = "Invaild Argument";
+                if (ret == 20) result = "NACK";
+                else result = "Invaild Argument";
             }
+            else result = data;
             
         }
 
-        public void Set_LR_Var(int addr, ref bool flag, ref int num, ref string str)
+        public void Set_LR_Var(int addr, ref object result)
         {
+            int data;
             int ret;
 
-            ret = eMcsGetLVariable(addr, out num);
+            ret = eMcsGetLVariable(addr, out data);
 
             if (ret == 0)
             {
-                flag = false;
-                str = "NACK";
+                result = "NACK";
             }
+            else result = data;
 
         }
 
