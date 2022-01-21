@@ -16,3 +16,5 @@ D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.pdb
 D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\McsLibrary.dll
 D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\McsLibrary.dll.config
 D:\LYS\EMotionEx\McsWPF\McsView\obj\Debug\McsView.csproj.CopyComplete
+D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\TdLib.dll
+D:\LYS\EMotionEx\McsWPF\McsView\bin\Debug\VtpLib.dll

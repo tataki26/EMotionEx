@@ -49,6 +49,12 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TdLib">
+      <HintPath>C:\Users\emotion_No.23\OneDrive\바탕 화면\dll\TdLib.dll</HintPath>
+    </Reference>
+    <Reference Include="VtpLib">
+      <HintPath>C:\Users\emotion_No.23\OneDrive\바탕 화면\dll\VtpLib.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
