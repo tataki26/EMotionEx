@@ -1,0 +1,8 @@
+D:\LYS\EMotionEx\TdLib\bin\Debug\TdLib.dll
+D:\LYS\EMotionEx\TdLib\bin\Debug\TdLib.pdb
+D:\LYS\EMotionEx\TdLib\bin\Debug\VtpLib.dll
+D:\LYS\EMotionEx\TdLib\obj\Debug\TdLib.csproj.AssemblyReference.cache
+D:\LYS\EMotionEx\TdLib\obj\Debug\TdLib.csproj.CoreCompileInputs.cache
+D:\LYS\EMotionEx\TdLib\obj\Debug\TdLib.csproj.CopyComplete
+D:\LYS\EMotionEx\TdLib\obj\Debug\TdLib.dll
+D:\LYS\EMotionEx\TdLib\obj\Debug\TdLib.pdb
