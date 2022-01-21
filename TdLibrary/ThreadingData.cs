@@ -20,6 +20,11 @@ namespace TdLibrary
         {
             virtualTableProtocol = imcs;
         }
+        
+        public ThreadingData()
+        {
+
+        }
 
         public void Connect(string host, int port)
         {
