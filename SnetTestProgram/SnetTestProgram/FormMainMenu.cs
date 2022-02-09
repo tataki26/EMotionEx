@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EMotionSnetBase;
 
 namespace SnetTestProgram
 {
@@ -15,6 +16,8 @@ namespace SnetTestProgram
         #region Fields
         private Button currentButton;
         private Form activeForm;
+
+        private SnetDevice _snetDevice = new SnetDevice();
         #endregion
 
         public FormMainMenu()
@@ -81,7 +84,7 @@ namespace SnetTestProgram
         private void btnConnect_Click(object sender, EventArgs e)
         {
             // ActivateButton(sender);
-            OpenChildForm(new Forms.FormConnect(), sender);
+            OpenChildForm(new Forms.FormConnect(_snetDevice), sender);
         }
 
         private void btnInterrupt_Click(object sender, EventArgs e)
