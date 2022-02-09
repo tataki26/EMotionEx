@@ -14,6 +14,7 @@ namespace SnetTestProgram
     {
         #region Fields
         private Button currentButton;
+        private Form activeForm;
         #endregion
 
         public FormMainMenu()
@@ -49,17 +50,43 @@ namespace SnetTestProgram
                 }
             }
         }
+
+        private void OpenChildForm(Form childForm, object btnSender)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+            }
+
+            ActivateButton(btnSender);
+
+            activeForm = childForm;
+
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+
+            this.panelDesktopPanel.Controls.Add(childForm);
+            this.panelDesktopPanel.Tag = childForm;
+
+            childForm.BringToFront();
+            childForm.Show();
+
+            lbTitle.Text = childForm.Text;
+
+        }
         #endregion
 
         #region Events
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
+            // ActivateButton(sender);
+            OpenChildForm(new Forms.FormConnect(), sender);
         }
 
         private void btnInterrupt_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
+            OpenChildForm(new Forms.FormInterrupt(), sender);
         }
         #endregion
     }
