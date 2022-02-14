@@ -33,9 +33,11 @@ namespace SnetTestProgram.Forms
             if (status == 0)
             {
                 Debug.WriteLine("Connect Success!!!");
+                MessageBox.Show("Connect Success!!!");
                 _bConnect = true;
             }
             else Debug.WriteLine("Connect Fail!!!");
+
         }
 
         private void buttonDisconnect_Click(object sender, EventArgs e)
@@ -43,10 +45,15 @@ namespace SnetTestProgram.Forms
             int status = 0;
             status = _snetDevice.Disconnect();
 
-            if (status == 0) Debug.WriteLine("Disconnect Success!!!");
+            if (status == 0)
+            {
+                Debug.WriteLine("Disconnect Success!!!");
+                MessageBox.Show("Disconnect Fail!!!");
+            }
             else if (status == 50) Debug.WriteLine("Disconnected");
             else if (status == 51) Debug.WriteLine("Disconnecting...");
-            else Debug.WriteLine("Disconnect Fail!!: " + status);
+            else Debug.WriteLine("Disconnect Fail!!!: " + status);
+            
         }
     }
 }
