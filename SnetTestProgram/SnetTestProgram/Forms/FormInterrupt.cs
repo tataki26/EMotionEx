@@ -32,14 +32,16 @@ namespace SnetTestProgram.Forms
             int velocity;
             int accTime;
             int decTime;
-            int position;
+            int startPos;
+            int endPos;
 
             int.TryParse(tbVelocity.Text, out velocity);
             int.TryParse(tbAccTime.Text, out accTime);
             int.TryParse(tbDecTime.Text, out decTime);
-            int.TryParse(tbRepeatPosition1.Text, out position);
+            int.TryParse(tbRepeatPosition1.Text, out startPos);
+            int.TryParse(tbRepeatPosition2.Text, out endPos);
 
-            uint ret = _pollingThread.PollingMoveTime(velocity, accTime, decTime, position);
+            uint ret = _pollingThread.PollingMoveTime(velocity, accTime, decTime, startPos, endPos);
 
             MessageBox.Show("Motion Done: "+ret + "ms");
 
