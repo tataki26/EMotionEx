@@ -35,7 +35,7 @@ namespace SnetTestProgram.Forms
             this.tbVelocity = new System.Windows.Forms.TextBox();
             this.tbAccTime = new System.Windows.Forms.TextBox();
             this.tbDecTime = new System.Windows.Forms.TextBox();
-            this.tbDwell1 = new System.Windows.Forms.TextBox();
+            this.tbDwell = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -91,12 +91,12 @@ namespace SnetTestProgram.Forms
             this.tbDecTime.Size = new System.Drawing.Size(100, 21);
             this.tbDecTime.TabIndex = 9;
             // 
-            // tbDwell1
+            // tbDwell
             // 
-            this.tbDwell1.Location = new System.Drawing.Point(143, 211);
-            this.tbDwell1.Name = "tbDwell1";
-            this.tbDwell1.Size = new System.Drawing.Size(100, 21);
-            this.tbDwell1.TabIndex = 10;
+            this.tbDwell.Location = new System.Drawing.Point(143, 211);
+            this.tbDwell.Name = "tbDwell";
+            this.tbDwell.Size = new System.Drawing.Size(100, 21);
+            this.tbDwell.TabIndex = 10;
             // 
             // label3
             // 
@@ -153,7 +153,7 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbDwell1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tbDwell, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.tbDecTime, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.tbAccTime, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tbVelocity, 1, 1);
@@ -208,7 +208,7 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.TextBox tbVelocity;
         private System.Windows.Forms.TextBox tbAccTime;
         private System.Windows.Forms.TextBox tbDecTime;
-        private System.Windows.Forms.TextBox tbDwell1;
+        private System.Windows.Forms.TextBox tbDwell;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
