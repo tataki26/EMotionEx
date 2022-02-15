@@ -26,6 +26,7 @@ namespace SnetTestProgram.Forms
             InitializeComponent();
             _snetDevice = snetDevice;
             _job = job;
+
             _pollingThread = new PollingThread(_snetDevice, _job);
         }
 
@@ -45,9 +46,21 @@ namespace SnetTestProgram.Forms
             int.TryParse(tbRepeatPosition2.Text, out endPos);
             int.TryParse(tbDwell.Text, out dwell);
 
+            Job.JobList[] jobListArray = new Job.JobList[32];
+
+            for (int i = 0; i < 3; i++)
+            {
+                Job.JobList jobList = _job.CreateJobList(i, velocity, accTime, decTime, dwell, startPos, endPos);
+                _job.UpdateJobListArray(jobList, i, ref jobListArray);
+            }
+
+            _job.JobMove(jobListArray);
+
+            /*
             uint ret = _pollingThread.PollingMoveTime(velocity, accTime, decTime, startPos, endPos, dwell);
 
             MessageBox.Show("Motion Done: "+ret + "ms");
+            */
 
         }
     }

@@ -18,6 +18,7 @@ namespace SnetTestProgram
         private Form activeForm;
 
         private SnetDevice _snetDevice = new SnetDevice();
+        private Job _job = new Job();
         #endregion
 
         public FormMainMenu()
@@ -89,7 +90,7 @@ namespace SnetTestProgram
 
         private void btnInterrupt_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormInterrupt(_snetDevice), sender);
+            OpenChildForm(new Forms.FormInterrupt(_snetDevice, _job), sender);
         }
         #endregion
     }
