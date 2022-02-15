@@ -12,13 +12,15 @@ namespace SnetTestProgram
     public class PollingThread
     {
         private SnetDevice _snetDevice;
+        private Job _job;
 
         [DllImport("winmm.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint timeGetTime();
 
-        public PollingThread(SnetDevice snetDevice)
+        public PollingThread(SnetDevice snetDevice, Job job)
         {
             _snetDevice = snetDevice;
+            _job = job;
         }
 
         public uint PollingMoveTime(int velocity, int accTime, int decTime, int startPos, int endPos, int dwell)

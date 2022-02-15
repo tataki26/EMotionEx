@@ -64,6 +64,7 @@
     <Compile Include="Forms\FormInterrupt.Designer.cs">
       <DependentUpon>FormInterrupt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Job.cs" />
     <Compile Include="PollingThread.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
