@@ -15,16 +15,18 @@ namespace SnetTestProgram.Forms
     public partial class FormInterrupt : Form
     {
         private SnetDevice _snetDevice;
+        private Job _job;
         private PollingThread _pollingThread;
 
         [DllImport("winmm.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint timeGetTime();
 
-        public FormInterrupt(SnetDevice snetDevice)
+        public FormInterrupt(SnetDevice snetDevice, Job job)
         {
             InitializeComponent();
             _snetDevice = snetDevice;
-            _pollingThread = new PollingThread(_snetDevice);
+            _job = job;
+            _pollingThread = new PollingThread(_snetDevice, _job);
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
