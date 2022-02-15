@@ -16,7 +16,6 @@ namespace SnetTestProgram.Forms
     {
         private SnetDevice _snetDevice;
         private Job _job;
-        private PollingThread _pollingThread;
 
         [DllImport("winmm.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint timeGetTime();
@@ -27,7 +26,6 @@ namespace SnetTestProgram.Forms
             _snetDevice = snetDevice;
             _job = job;
 
-            _pollingThread = new PollingThread(_snetDevice, _job);
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -54,13 +52,10 @@ namespace SnetTestProgram.Forms
                 _job.UpdateJobListArray(jobList, i, ref jobListArray);
             }
 
-            _job.JobMove(jobListArray);
+            uint time = 0;
+            _job.JobMove(jobListArray, ref time);
 
-            /*
-            uint ret = _pollingThread.PollingMoveTime(velocity, accTime, decTime, startPos, endPos, dwell);
-
-            MessageBox.Show("Motion Done: "+ret + "ms");
-            */
+            MessageBox.Show("Motion Done: "+time+ "ms");
 
         }
     }
