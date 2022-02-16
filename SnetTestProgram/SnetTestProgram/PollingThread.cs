@@ -56,30 +56,41 @@ namespace SnetTestProgram
         {
             SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Scurve;
 
-            bool moving = true;
             bool motionDone = false;
 
             int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
             
             uint startTime = timeGetTime();
 
-            returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
-
-            Thread.Sleep(dwell);
-
-            returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, endPos);
-
-            while (moving)
+            int i = 0;
+            while (i<4)
             {
-                returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
+                returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
 
-                if (returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
+                while (true)
                 {
+                    returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
                     if (motionDone == true)
                     {
-                        moving = false;
+                        Thread.Sleep(dwell);
+                        break;
                     }
                 }
+
+                returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, endPos);
+
+                while (true)
+                {
+                    returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
+                    if (motionDone == true)
+                    {
+                        Thread.Sleep(dwell);
+                        break;
+                    }
+
+                }
+
+                i++;
             }
 
             uint endTime = timeGetTime();
