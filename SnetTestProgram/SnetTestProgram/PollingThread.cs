@@ -52,7 +52,7 @@ namespace SnetTestProgram
             return endTime - startTime;
         }
 
-        public uint PollingMoveTime(int axis, int velocity, int accTime, int decTime, int startPos, int endPos, int dwell)
+        public uint PollingMoveTime(int axis, int velocity, int accTime, int decTime, int startPos, int endPos, int repeatNum, int dwell)
         {
             SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Scurve;
 
@@ -63,7 +63,7 @@ namespace SnetTestProgram
             uint startTime = timeGetTime();
 
             int i = 0;
-            while (i<4)
+            while (i<repeatNum)
             {
                 returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
 

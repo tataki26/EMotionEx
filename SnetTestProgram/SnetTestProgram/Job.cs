@@ -28,9 +28,10 @@ namespace SnetTestProgram
             public int dwell;
             public int startPos;
             public int endPos;
+            public int repeatNum;
 
             // 매개변수를 통해 Job List를 생성하기 위한 설정
-            public JobList(int axis, int velocity, int accTime, int decTime, int dwell, int startPos, int endPos)
+            public JobList(int axis, int velocity, int accTime, int decTime, int dwell, int startPos, int endPos, int repeatNum)
             {
                 this.axis = axis;
                 this.velocity = velocity;
@@ -39,14 +40,15 @@ namespace SnetTestProgram
                 this.dwell = dwell;
                 this.startPos = startPos;
                 this.endPos = endPos;
+                this.repeatNum = repeatNum;
             }
         }
 
         #region Methods
 
-        public JobList CreateJobList(int axis, int velocity, int accTime, int decTime, int dwell, int startPos, int endPos)
+        public JobList CreateJobList(int axis, int velocity, int accTime, int decTime, int dwell, int startPos, int endPos, int repeatNum)
         {
-            JobList jobList = new JobList(axis, velocity, accTime, decTime, dwell, startPos, endPos);
+            JobList jobList = new JobList(axis, velocity, accTime, decTime, dwell, startPos, endPos, repeatNum);
 
             return jobList;
         }
@@ -58,13 +60,14 @@ namespace SnetTestProgram
 
         public void PrintJobListArray(JobList[] jobListArray, int idx)
         {
-            Console.WriteLine("    axis: " + jobListArray[idx].axis);
-            Console.WriteLine("velocity: " + jobListArray[idx].velocity);
-            Console.WriteLine(" accTime: " + jobListArray[idx].accTime);
-            Console.WriteLine(" decTime: " + jobListArray[idx].decTime);
-            Console.WriteLine("   dwell: " + jobListArray[idx].dwell);
-            Console.WriteLine("startPos: " + jobListArray[idx].startPos);
-            Console.WriteLine("  endPos: " + jobListArray[idx].endPos);
+            Console.WriteLine("     axis: " + jobListArray[idx].axis);
+            Console.WriteLine(" velocity: " + jobListArray[idx].velocity);
+            Console.WriteLine("  accTime: " + jobListArray[idx].accTime);
+            Console.WriteLine("  decTime: " + jobListArray[idx].decTime);
+            Console.WriteLine("    dwell: " + jobListArray[idx].dwell);
+            Console.WriteLine(" startPos: " + jobListArray[idx].startPos);
+            Console.WriteLine("   endPos: " + jobListArray[idx].endPos);
+            Console.WriteLine("repeatNum: " + jobListArray[idx].repeatNum);
         }
 
         public void JobMove(JobList[] jobListArray, ref uint time)
@@ -81,7 +84,7 @@ namespace SnetTestProgram
                         break;
                     // 2번축(amp fault) 오류로 인한 3번 축 구동
                     case 2:
-                        time = _pollingThread.PollingMoveTime(3, jobListArray[2].velocity, jobListArray[2].accTime, jobListArray[2].decTime, jobListArray[2].startPos, jobListArray[2].endPos, jobListArray[2].dwell);
+                        time = _pollingThread.PollingMoveTime(3, jobListArray[2].velocity, jobListArray[2].accTime, jobListArray[2].decTime, jobListArray[2].startPos, jobListArray[2].endPos, jobListArray[2].repeatNum, jobListArray[2].dwell);
                         break;
                 }
             }
