@@ -75,12 +75,13 @@ namespace SnetTestProgram
                 {
                     case 0:
                         time= _pollingThread.PollingMoveTime(jobListArray[0].axis, jobListArray[0].velocity, jobListArray[0].accTime, jobListArray[0].decTime, jobListArray[0].startPos);
-                        break;
+                         break;
                     case 1:
                         time = _pollingThread.PollingMoveTime(jobListArray[1].axis, jobListArray[1].velocity, jobListArray[1].accTime, jobListArray[1].decTime, jobListArray[1].endPos);
                         break;
+                    // 2번축(amp fault) 오류로 인한 3번 축 구동
                     case 2:
-                        time = _pollingThread.PollingMoveTime(jobListArray[2].axis, jobListArray[2].velocity, jobListArray[2].accTime, jobListArray[2].decTime, jobListArray[2].startPos, jobListArray[2].endPos, jobListArray[2].dwell);
+                        time = _pollingThread.PollingMoveTime(3, jobListArray[2].velocity, jobListArray[2].accTime, jobListArray[2].decTime, jobListArray[2].startPos, jobListArray[2].endPos, jobListArray[2].dwell);
                         break;
                 }
             }

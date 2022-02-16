@@ -54,36 +54,32 @@ namespace SnetTestProgram
 
         public uint PollingMoveTime(int axis, int velocity, int accTime, int decTime, int startPos, int endPos, int dwell)
         {
-            int[] position = new int[] { startPos, endPos };
-
             SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Scurve;
 
             bool moving = true;
-
-            int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
-            uint startTime = timeGetTime();
-           
             bool motionDone = false;
 
-            for (int i = 0; i < 2; i++)
+            int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+            
+            uint startTime = timeGetTime();
+
+            returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
+
+            Thread.Sleep(dwell);
+
+            returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, endPos);
+
+            while (moving)
             {
-                returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, position[i]);
+                returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
 
-                while (moving)
+                if (returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
                 {
-                    returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
-
-                    if (returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
+                    if (motionDone == true)
                     {
-                        if (motionDone == true)
-                        {
-                            moving = false;
-                        }
+                        moving = false;
                     }
                 }
-                
-                Thread.Sleep(dwell);
-
             }
 
             uint endTime = timeGetTime();
