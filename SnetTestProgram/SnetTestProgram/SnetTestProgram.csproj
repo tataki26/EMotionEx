@@ -65,11 +65,11 @@
       <DependentUpon>FormInterrupt.cs</DependentUpon>
     </Compile>
     <Compile Include="Job.cs" />
-    <Compile Include="PollingThread.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SnetCommunicator.cs" />
     <Compile Include="SnetDevice.cs" />
+    <Compile Include="Waiting.cs" />
     <EmbeddedResource Include="FormMainMenu.resx">
       <DependentUpon>FormMainMenu.cs</DependentUpon>
     </EmbeddedResource>

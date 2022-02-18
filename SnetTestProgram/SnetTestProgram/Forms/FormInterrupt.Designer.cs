@@ -41,9 +41,9 @@ namespace SnetTestProgram.Forms
             this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonStart = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbRepeatNumber = new System.Windows.Forms.TextBox();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +52,7 @@ namespace SnetTestProgram.Forms
             this.tbRepeatPosition2.Location = new System.Drawing.Point(318, 3);
             this.tbRepeatPosition2.Name = "tbRepeatPosition2";
             this.tbRepeatPosition2.Size = new System.Drawing.Size(100, 21);
-            this.tbRepeatPosition2.TabIndex = 11;
+            this.tbRepeatPosition2.TabIndex = 7;
             // 
             // label1
             // 
@@ -77,28 +77,28 @@ namespace SnetTestProgram.Forms
             this.tbVelocity.Location = new System.Drawing.Point(181, 103);
             this.tbVelocity.Name = "tbVelocity";
             this.tbVelocity.Size = new System.Drawing.Size(100, 21);
-            this.tbVelocity.TabIndex = 7;
+            this.tbVelocity.TabIndex = 9;
             // 
             // tbAccTime
             // 
             this.tbAccTime.Location = new System.Drawing.Point(181, 153);
             this.tbAccTime.Name = "tbAccTime";
             this.tbAccTime.Size = new System.Drawing.Size(100, 21);
-            this.tbAccTime.TabIndex = 8;
+            this.tbAccTime.TabIndex = 10;
             // 
             // tbDecTime
             // 
             this.tbDecTime.Location = new System.Drawing.Point(181, 203);
             this.tbDecTime.Name = "tbDecTime";
             this.tbDecTime.Size = new System.Drawing.Size(100, 21);
-            this.tbDecTime.TabIndex = 9;
+            this.tbDecTime.TabIndex = 11;
             // 
             // tbDwell
             // 
             this.tbDwell.Location = new System.Drawing.Point(181, 253);
             this.tbDwell.Name = "tbDwell";
             this.tbDwell.Size = new System.Drawing.Size(100, 21);
-            this.tbDwell.TabIndex = 10;
+            this.tbDwell.TabIndex = 12;
             // 
             // label3
             // 
@@ -178,20 +178,6 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Size = new System.Drawing.Size(611, 305);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // buttonStart
-            // 
-            this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonStart.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStart.Location = new System.Drawing.Point(518, 272);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(90, 30);
-            this.buttonStart.TabIndex = 20;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = false;
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -208,7 +194,21 @@ namespace SnetTestProgram.Forms
             this.tbRepeatNumber.Location = new System.Drawing.Point(181, 53);
             this.tbRepeatNumber.Name = "tbRepeatNumber";
             this.tbRepeatNumber.Size = new System.Drawing.Size(100, 21);
-            this.tbRepeatNumber.TabIndex = 33;
+            this.tbRepeatNumber.TabIndex = 8;
+            // 
+            // buttonStart
+            // 
+            this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStart.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStart.Location = new System.Drawing.Point(518, 272);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(90, 30);
+            this.buttonStart.TabIndex = 20;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = false;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // FormInterrupt
             // 

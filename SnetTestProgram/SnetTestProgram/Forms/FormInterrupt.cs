@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using EMotionSnetBase;
+using System.Threading;
 
 namespace SnetTestProgram.Forms
 {
@@ -17,19 +18,19 @@ namespace SnetTestProgram.Forms
         private SnetDevice _snetDevice;
         private Job _job;
 
-        [DllImport("winmm.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint timeGetTime();
-
         public FormInterrupt(SnetDevice snetDevice, Job job)
         {
             InitializeComponent();
+
             _snetDevice = snetDevice;
             _job = job;
 
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        // start 버튼: single axis move에 대한 왕복 실험
+        private async void buttonStart_Click(object sender, EventArgs e)
         {
+            // Form에 입력된 data 가져오기
             int velocity;
             int accTime;
             int decTime;
@@ -46,18 +47,37 @@ namespace SnetTestProgram.Forms
             int.TryParse(tbRepeatNumber.Text, out repeatNum);
             int.TryParse(tbDwell.Text, out dwell);
 
-            Job.JobList[] jobListArray = new Job.JobList[32];
+            // JobQueue 생성하기
+            Queue<Action> jobQueue = _job.CreateJobQueue();
 
-            for (int i = 0; i < 3; i++)
+            // JobQueue에 Job 할당하기
+            for(int i = 0; i < repeatNum; i++)
             {
-                Job.JobList jobList = _job.CreateJobList(i, velocity, accTime, decTime, dwell, startPos, endPos, repeatNum);
-                _job.UpdateJobListArray(jobList, i, ref jobListArray);
+                int axis = 0;
+                SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Scurve;
+                
+                int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+                
+                jobQueue.Enqueue(() =>
+                {
+                    returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
+                });
+
+                jobQueue.Enqueue(() =>
+                {
+                    returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, endPos);
+                });
+
             }
 
             uint time = 0;
-            _job.JobMove(jobListArray, ref time);
+            // 스레드로 action 실행
+            Action action = () => { time=_job.DoJobPolling(jobQueue); };
+            Task task = Task.Factory.StartNew(action);
+            // task 끝날 때까지 대기
+            await task;
 
-            MessageBox.Show("Motion Done: "+time+ "ms");
+            MessageBox.Show(time.ToString()+"msec");
 
         }
     }
