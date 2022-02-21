@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using EMotionSnetBase;
 using System.Threading;
+using System.Security;
 
 namespace SnetTestProgram
 { 
@@ -16,12 +17,23 @@ namespace SnetTestProgram
 
     public class PollingWait : IControllerWait
     {
+        [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod")]
+        public static extern uint timeBeginPeriod(uint uMilliseconds);
+
+        [DllImport("winmm.dll", EntryPoint = "timeEndPeriod")]
+        public static extern uint timeEndPeriod(uint uMilliseconds);
+
         private SnetDevice _snetDevice;
 
         public PollingWait(SnetDevice snetDevice)
         {
-            _snetDevice = snetDevice;
+            SnetDevice = snetDevice;
         }
+
+        public SnetDevice SnetDevice { get => SnetDevice1; set => SnetDevice1 = value; }
+        public SnetDevice SnetDevice1 { get => SnetDevice2; set => SnetDevice2 = value; }
+        public SnetDevice SnetDevice2 { get => _snetDevice; set => _snetDevice = value; }
+        public SnetDevice SnetDevice3 { get => _snetDevice; set => _snetDevice = value; }
 
         public int WaitMotionDone(int axis)
         {
@@ -32,14 +44,16 @@ namespace SnetTestProgram
 
             while (moving)
             {
-                returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
+                returnCode = SnetDevice.GetMotionDone(axis, ref motionDone);
 
                 if (returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
                 {
                     if (motionDone == true) moving = false;
                 }
 
+                timeBeginPeriod(1);
                 Thread.Sleep(1);
+                timeEndPeriod(1);
             }
 
             return returnCode;
