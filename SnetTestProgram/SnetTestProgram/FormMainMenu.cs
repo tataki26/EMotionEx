@@ -27,7 +27,7 @@ namespace SnetTestProgram
             InitializeComponent();
 
             _pollingWait = new PollingWait(_snetDevice);
-            _job = new Job(_snetDevice, _pollingWait);
+            _job = new Job(_pollingWait);
         }
 
         #region Methods
