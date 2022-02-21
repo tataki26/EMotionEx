@@ -50,7 +50,7 @@ namespace SnetTestProgram.Forms
             // JobQueue 생성하기
             Queue<Action> jobQueue = _job.CreateJobQueue();
 
-            // JobQueue에 Job 할당하기
+            // JobQueue에 Job 할당하기 - 사용자 영역
             for(int i = 0; i < repeatNum; i++)
             {
                 int axis = 0;
@@ -71,8 +71,9 @@ namespace SnetTestProgram.Forms
             }
 
             uint time = 0;
-            // 스레드로 action 실행
+            // Job 실행 함수 람다식 선언
             Action action = () => { time=_job.DoJobPolling(jobQueue); };
+            // 스레드로 action 실행
             Task task = Task.Factory.StartNew(action);
             // task 끝날 때까지 대기
             await task;
