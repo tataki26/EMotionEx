@@ -30,9 +30,9 @@ namespace SnetTestProgram
             return jobQueue;
         }
 
-        public uint DoJobPolling(Queue<Action> jobQueue)
+        public string DoJobPolling(Queue<Action> jobQueue)
         {
-            uint startTime = timeGetTime();
+            Stopwatch stopWatch = Stopwatch.StartNew();
 
             while (jobQueue.Count > 0)
             {
@@ -47,9 +47,9 @@ namespace SnetTestProgram
 
             _pollingWait.WaitMotionDone(0);
 
-            uint endTime = timeGetTime();
-            
-            return endTime-startTime;
+            stopWatch.Stop();
+
+            return (stopWatch.ElapsedMilliseconds).ToString();
         }
     
         #endregion

@@ -54,7 +54,7 @@ namespace SnetTestProgram.Forms
             for(int i = 0; i < repeatNum; i++)
             {
                 int axis = 0;
-                SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Scurve;
+                SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Trapezoidal;
                 
                 int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
                 
@@ -70,7 +70,7 @@ namespace SnetTestProgram.Forms
 
             }
 
-            uint time = 0;
+            string time=null;
             // Job 실행 함수 람다식 선언
             Action action = () => { time=_job.DoJobPolling(jobQueue); };
             // 스레드로 action 실행
@@ -78,7 +78,7 @@ namespace SnetTestProgram.Forms
             // task 끝날 때까지 대기
             await task;
 
-            MessageBox.Show(time.ToString()+"msec");
+            MessageBox.Show(time+"msec");
 
         }
     }
