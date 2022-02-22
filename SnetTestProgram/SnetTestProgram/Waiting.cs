@@ -16,6 +16,12 @@ namespace SnetTestProgram
 
     public class PollingWait : IControllerWait
     {
+        [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod")]
+        public static extern uint timeBeginPeriod(uint uMilliseconds);
+
+        [DllImport("winmm.dll", EntryPoint = "timeEndPeriod")]
+        public static extern uint timeEndPeriod(uint uMilliseconds);
+
         private SnetDevice _snetDevice;
 
         public PollingWait(SnetDevice snetDevice)
@@ -39,7 +45,9 @@ namespace SnetTestProgram
                     if (motionDone == true) moving = false;
                 }
 
+                timeBeginPeriod(1);
                 Thread.Sleep(1);
+                timeEndPeriod(1);
             }
 
             return returnCode;

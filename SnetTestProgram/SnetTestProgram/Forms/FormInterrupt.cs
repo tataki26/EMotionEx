@@ -68,6 +68,11 @@ namespace SnetTestProgram.Forms
                     returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, endPos);
                 });
 
+                jobQueue.Enqueue(() =>
+                {
+                    returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
+                });
+
             }
 
             uint time = 0;
