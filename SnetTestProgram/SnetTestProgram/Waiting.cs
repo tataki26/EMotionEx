@@ -27,13 +27,8 @@ namespace SnetTestProgram
 
         public PollingWait(SnetDevice snetDevice)
         {
-            SnetDevice = snetDevice;
+            _snetDevice = snetDevice;
         }
-
-        public SnetDevice SnetDevice { get => SnetDevice1; set => SnetDevice1 = value; }
-        public SnetDevice SnetDevice1 { get => SnetDevice2; set => SnetDevice2 = value; }
-        public SnetDevice SnetDevice2 { get => _snetDevice; set => _snetDevice = value; }
-        public SnetDevice SnetDevice3 { get => _snetDevice; set => _snetDevice = value; }
 
         public int WaitMotionDone(int axis)
         {
@@ -44,7 +39,7 @@ namespace SnetTestProgram
 
             while (moving)
             {
-                returnCode = SnetDevice.GetMotionDone(axis, ref motionDone);
+                returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
 
                 if (returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
                 {

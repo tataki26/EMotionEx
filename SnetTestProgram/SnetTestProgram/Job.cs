@@ -17,6 +17,7 @@ namespace SnetTestProgram
 
         private PollingWait _pollingWait;
 
+
         public Job(PollingWait pollingWait)
         {
             _pollingWait = pollingWait;

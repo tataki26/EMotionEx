@@ -25,6 +25,8 @@ namespace SnetTestProgram.Forms
             _snetDevice = snetDevice;
             _job = job;
 
+            timer.Start();
+
         }
 
         // start 버튼: single axis move에 대한 왕복 실험
@@ -85,6 +87,13 @@ namespace SnetTestProgram.Forms
 
             MessageBox.Show(time+"msec");
 
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            int position = 0;
+            _snetDevice.GetCommandPosition(0, ref position);
+            tbResult.Text = position.ToString();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace SnetTestProgram.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbRepeatPosition2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbRepeatPosition1 = new System.Windows.Forms.TextBox();
@@ -44,6 +45,8 @@ namespace SnetTestProgram.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.tbRepeatNumber = new System.Windows.Forms.TextBox();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.tbResult = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,6 +169,7 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbRepeatNumber, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.buttonStart, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tbResult, 4, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(70, 64);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
@@ -210,6 +214,18 @@ namespace SnetTestProgram.Forms
             this.buttonStart.UseVisualStyleBackColor = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // tbResult
+            // 
+            this.tbResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbResult.Location = new System.Drawing.Point(508, 3);
+            this.tbResult.Name = "tbResult";
+            this.tbResult.Size = new System.Drawing.Size(100, 21);
+            this.tbResult.TabIndex = 33;
+            // 
             // FormInterrupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -240,5 +256,7 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbRepeatNumber;
+        private System.Windows.Forms.TextBox tbResult;
+        private System.Windows.Forms.Timer timer;
     }
 }
