@@ -31,9 +31,9 @@ namespace SnetTestProgram
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMenu));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.btnConnect = new System.Windows.Forms.Button();
             this.btnInterrupt = new System.Windows.Forms.Button();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.panelLogo = new System.Windows.Forms.Panel();
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lbTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
@@ -53,16 +53,25 @@ namespace SnetTestProgram
             this.panelMenu.Size = new System.Drawing.Size(220, 581);
             this.panelMenu.TabIndex = 0;
             // 
-            // panelLogo
+            // btnInterrupt
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(180)))), ((int)(((byte)(255)))));
-            this.panelLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelLogo.BackgroundImage")));
-            this.panelLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(220, 80);
-            this.panelLogo.TabIndex = 0;
+            this.btnInterrupt.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnInterrupt.FlatAppearance.BorderSize = 0;
+            this.btnInterrupt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInterrupt.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInterrupt.ForeColor = System.Drawing.Color.AliceBlue;
+            this.btnInterrupt.Image = ((System.Drawing.Image)(resources.GetObject("btnInterrupt.Image")));
+            this.btnInterrupt.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInterrupt.Location = new System.Drawing.Point(0, 140);
+            this.btnInterrupt.Name = "btnInterrupt";
+            this.btnInterrupt.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInterrupt.Size = new System.Drawing.Size(220, 60);
+            this.btnInterrupt.TabIndex = 2;
+            this.btnInterrupt.Text = "   Interrupt";
+            this.btnInterrupt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInterrupt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnInterrupt.UseVisualStyleBackColor = true;
+            this.btnInterrupt.Click += new System.EventHandler(this.btnInterrupt_Click);
             // 
             // btnConnect
             // 
@@ -84,25 +93,16 @@ namespace SnetTestProgram
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
-            // btnInterrupt
+            // panelLogo
             // 
-            this.btnInterrupt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnInterrupt.FlatAppearance.BorderSize = 0;
-            this.btnInterrupt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInterrupt.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInterrupt.ForeColor = System.Drawing.Color.AliceBlue;
-            this.btnInterrupt.Image = ((System.Drawing.Image)(resources.GetObject("btnInterrupt.Image")));
-            this.btnInterrupt.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInterrupt.Location = new System.Drawing.Point(0, 140);
-            this.btnInterrupt.Name = "btnInterrupt";
-            this.btnInterrupt.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnInterrupt.Size = new System.Drawing.Size(220, 60);
-            this.btnInterrupt.TabIndex = 2;
-            this.btnInterrupt.Text = "   Interrupt";
-            this.btnInterrupt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInterrupt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnInterrupt.UseVisualStyleBackColor = true;
-            this.btnInterrupt.Click += new System.EventHandler(this.btnInterrupt_Click);
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(180)))), ((int)(((byte)(255)))));
+            this.panelLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelLogo.BackgroundImage")));
+            this.panelLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(220, 80);
+            this.panelLogo.TabIndex = 0;
             // 
             // panelTitleBar
             // 
@@ -143,7 +143,7 @@ namespace SnetTestProgram
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
             this.Name = "FormMainMenu";
-            this.Text = "Form1";
+            this.Text = "Snet Test Program";
             this.panelMenu.ResumeLayout(false);
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();

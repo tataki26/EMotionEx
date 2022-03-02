@@ -12,8 +12,6 @@ namespace SnetTestProgram
 {
     public class Job
     {
-        [DllImport("winmm.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint timeGetTime();
 
         private PollingWait _pollingWait;
 
