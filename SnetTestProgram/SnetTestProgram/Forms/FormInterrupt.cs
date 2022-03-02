@@ -13,12 +13,12 @@ using System.Threading;
 
 namespace SnetTestProgram.Forms
 {
-    public partial class FormInterrupt : Form
+    public partial class Interrupt : Form
     {
         private SnetDevice _snetDevice;
         private Job _job;
 
-        public FormInterrupt(SnetDevice snetDevice, Job job)
+        public Interrupt(SnetDevice snetDevice, Job job)
         {
             InitializeComponent();
 
@@ -86,6 +86,8 @@ namespace SnetTestProgram.Forms
             await task;
 
             MessageBox.Show(time+"msec");
+
+            Logger.WriteLog(time+"msec");
 
         }
 

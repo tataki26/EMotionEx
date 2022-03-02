@@ -1,7 +1,7 @@
 ﻿
 namespace SnetTestProgram.Forms
 {
-    partial class FormInterrupt
+    partial class Interrupt
     {
         /// <summary>
         /// Required designer variable.
@@ -45,8 +45,8 @@ namespace SnetTestProgram.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.tbRepeatNumber = new System.Windows.Forms.TextBox();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.tbResult = new System.Windows.Forms.TextBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -214,10 +214,6 @@ namespace SnetTestProgram.Forms
             this.buttonStart.UseVisualStyleBackColor = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // timer
-            // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // tbResult
             // 
             this.tbResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -226,13 +222,17 @@ namespace SnetTestProgram.Forms
             this.tbResult.Size = new System.Drawing.Size(100, 21);
             this.tbResult.TabIndex = 33;
             // 
-            // FormInterrupt
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // Interrupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 462);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "FormInterrupt";
+            this.Name = "Interrupt";
             this.Text = "FormInterrupt";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

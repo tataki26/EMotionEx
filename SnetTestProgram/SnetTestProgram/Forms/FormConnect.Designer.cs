@@ -30,10 +30,10 @@ namespace SnetTestProgram.Forms
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonDisconnect = new System.Windows.Forms.Button();
             this.labelNetworkIp4 = new System.Windows.Forms.Label();
             this.textBoxNetworkIp4 = new System.Windows.Forms.TextBox();
             this.buttonConnect = new System.Windows.Forms.Button();
-            this.buttonDisconnect = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +56,21 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(848, 80);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // buttonDisconnect
+            // 
+            this.buttonDisconnect.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonDisconnect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonDisconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisconnect.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisconnect.Location = new System.Drawing.Point(666, 30);
+            this.buttonDisconnect.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
+            this.buttonDisconnect.Name = "buttonDisconnect";
+            this.buttonDisconnect.Size = new System.Drawing.Size(152, 35);
+            this.buttonDisconnect.TabIndex = 3;
+            this.buttonDisconnect.Text = "Disconnect";
+            this.buttonDisconnect.UseVisualStyleBackColor = false;
+            this.buttonDisconnect.Click += new System.EventHandler(this.buttonDisconnect_Click);
             // 
             // labelNetworkIp4
             // 
@@ -94,21 +109,6 @@ namespace SnetTestProgram.Forms
             this.buttonConnect.UseVisualStyleBackColor = false;
             this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
             // 
-            // buttonDisconnect
-            // 
-            this.buttonDisconnect.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.buttonDisconnect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonDisconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDisconnect.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDisconnect.Location = new System.Drawing.Point(666, 30);
-            this.buttonDisconnect.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
-            this.buttonDisconnect.Name = "buttonDisconnect";
-            this.buttonDisconnect.Size = new System.Drawing.Size(152, 35);
-            this.buttonDisconnect.TabIndex = 3;
-            this.buttonDisconnect.Text = "Disconnect";
-            this.buttonDisconnect.UseVisualStyleBackColor = false;
-            this.buttonDisconnect.Click += new System.EventHandler(this.buttonDisconnect_Click);
-            // 
             // FormConnect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -116,7 +116,7 @@ namespace SnetTestProgram.Forms
             this.ClientSize = new System.Drawing.Size(848, 462);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormConnect";
-            this.Text = "FormConnect";
+            this.Text = "Connect";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
