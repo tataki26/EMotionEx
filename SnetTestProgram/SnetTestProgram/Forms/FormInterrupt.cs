@@ -53,7 +53,7 @@ namespace SnetTestProgram.Forms
             Queue<Action> jobQueue = _job.CreateJobQueue();
 
             // JobQueue에 Job 할당하기 - 사용자 영역
-            for(int i = 0; i < repeatNum; i++)
+            for(int i = 0; i <= repeatNum; i++)
             {
                 int axis = 0;
                 SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Trapezoidal;
