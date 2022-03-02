@@ -13,12 +13,12 @@ using System.Threading;
 
 namespace SnetTestProgram.Forms
 {
-    public partial class Interrupt : Form
+    public partial class FormInterrupt : Form
     {
         private SnetDevice _snetDevice;
         private Job _job;
 
-        public Interrupt(SnetDevice snetDevice, Job job)
+        public FormInterrupt(SnetDevice snetDevice, Job job)
         {
             InitializeComponent();
 

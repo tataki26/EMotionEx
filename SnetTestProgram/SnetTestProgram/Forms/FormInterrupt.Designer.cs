@@ -1,7 +1,7 @@
 ﻿
 namespace SnetTestProgram.Forms
 {
-    partial class Interrupt
+    partial class FormInterrupt
     {
         /// <summary>
         /// Required designer variable.
@@ -226,14 +226,14 @@ namespace SnetTestProgram.Forms
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // Interrupt
+            // FormInterrupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 462);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Interrupt";
-            this.Text = "FormInterrupt";
+            this.Name = "FormInterrupt";
+            this.Text = "Interrupt";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

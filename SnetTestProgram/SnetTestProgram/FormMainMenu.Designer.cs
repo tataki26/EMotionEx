@@ -37,6 +37,7 @@ namespace SnetTestProgram
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lbTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
+            this.btnLog = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.SuspendLayout();
@@ -44,6 +45,7 @@ namespace SnetTestProgram
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panelMenu.Controls.Add(this.btnLog);
             this.panelMenu.Controls.Add(this.btnInterrupt);
             this.panelMenu.Controls.Add(this.btnConnect);
             this.panelMenu.Controls.Add(this.panelLogo);
@@ -120,7 +122,7 @@ namespace SnetTestProgram
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitle.ForeColor = System.Drawing.Color.White;
-            this.lbTitle.Location = new System.Drawing.Point(364, 26);
+            this.lbTitle.Location = new System.Drawing.Point(386, 25);
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(87, 33);
             this.lbTitle.TabIndex = 0;
@@ -133,6 +135,26 @@ namespace SnetTestProgram
             this.panelDesktopPanel.Name = "panelDesktopPanel";
             this.panelDesktopPanel.Size = new System.Drawing.Size(864, 501);
             this.panelDesktopPanel.TabIndex = 2;
+            // 
+            // btnLog
+            // 
+            this.btnLog.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLog.FlatAppearance.BorderSize = 0;
+            this.btnLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLog.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLog.ForeColor = System.Drawing.Color.AliceBlue;
+            this.btnLog.Image = ((System.Drawing.Image)(resources.GetObject("btnLog.Image")));
+            this.btnLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLog.Location = new System.Drawing.Point(0, 200);
+            this.btnLog.Name = "btnLog";
+            this.btnLog.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnLog.Size = new System.Drawing.Size(220, 60);
+            this.btnLog.TabIndex = 3;
+            this.btnLog.Text = "    Log";
+            this.btnLog.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLog.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLog.UseVisualStyleBackColor = true;
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
             // 
             // FormMainMenu
             // 
@@ -160,6 +182,7 @@ namespace SnetTestProgram
         private System.Windows.Forms.Panel panelTitleBar;
         private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.Panel panelDesktopPanel;
+        private System.Windows.Forms.Button btnLog;
     }
 }
 
