@@ -26,7 +26,7 @@ namespace SnetTestProgram
                 if (!di.Exists)
                     Directory.CreateDirectory(directoryPath);
 
-                string msg = string.Format("{0}:\t{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), str);
+                string msg = string.Format("{0}: {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), str);
 
                 if (!fi.Exists)
                 {
