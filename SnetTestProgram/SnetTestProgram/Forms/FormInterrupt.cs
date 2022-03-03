@@ -33,19 +33,35 @@ namespace SnetTestProgram.Forms
         private async void buttonStart_Click(object sender, EventArgs e)
         {
             // Form에 입력된 data 가져오기
+            int axis0;
+            int axis1;
+            int axis2;
+            int axis3;
+
+            int axis0Pos;
+            int axis1Pos;
+            int axis2Pos;
+            int axis3Pos;
+
             int velocity;
             int accTime;
             int decTime;
-            int startPos;
-            int endPos;
             int repeatNum;
             int dwell;
+
+            int.TryParse(tbAxis0.Text, out axis0);
+            int.TryParse(tbAxis1.Text, out axis1);
+            int.TryParse(tbAxis2.Text, out axis2);
+            int.TryParse(tbAxis3.Text, out axis3);
+
+            int.TryParse(tbPosition0.Text, out axis0Pos);
+            int.TryParse(tbPosition1.Text, out axis1Pos);
+            int.TryParse(tbPosition2.Text, out axis2Pos);
+            int.TryParse(tbPosition3.Text, out axis3Pos);
 
             int.TryParse(tbVelocity.Text, out velocity);
             int.TryParse(tbAccTime.Text, out accTime);
             int.TryParse(tbDecTime.Text, out decTime);
-            int.TryParse(tbRepeatPosition1.Text, out startPos);
-            int.TryParse(tbRepeatPosition2.Text, out endPos);
             int.TryParse(tbRepeatNumber.Text, out repeatNum);
             int.TryParse(tbDwell.Text, out dwell);
 
@@ -53,9 +69,15 @@ namespace SnetTestProgram.Forms
             Queue<Action> jobQueue = _job.CreateJobQueue();
 
             // JobQueue에 Job 할당하기 - 사용자 영역
+
+            /*
+            // 단축 왕복 운동
             for(int i = 0; i <= repeatNum; i++)
             {
+                FormAxis formaxis = new FormAxis();
+
                 int axis = 0;
+
                 SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Trapezoidal;
                 
                 int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
@@ -74,6 +96,38 @@ namespace SnetTestProgram.Forms
                 {
                     returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
                 });
+
+            }
+            */
+
+            /*
+            // 다축 직선 보간 운동
+            for (int i = 0; i <= repeatNum; i++)
+            {
+                int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+
+                jobQueue.Enqueue(() =>
+                {
+                    returnCode = _snetDevice.MoveLine(axis0, axis1, axis2, axis3,
+                        axis0Pos, axis1Pos, axis2Pos, axis3Pos, velocity, accTime, decTime, 66, 66);
+                });
+            }
+            */
+
+            // 다축 원호 보간 운동
+            for(int i = 0; i <= repeatNum; i++) {
+
+                int cwCcw = -1;
+                int radius = 10000;
+
+                int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+
+                jobQueue.Enqueue(() =>
+                {
+                    returnCode = _snetDevice.MoveArcRadius(axis0, axis1, axis2,
+                        axis0Pos, axis1Pos, axis2Pos, cwCcw, radius, velocity, accTime, decTime, 66, 66);
+                });
+
 
             }
 

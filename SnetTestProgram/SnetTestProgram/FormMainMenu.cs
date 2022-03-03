@@ -83,6 +83,7 @@ namespace SnetTestProgram
             lbTitle.Text = childForm.Text;
 
         }
+
         #endregion
 
         #region Events
