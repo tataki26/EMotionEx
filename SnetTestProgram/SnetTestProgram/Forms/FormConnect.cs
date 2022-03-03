@@ -55,5 +55,11 @@ namespace SnetTestProgram.Forms
             else Debug.WriteLine("Disconnect Fail!!!: " + status);
             
         }
+
+        private void buttonAxis_Click(object sender, EventArgs e)
+        {
+            FormAxis formAxis = new FormAxis();
+            formAxis.Show();
+        }
     }
 }

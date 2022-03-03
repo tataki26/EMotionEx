@@ -10,3 +10,5 @@ D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.exe
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.pdb
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormConnect.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormInterrupt.resources
+D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormLog.resources
+D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormAxis.resources

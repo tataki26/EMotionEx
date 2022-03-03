@@ -83,12 +83,12 @@ namespace SnetTestProgram
             lbTitle.Text = childForm.Text;
 
         }
+
         #endregion
 
         #region Events
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            // ActivateButton(sender);
             OpenChildForm(new Forms.FormConnect(_snetDevice), sender);
         }
 
@@ -97,5 +97,10 @@ namespace SnetTestProgram
             OpenChildForm(new Forms.FormInterrupt(_snetDevice, _job), sender);
         }
         #endregion
+
+        private void btnLog_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormLog(), sender);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using EMotionSnetBase;
 using System.Threading;
+using System.Security;
 
 namespace SnetTestProgram
 { 
