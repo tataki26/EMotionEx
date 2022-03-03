@@ -29,15 +29,15 @@ namespace SnetTestProgram.Forms
 
         }
 
+        int axis0;
+        int axis1;
+        int axis2;
+        int axis3;
+
         // start 버튼: single axis move에 대한 왕복 실험
         private async void buttonStart_Click(object sender, EventArgs e)
         {
             // Form에 입력된 data 가져오기
-            int axis0;
-            int axis1;
-            int axis2;
-            int axis3;
-
             int axis0Pos;
             int axis1Pos;
             int axis2Pos;
@@ -70,13 +70,11 @@ namespace SnetTestProgram.Forms
 
             // JobQueue에 Job 할당하기 - 사용자 영역
 
-            /*
+            
             // 단축 왕복 운동
             for(int i = 0; i <= repeatNum; i++)
             {
                 FormAxis formaxis = new FormAxis();
-
-                int axis = 0;
 
                 SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Trapezoidal;
                 
@@ -84,21 +82,21 @@ namespace SnetTestProgram.Forms
                 
                 jobQueue.Enqueue(() =>
                 {
-                    returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
+                    returnCode = _snetDevice.MoveSingleEx(axis0, moveType, velocity, accTime, decTime, 66, axis0Pos);
                 });
 
                 jobQueue.Enqueue(() =>
                 {
-                    returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, endPos);
+                    returnCode = _snetDevice.MoveSingleEx(axis0, moveType, velocity, accTime, decTime, 66, axis1Pos);
                 });
 
                 jobQueue.Enqueue(() =>
                 {
-                    returnCode = _snetDevice.MoveSingleEx(axis, moveType, velocity, accTime, decTime, 66, startPos);
+                    returnCode = _snetDevice.MoveSingleEx(axis0, moveType, velocity, accTime, decTime, 66, axis0Pos);
                 });
 
             }
-            */
+            
 
             /*
             // 다축 직선 보간 운동
@@ -114,6 +112,7 @@ namespace SnetTestProgram.Forms
             }
             */
 
+            /*
             // 다축 원호 보간 운동
             for(int i = 0; i <= repeatNum; i++) {
 
@@ -130,10 +129,11 @@ namespace SnetTestProgram.Forms
 
 
             }
+            */
 
             string time=null;
             // Job 실행 함수 람다식 선언
-            Action action = () => { time=_job.DoJobPolling(jobQueue); };
+            Action action = () => { time=_job.DoJobPolling(jobQueue,axis0); };
             // 스레드로 action 실행
             Task task = Task.Factory.StartNew(action);
             // task 끝날 때까지 대기

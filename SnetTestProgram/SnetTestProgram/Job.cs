@@ -29,13 +29,13 @@ namespace SnetTestProgram
             return jobQueue;
         }
 
-        public string DoJobPolling(Queue<Action> jobQueue)
+        public string DoJobPolling(Queue<Action> jobQueue, int axis)
         {
             Stopwatch stopWatch = Stopwatch.StartNew();
 
             while (jobQueue.Count > 0)
             {
-                int motionDone = _pollingWait.WaitMotionDone(0);
+                int motionDone = _pollingWait.WaitMotionDone(axis);
 
                 if (motionDone == 0)
                 {
@@ -44,7 +44,7 @@ namespace SnetTestProgram
                 }
             }
 
-            _pollingWait.WaitMotionDone(0);
+            _pollingWait.WaitMotionDone(axis);
 
             stopWatch.Stop();
 
