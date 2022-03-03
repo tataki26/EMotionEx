@@ -147,9 +147,17 @@ namespace SnetTestProgram.Forms
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            int position = 0;
-            _snetDevice.GetCommandPosition(0, ref position);
-            tbResult.Text = position.ToString();
+            int[] position = new int[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                _snetDevice.GetCommandPosition(i, ref position[i]);
+            }
+
+            tbResult0.Text = position[0].ToString();
+            tbResult1.Text = position[1].ToString();
+            tbResult2.Text = position[2].ToString();
+            tbResult3.Text = position[3].ToString();
         }
     }
 }

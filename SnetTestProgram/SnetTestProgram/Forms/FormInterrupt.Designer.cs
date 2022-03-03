@@ -45,7 +45,7 @@ namespace SnetTestProgram.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.tbRepeatNumber = new System.Windows.Forms.TextBox();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.tbResult = new System.Windows.Forms.TextBox();
+            this.tbResult0 = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.tbAxis0 = new System.Windows.Forms.TextBox();
@@ -54,9 +54,9 @@ namespace SnetTestProgram.Forms
             this.tbAxis2 = new System.Windows.Forms.TextBox();
             this.tbPosition2 = new System.Windows.Forms.TextBox();
             this.tbPosition3 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.tbResult1 = new System.Windows.Forms.TextBox();
+            this.tbResult2 = new System.Windows.Forms.TextBox();
+            this.tbResult3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -189,10 +189,10 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Controls.Add(this.tbAxis2, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbPosition2, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbPosition3, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox8, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.textBox9, 5, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tbResult, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textBox7, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tbResult2, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tbResult3, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tbResult0, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tbResult1, 5, 4);
             this.tableLayoutPanel1.Controls.Add(this.label5, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.label7, 5, 3);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(70, 64);
@@ -240,14 +240,14 @@ namespace SnetTestProgram.Forms
             this.buttonStart.UseVisualStyleBackColor = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // tbResult
+            // tbResult0
             // 
-            this.tbResult.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tbResult.Location = new System.Drawing.Point(450, 214);
-            this.tbResult.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
-            this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(100, 21);
-            this.tbResult.TabIndex = 13;
+            this.tbResult0.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.tbResult0.Location = new System.Drawing.Point(450, 214);
+            this.tbResult0.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
+            this.tbResult0.Name = "tbResult0";
+            this.tbResult0.Size = new System.Drawing.Size(100, 21);
+            this.tbResult0.TabIndex = 13;
             // 
             // timer
             // 
@@ -306,31 +306,31 @@ namespace SnetTestProgram.Forms
             this.tbPosition3.Size = new System.Drawing.Size(100, 21);
             this.tbPosition3.TabIndex = 7;
             // 
-            // textBox7
+            // tbResult1
             // 
-            this.textBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox7.Location = new System.Drawing.Point(560, 214);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 21);
-            this.textBox7.TabIndex = 14;
+            this.tbResult1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tbResult1.Location = new System.Drawing.Point(560, 214);
+            this.tbResult1.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.tbResult1.Name = "tbResult1";
+            this.tbResult1.Size = new System.Drawing.Size(100, 21);
+            this.tbResult1.TabIndex = 14;
             // 
-            // textBox8
+            // tbResult2
             // 
-            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox8.Location = new System.Drawing.Point(450, 253);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 21);
-            this.textBox8.TabIndex = 15;
+            this.tbResult2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbResult2.Location = new System.Drawing.Point(450, 253);
+            this.tbResult2.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
+            this.tbResult2.Name = "tbResult2";
+            this.tbResult2.Size = new System.Drawing.Size(100, 21);
+            this.tbResult2.TabIndex = 15;
             // 
-            // textBox9
+            // tbResult3
             // 
-            this.textBox9.Location = new System.Drawing.Point(560, 253);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 21);
-            this.textBox9.TabIndex = 16;
+            this.tbResult3.Location = new System.Drawing.Point(560, 253);
+            this.tbResult3.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.tbResult3.Name = "tbResult3";
+            this.tbResult3.Size = new System.Drawing.Size(100, 21);
+            this.tbResult3.TabIndex = 16;
             // 
             // label5
             // 
@@ -386,7 +386,7 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbRepeatNumber;
-        private System.Windows.Forms.TextBox tbResult;
+        private System.Windows.Forms.TextBox tbResult0;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbAxis0;
@@ -395,9 +395,9 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.TextBox tbAxis2;
         private System.Windows.Forms.TextBox tbPosition2;
         private System.Windows.Forms.TextBox tbPosition3;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox tbResult1;
+        private System.Windows.Forms.TextBox tbResult2;
+        private System.Windows.Forms.TextBox tbResult3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
     }
