@@ -13,12 +13,12 @@ using System.Threading;
 
 namespace SnetTestProgram.Forms
 {
-    public partial class FormInterrupt : Form
+    public partial class FormSingleLine : Form
     {
         private SnetDevice _snetDevice;
         private Job _job;
 
-        public FormInterrupt(SnetDevice snetDevice, Job job)
+        public FormSingleLine(SnetDevice snetDevice, Job job)
         {
             InitializeComponent();
 
@@ -29,10 +29,10 @@ namespace SnetTestProgram.Forms
 
         }
 
-        int axis0;
-        int axis1;
-        int axis2;
-        int axis3;
+        int axis0=0xff;
+        int axis1=0xff;
+        int axis2=0xff;
+        int axis3=0xff;
 
         // start 버튼: single axis move에 대한 왕복 실험
         private async void buttonStart_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace SnetTestProgram.Forms
 
             // JobQueue에 Job 할당하기 - 사용자 영역
 
-            
+            /*
             // 단축 왕복 운동
             for(int i = 0; i <= repeatNum; i++)
             {
@@ -96,7 +96,36 @@ namespace SnetTestProgram.Forms
                 });
 
             }
-            
+            */
+
+            /*
+            // 다축 이송
+            for (int i = 0; i <= repeatNum; i++)
+            {
+                int[] axis = new int[4];
+                int axisCnt = 0;
+                axis[0] = axis0;
+                axis[1] = axis1;
+                axis[2] = axis2;
+                axis[3] = axis3;
+
+                for (int j = 0; j < 4; j++)
+                {
+                    if (axis[j] != 0xff) axisCnt++;
+                }
+
+                SnetDevice.eSnetMoveType[] moveType = new SnetDevice.eSnetMoveType[axisCnt];
+
+                moveType = Enumerable.Repeat(SnetDevice.eSnetMoveType.Trapezoidal, axisCnt).ToArray<SnetDevice.eSnetMoveType>();
+                
+                int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+
+                jobQueue.Enqueue(() =>
+                {
+                    returnCode = _snetDevice.MoveMultiAxis(axisCnt, axis, moveType, velocity, accTime, decTime, 66, axis0Pos);
+                });
+            }
+            */
 
             /*
             // 다축 직선 보간 운동
