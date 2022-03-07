@@ -23,7 +23,7 @@ namespace SnetTestProgram.Forms
             _snetDevice = snetDevice;
             _job = job;
 
-            timerPTP.Start();
+            timerSPTP.Start();
 
         }
 
@@ -59,8 +59,6 @@ namespace SnetTestProgram.Forms
             // 단축 왕복 운동
             for (int i = 0; i <= repeatNum; i++)
             {
-                FormAxis formaxis = new FormAxis();
-
                 SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Trapezoidal;
 
                 int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
@@ -94,9 +92,9 @@ namespace SnetTestProgram.Forms
             Logger.WriteLog(time + "msec");
         }
 
-        private void timerPTP_Tick(object sender, EventArgs e)
+        private void timerSPTP_Tick(object sender, EventArgs e)
         {
-            int position=0;
+            int position = 0;
 
             _snetDevice.GetCommandPosition(axis_1, ref position);
 

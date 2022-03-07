@@ -1,7 +1,7 @@
 ﻿
 namespace SnetTestProgram.Forms
 {
-    partial class FormInterruptEvent
+    partial class FormInterrupt
     {
         /// <summary>
         /// Required designer variable.

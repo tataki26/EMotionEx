@@ -11,12 +11,12 @@ using EMotionSnetBase;
 
 namespace SnetTestProgram.Forms
 {
-    public partial class FormInterruptEvent : Form
+    public partial class FormInterrupt : Form
     {
         private SnetDevice _snetDevice;
         private Job _job;
 
-        public FormInterruptEvent(SnetDevice snetDevice, Job job)
+        public FormInterrupt(SnetDevice snetDevice, Job job)
         {
             InitializeComponent();
 
@@ -33,8 +33,8 @@ namespace SnetTestProgram.Forms
 
         private void btnMoveMulti_Click(object sender, EventArgs e)
         {
-            FormSinglePTP singlePTP = new FormSinglePTP(_snetDevice, _job);
-            singlePTP.Show();
+            FormMultiPTP multiPTP = new FormMultiPTP(_snetDevice, _job);
+            multiPTP.Show();
         }
 
         private void btnSingleLine_Click(object sender, EventArgs e)

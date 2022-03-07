@@ -48,7 +48,7 @@ namespace SnetTestProgram.Forms
             this.tbPosition_2 = new System.Windows.Forms.TextBox();
             this.tbAxis_1 = new System.Windows.Forms.TextBox();
             this.tbResult = new System.Windows.Forms.TextBox();
-            this.timerPTP = new System.Windows.Forms.Timer(this.components);
+            this.timerSPTP = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -246,9 +246,9 @@ namespace SnetTestProgram.Forms
             this.tbResult.Size = new System.Drawing.Size(100, 21);
             this.tbResult.TabIndex = 13;
             // 
-            // timerPTP
+            // timerSPTP
             // 
-            this.timerPTP.Tick += new System.EventHandler(this.timerPTP_Tick);
+            this.timerSPTP.Tick += new System.EventHandler(this.timerSPTP_Tick);
             // 
             // FormSinglePTP
             // 
@@ -284,6 +284,6 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.TextBox tbAxis_1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbDwell;
-        private System.Windows.Forms.Timer timerPTP;
+        private System.Windows.Forms.Timer timerSPTP;
     }
 }

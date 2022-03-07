@@ -64,17 +64,23 @@
     <Compile Include="Forms\FormConnect.Designer.cs">
       <DependentUpon>FormConnect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormMultiPTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMultiPTP.Designer.cs">
+      <DependentUpon>FormMultiPTP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSingleLine.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSingleLine.Designer.cs">
       <DependentUpon>FormSingleLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormInterruptEvent.cs">
+    <Compile Include="Forms\FormInterrupt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormInterruptEvent.Designer.cs">
-      <DependentUpon>FormInterruptEvent.cs</DependentUpon>
+    <Compile Include="Forms\FormInterrupt.Designer.cs">
+      <DependentUpon>FormInterrupt.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormLog.cs">
       <SubType>Form</SubType>
@@ -104,11 +110,14 @@
     <EmbeddedResource Include="Forms\FormConnect.resx">
       <DependentUpon>FormConnect.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMultiPTP.resx">
+      <DependentUpon>FormMultiPTP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSingleLine.resx">
       <DependentUpon>FormSingleLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormInterruptEvent.resx">
-      <DependentUpon>FormInterruptEvent.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormInterrupt.resx">
+      <DependentUpon>FormInterrupt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLog.resx">
       <DependentUpon>FormLog.cs</DependentUpon>

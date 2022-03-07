@@ -11,6 +11,7 @@ D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.pdb
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormConnect.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormLog.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormAxis.resources
-D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormInterruptEvent.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormSingleLine.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormSinglePTP.resources
+D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormMultiPTP.resources
+D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormInterrupt.resources
