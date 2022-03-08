@@ -9,7 +9,7 @@ using System.Diagnostics;
 namespace EMotionSnetBase
 {
 	/// <summary>
-	/// Snet device API wrapper class
+	/// SNET device API wrapper class
 	/// </summary>
 	public class SnetDevice
 	{
@@ -216,6 +216,35 @@ namespace EMotionSnetBase
 			LinearCompensationCountError	= 3002, // Count 설정 오류
 			LinearCompensationLimitError	= 3003, // Limit 설정 오류
 
+			// Interrupt Event
+			InterruptEventBase					= 3500,
+			InterruptEventInvalidEnable			= InterruptEventBase + 1,   // Interrupt Event 활성화/비활성화 오류
+			InterruptEventInvalidIndex			= InterruptEventBase + 2,   // 축 번호 혹은 입력 채널 번호 오류		
+			InterruptEventInvalidInputType		= InterruptEventBase + 3,   // 입력 Type(enum 'InterruptEventInputType') 오류
+			InterruptEventInvalidInputPort		= InterruptEventBase + 4,   // 입력 Port(index) 오류
+			InterruptEventInvalidInputPoint		= InterruptEventBase + 5,   // 입력 Point(bit) 오류
+			InterruptEventInvalidInputActive	= InterruptEventBase + 6,	// 입력 Active(level) 오류
+			InterruptEventFailInitialization	= InterruptEventBase + 20,	// 초기화 오류
+			InterruptEventNotEnable				= InterruptEventBase + 21,  // 현재 Interrupt Event 비활성화
+			InterruptEventInvalidTableIndex		= InterruptEventBase + 22,  // Interrupt Event Table 번호 오류
+			InterruptEventInvalidAxisIndex		= InterruptEventBase + 30,  // 축 번호 오류
+			InterruptEventInvalidAxisType		= InterruptEventBase + 31,  // 축 Interrupt Type(enum 'InterruptEventAxisType') 오류
+			InterruptEventInvalidInputChannel	= InterruptEventBase + 40,  // 입력 채널 번호 오류
+			InterruptEventWaiting				= InterruptEventBase + 50,  // 이미 대기 상태 중
+			InterruptEventFailedWaiting			= InterruptEventBase + 51,  // 대기 오류
+			InterruptEventFailedStartServer		= InterruptEventBase + 60,  // Interrupt Event Server 활성화 오류
+			InterruptEventAlreadyStartServer	= InterruptEventBase + 61,	// Interrupt Event Server가 이미 활성화 상태
+			InterruptEventNotStartServer		= InterruptEventBase + 62,	// Interrupt Event Server가 비활성화 상태
+			InterruptEventFailedStopServer		= InterruptEventBase + 65,  // Interrupt Event Server 비활성화 오류
+			InterruptEventFailedGetServer		= InterruptEventBase + 70,  // Interrupt Event Server 정보 읽기 오류
+			InterruptEventFailedSetServer		= InterruptEventBase + 71,  // Interrupt Event Server 정보 쓰기 오류
+			InterruptEventFailedCreateThread	= InterruptEventBase + 80,	// Interrupt Event Server Thread 활성화 오류
+			InterruptEventFailedDeleteThread	= InterruptEventBase + 81,	// Interrupt Event Server Thread 비활성화 오류
+			InterruptEventInvalidToken			= InterruptEventBase + 100, // Interrupt Event Message Format 오류
+			InterruptEventInvalidCommand		= InterruptEventBase + 101, // Interrupt Event Command 오류
+			InterruptEventInvalidData			= InterruptEventBase + 102, // Interrupt Event Data 오류
+			InterruptEventInvalidArgument		= InterruptEventBase + 110, // 잘못된 인자 값
+
 			// System Error
 			SystemErrorBase = 10000,
 			SystemErrorGetFile	= SystemErrorBase + 1,
@@ -414,6 +443,83 @@ namespace EMotionSnetBase
 			public int velocity;
 			public int position;
 		}
+
+		/// <summary>
+		/// The interrupt event type of axis
+		/// </summary>
+		public enum InterruptEventAxisType
+		{
+			MotionDone = 0,
+			Alarm = 1,
+			SlowStop = 2,
+			EmergencyStop = 3,
+		}
+
+		/// <summary>
+		/// The interrupt event type of input
+		/// </summary>
+		public enum InterruptEventInputType
+		{
+			User = 0,
+			RemoteModule = 1,
+			OptionModule = 2,
+		}
+
+		/// <summary>
+		/// Interrupt Event Table Information
+		/// </summary>
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+		public struct InterruptEventTableInfo
+		{
+			//
+			// 0: continous event
+			// 1: only first event. after first event, not occurred event 
+			//
+			public int oneshot;
+			//
+			// from 0 : the index of axis for using interrupt event
+			// under 0 : no use interrupt event of axis 
+			//
+			public int axis_index;
+			//
+			// the event type of axis. see enum 'InterruptEventAxisType'
+			//
+			public int axis_type;
+			//
+			// from 0 : the index of channel for using input.
+			// under 0 : no use interrupt event of input
+			//
+			public int input_channel;
+			//
+			// the event type of input. see enum 'InterruptEventInputType'
+			public int input_type;
+			//
+			// from 0 : the port(index) of input
+			// under 0 : no use interrupt event of input
+			//
+			public int input_port;
+			//
+			// from 0 : the point(bit) of input
+			// under 0 : no use interrupt event of input
+			//
+			public int input_point;
+			//
+			// 0 : active low(high to low)
+			// 1 : active high(low to high)
+			//
+			public int input_active;
+		}
+
+		/// <summary>
+		/// Delegate of Interrupt event table 
+		/// </summary>
+		/// <param name="table_index">The index of interrupt event table when to occur event</param>
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate void InterruptEventRoutine(int table_index);
+
+		#endregion
+
+		#region API Import
 
 		#region Connection
 
@@ -1396,8 +1502,8 @@ namespace EMotionSnetBase
 		///										SplineMovingCommandPositionError (2508)																	</returns>
 		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int eSnetMoveSpline(int net, int axis_x, int axis_y, int point_count, out int x_points, out int y_points,
-			int sampling_count, out float xs, out float ys, int type,  
-			int axis3, out int axis3_positions, 
+			int sampling_count, out float xs, out float ys, int type,
+			int axis3, out int axis3_positions,
 			int velocity, int accel, int decel, int jerk_acc, int jerk_dec);
 
 		#endregion
@@ -3977,12 +4083,10 @@ namespace EMotionSnetBase
 
 		#endregion
 
-		#region Trigger (주기 출력) 
-
-		/*** Trigger 1 (period) ***/
+		#region Trigger 1 (주기 출력) ( SNET-P / SNET-RTEX )
 
 		/// <summary>
-		/// endoer를 읽을 축과 output을 내 보낼 축을 설정 하기 ( SNET-P / SNET-RTEX )
+		/// "Trigger 1 출력(주기)" Encoder를 읽을 축과 output을 내 보낼 축을 설정 하기 ( SNET-P / SNET-RTEX )
 		/// </summary>
 		/// <param name="net"> 			: controller id								</param>
 		/// <param name="encoder_axis">	: # SNET-P		
@@ -4000,7 +4104,7 @@ namespace EMotionSnetBase
 		public static extern int eSnetSetTriggerPort(int net, int encoder_axis, int output_axis);
 
 		/// <summary>
-		/// endoer를 읽을 축과 output을 내 보낼 축을 설정값 읽기 ( SNET-P / SNET-RTEX )
+		/// "Trigger 1 출력(주기)" Encoder를 읽을 축과 output을 내 보낼 축을 설정값 읽기 ( SNET-P / SNET-RTEX )
 		/// </summary>
 		/// <param name="net"> 			: controller id								</param>
 		/// <param name="encoder_axis">	: # SNET-P		
@@ -4018,7 +4122,7 @@ namespace EMotionSnetBase
 		public static extern int eSnetGetTriggerPort(int net, out int encoder_axis, out int output_axis);
 
 		/// <summary>
-		/// "Trigger 1 출력(주기)" 관련 파라미터 설정 ( SNET-P )
+		/// "Trigger 1 출력(주기)" 관련 파라미터 설정 ( SNET-P / SNET-RTEX )
 		/// (tip 1) "SNET-RTEX" 제품의 경우 "eSnetRtexSetTriggerParameter"를 참조 하십시요  
 		/// </summary>
 		/// <param name="net"> 				: controller id												</param>						
@@ -4033,7 +4137,7 @@ namespace EMotionSnetBase
 		public static extern int eSnetSetTriggerParameter(int net, int pulse_count, int first_position, int pulse_interval, int pulse_on_time);
 
 		/// <summary>
-		/// "Trigger 1 출력(주기)" 관련 파라미터 설정값 읽기 ( SNET-P )
+		/// "Trigger 1 출력(주기)" 관련 파라미터 설정값 읽기 ( SNET-P / SNET-RTEX )
 		/// (tip 1) "SNET-RTEX" 제품의 경우 "eSnetRtexGetTriggerParameter"를 참조 하십시요  
 		/// </summary>
 		/// <param name="net"> 				: controller id												</param>						
@@ -4048,7 +4152,29 @@ namespace EMotionSnetBase
 		public static extern int eSnetGetTriggerParameter(int net, out int pulse_count, out int first_position, out int pulse_interval, out int pulse_on_time);
 
 		/// <summary>
-		/// Trigger 신호 출력 상태 정보 확인 
+		/// "Trigger 1 출력(주기)" 연동 축 번호 설정 ( SNET-RTEX )
+		/// (tip 1)지정된 "Rtex 드라이버"의 엔코더 출력 신호를 
+		///		   "eSnetSetTriggerPort"로 지정된 제어기의 엔코더 입력 단자(ENC1 or ENC2)로 연결 합니다. 
+		/// : old version name -->"eSnetSetTriggerSource"
+		/// </summary>
+		/// <param name="net"> 		: controller id 						</param>
+		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
+		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetRtexSetTriggerSource(int net, int source);
+
+		/// <summary>
+		/// "Trigger 1 출력(주기)" "eSnetRtexSetTriggerSource" 사용자 설정값 확인 ( SNET-RTEX )
+		/// : old version name -->"eSnetGetTriggerSource"
+		/// </summary>
+		/// <param name="net"> 		: controller id 						</param>
+		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
+		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetRtexGetTriggerSource(int net, out int source);
+
+		/// <summary>
+		/// "Trigger 1 출력(주기)" Trigger 신호 출력 상태 정보 확인 ( SNET-P / SNET-RTEX )
 		/// </summary>
 		/// <param name="net"> 				: controller id											</param>						
 		/// <param name="run_flag">			: "1"->trigger기능 사용 중, "0"->trigger기능 사용 안함	</param>						
@@ -4058,7 +4184,7 @@ namespace EMotionSnetBase
 		public static extern int eSnetGetTriggerStatus(int net, out int run_flag, out int trigger_count);
 
 		/// <summary>
-		/// Trigger 신호 출력 기능 시작 하기 
+		/// "Trigger 1 출력(주기)" Trigger 신호 출력 기능 시작 ( SNET-P / SNET-RTEX )
 		/// (tip 1) eSnetStartTrigger() 지령 후 "축 이송 명령"을 사용 하십시요 
 		/// : old version name ->"eSnetSetTriggerStart"
 		/// </summary>
@@ -4070,7 +4196,7 @@ namespace EMotionSnetBase
 
 		#endregion
 
-		#region Trigger (Interpolation) 
+		#region Trigger (Interpolation) ( SNET-P )
 
 		/*** Trigger 출력( 보간 이송 거리 기준 ) ( SNET-P / SNET-RTEX ) ***/
 
@@ -4145,8 +4271,6 @@ namespace EMotionSnetBase
 
 		#region Trigger (비주기 출력)
 
-		/*** Trigger 2 (non period) ***/
-
 		/// <summary>
 		/// eSnetTriggerOnlyAbs(...) 함수 사용 전 트리거 출력 채널 번호, 출력 시간, 축 번호, 출력 극성, 기준 위치 소스 의 종류를 설정하기
 		/// : old version name -->"eSnetTriggerSetTimeLevel"
@@ -4210,34 +4334,10 @@ namespace EMotionSnetBase
 
 		#endregion
 
-		#region Trigger (주기 출력) (SNET-RTEX)
-
-		/*** Trigger 3 (period) (SNET-RTEX) ***/
+		#region Trigger 2 (주기 출력) (SNET-RTEX)
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)"연동 축 번호 설정 
-		/// (tip 1)지정된 "Rtex 드라이버"의 엔코더 출력 신호를 "eSnetRtexSetTriggerPort"로 지정된 제어기  
-		///		  엔코더 입력 단자(ENC1 or ENC2)로 연결 합니다. 
-		/// : old version name -->"eSnetSetTriggerSource"
-		/// </summary>
-		/// <param name="net"> 		: controller id 						</param>
-		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
-		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
-		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int eSnetRtexSetTriggerSource(int net, int source);
-
-		/// <summary>
-		/// SNET-RTEX "eSnetRtexSetTriggerSource" 사용자 설정값 확인 
-		/// : old version name -->"eSnetGetTriggerSource"
-		/// </summary>
-		/// <param name="net"> 		: controller id 						</param>
-		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
-		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
-		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int eSnetRtexGetTriggerSource(int net, out int source);
-
-		/// <summary>
-		/// SNET-RTEX "Trigger 출력2(주기 출력)" rtex 축 번호 선택 
+		/// SNET-RTEX "Trigger 2 (주기 출력)" rtex 축 번호 선택 
 		/// (tip 1)"ENC1","ENC2","P1 ~ P6"는 제품에 표시된 커넥터 label 입니다. 
 		/// : old version name -->"eSnetSetTriggerPortRtex"
 		/// </summary>
@@ -4262,7 +4362,7 @@ namespace EMotionSnetBase
 		public static extern int eSnetRtexGetTriggerPort(int net, out int encoder_port, out int output_port);
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)"관련 세부 파라미터 설정 
+		/// SNET-RTEX "Trigger 2 (주기 출력)" 관련 세부 파라미터 설정 
 		/// : old version name -->"eSnetSetTriggerParameterRtex"
 		/// </summary>
 		/// <param name="net"> 				: controller id 							</param>
@@ -4288,7 +4388,7 @@ namespace EMotionSnetBase
 		public static extern int eSnetRtexGetTriggerParameter(int net, out int pulse_count, out int first_position, out int pulse_interval, out int pulse_time);
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)" 동작 상태 확인 
+		/// SNET-RTEX "Trigger 2 (주기 출력)" 동작 상태 확인 
 		/// : old version name -->"eSnetGetTriggerStatusRtex"
 		/// </summary>
 		/// <param name="net"> 				: controller id 						</param>
@@ -4299,7 +4399,7 @@ namespace EMotionSnetBase
 		public static extern int eSnetRtexGetTriggerStatus(int net, out int run_flag, out int trigger_count);
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)" 시작 
+		/// SNET-RTEX "Trigger 2 (주기 출력)" 시작 
 		/// : old version name -->"eSnetSetTriggerStartRtex"
 		/// </summary>
 		/// <param name="net"> 		: controller id 					</param>
@@ -4361,7 +4461,7 @@ namespace EMotionSnetBase
 		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
 		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int eSnetRtexMoveAxisUntilTrqLimit(int net, int axis, int pos, int vel, int accel, int decel, int jerk, int time);
-		
+
 		#endregion
 
 		#region Position Capture 1 
@@ -4484,7 +4584,7 @@ namespace EMotionSnetBase
 		#endregion
 
 		#region Alarm & Warning (SNET-RTEX)
-		
+
 		/// <summary>
 		/// RTEX 드라이버에서 Alarm and Warning Code 읽기 
 		/// </summary>
@@ -4496,8 +4596,8 @@ namespace EMotionSnetBase
 		/// <param name="warning_sub">	: warning Code Sub					</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")	</returns>	
 		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int eSnetRtexGetAlarmWarning(int net, int axis, out int alarm_main, out int alarm_sub,	out int warning_main, out int warning_sub);
-		
+		public static extern int eSnetRtexGetAlarmWarning(int net, int axis, out int alarm_main, out int alarm_sub, out int warning_main, out int warning_sub);
+
 		#endregion
 
 		#region Positional Command Filter
@@ -4600,7 +4700,7 @@ namespace EMotionSnetBase
 		/// <param name="compensation_position">	: 보정 테이블이 적용된 return 좌표	</param>
 		/// <returns>								: (see enum "eSnetApiReturnCode")	</returns>	
 		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern  int eSnetGetPositionCompensationResult(int net, int axis, int command_position, out int compensation_position);
+		public static extern int eSnetGetPositionCompensationResult(int net, int axis, int command_position, out int compensation_position);
 
 		/// <summary>
 		/// "축 좌표 보정" 기능 사용시 "보정값이 적용되지 않은 Command Position(절대 좌표)"과  
@@ -4628,27 +4728,95 @@ namespace EMotionSnetBase
 
 		#endregion
 
-		#region Read Memory
+		#region Interrupt Event
 
 		/// <summary>
-		/// 메모리 데이터 읽기
+		/// Interrupt event table 특정 번호의 설정 정보 쓰기
 		/// </summary>
-		/// <param name="net">		: controller id										</param>
-		/// <param name="address">	: memory address									</param>
-		/// <param name="length">	: 몇 개의 address data까지 볼 것인가?				</param>
-		/// <param name="data">		: 배열 (배열 count는 16개 이하)
-		///								(예) address->"1711276032"(==0x66000000)" 이고, 
-		///                                  length->"3" 이라고 하면,
-		///								     data[0]->address "0x66000000"의 data 값,
-		///								     data[1]->address "0x66000004"의 data 값,
-		///								     data[2]->address "0x66000008"의 data 값,	</param>
-		/// <returns>				: (see enum "eSnetApiReturnCode")					</returns>	
+		/// <remarks>
+		/// Interrupt event table의 번호는 0 ~ 127 설정이 가능
+		/// </remarks>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="table_index">	: 설정을 쓸 Interrupt event table 번호</param>
+		/// <param name="enable">		: 'table_index' 에 해당하는 Interrupt event table 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <param name="info">			: 'table_index' 에 해당하는 Interrupt event table 설정 정보. struct 'InterruptEventTableInfo' 참조</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
 		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int eSnetReadSystemMemory(int net, int address, short length, out int data);
+		public static extern int eSnetSetInterruptEventTable(int net, int table_index, int enable, InterruptEventTableInfo info);
+
+		/// <summary>
+		/// Interrupt event table 특정 번호의 설정 정보 읽기
+		/// </summary>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="table_index">	: 설정을 읽을 Interrupt event table 번호</param>
+		/// <param name="enable">		: 'table_index' 에 해당하는 Interrupt event table 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <param name="info">			: 'table_index' 에 해당하는 Interrupt event table 설정 정보. struct 'InterruptEventTableInfo' 참조</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetGetInterruptEventTable(int net, int table_index, out int enable, out InterruptEventTableInfo info);
+
+		/// <summary>
+		/// Interrupt event table 특정 번호 삭제
+		/// </summary>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetEraseInterruptEventTable(int net, int table_index);
+
+		/// <summary>
+		/// Interrupt event table 전체 번호 삭제
+		/// </summary>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetClearInterruptEventTable(int net);
+
+		/// <summary>
+		/// Interrupt event routine(function) 등록
+		/// </summary>
+		/// <remarks>
+		/// Interrupt event 발생 시, 자동으로 호출될 Function pointer(handle)를 등록한다.
+		/// 등록된 Function 호출 시, 'table_index' 인자로 발생한 Interrupt event table 번호가 전달된다
+		/// </remarks>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="routine">		: Interrupt event 발생 시, 호출 될 Function pointer(handle)</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetSetInterruptEventRoutine(int net, InterruptEventRoutine routine);
+
+		/// <summary>
+		/// Interrupt event 기능 활성화/비활성화 정보 쓰기
+		/// </summary>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="enable">		: Interrupt event 기능 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetEnableInterruptEvent(int net, int enable);
+
+		/// <summary>
+		/// Interrupt event 기능 활성화/비활성화 정보 읽기
+		/// </summary>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="enable">		: Interrupt event 기능 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetIsInterruptEvent(int net, out int enable);
+
+		/// <summary>
+		/// Interrupt event table의 이벤트 발생 대기
+		/// </summary>
+		/// <remarks>
+		/// Interrupt event table 정보에 맞는 event 발생이 있을 때까지 대기한다
+		/// </remarks>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <param name="timeout">		: 대기 시간(milliseconds). 0으로 설정 시, 무한 대기</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetWaitInterruptEvent(int net, int table_index, int timeout);
 
 		#endregion
-		
-		#region EtherCAT Drive API Import
 
 		#endregion
 
@@ -4660,6 +4828,24 @@ namespace EMotionSnetBase
 		public int NetID { get; protected set; } = 1;
 
 		#endregion
+
+		/// <summary>
+		/// SnetDevice Constructor
+		/// </summary>
+		public SnetDevice()
+		{
+		}
+
+		/// <summary>
+		/// SnetDevice Constructor
+		/// </summary>
+		/// <param name="net">Network ID(IPv4 4th address)</param>
+		public SnetDevice(int net)
+		{
+			NetID = net;
+		}
+
+		#region Operation
 
 		#region Connection
 
@@ -4809,7 +4995,7 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					version = getValue0;					
+					version = getValue0;
 				}
 			}
 			catch (Exception ex)
@@ -5900,7 +6086,7 @@ namespace EMotionSnetBase
 		/// <param name="zero_shift">	: user가 Z상 또는 Sensor Off상태에서 얼마큼 더 이동 후에 Origion "0"점을 잡을지에 대한 위치값	</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")																</returns>	
 		public int SetHomingMethod(int net, int axis, int direction, int sensor, bool use_z, int set_time, int zero_shift)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -5935,7 +6121,7 @@ namespace EMotionSnetBase
 		/// <param name="zero_shift">	: user가 Z상 또는 Sensor Off상태에서 얼마큼 더 이동 후에 Origion "0"점을 잡을지에 대한 위치값	</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")																</returns>	
 		public int GetHomingMethod(int net, int axis, ref int direction, ref int sensor, ref bool use_z, ref int set_time, ref int zero_shift)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -5947,13 +6133,13 @@ namespace EMotionSnetBase
 						"SnetDevice.GetHomingMethod");
 				}
 				else
-                {
-					direction	= getValue0;
-					sensor		= getValue1;
-					use_z		= (getValue2 == 1);
-					set_time	= getValue3;
-					zero_shift	= getValue4;
-                }
+				{
+					direction = getValue0;
+					sensor = getValue1;
+					use_z = (getValue2 == 1);
+					set_time = getValue3;
+					zero_shift = getValue4;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -5978,7 +6164,7 @@ namespace EMotionSnetBase
 		/// <param name="accel_1">		: [mm/min] 세번째/네번째 구동 가속도	</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")		</returns>	
 		public int SetHomingMethodSpeed(int net, int axis, int velocity_0, int velocity_1, int velocity_2, int velocity_3, int accel_0, int accel_1)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -5997,8 +6183,8 @@ namespace EMotionSnetBase
 			}
 
 			return returnCode;
-		}	
-		
+		}
+
 		/// <summary>
 		/// homing method : homing 속도 설정값 읽기
 		/// : old version name ->"eSnetGetOriginMethodSpeed"
@@ -6013,7 +6199,7 @@ namespace EMotionSnetBase
 		/// <param name="accel_1">		: [mm/min] 세번째/네번째 구동 가속도	</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")		</returns>	
 		public int GetHomingMethodSpeed(int net, int axis, ref int velocity_0, ref int velocity_1, ref int velocity_2, ref int velocity_3, ref int accel_0, ref int accel_1)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -6027,12 +6213,12 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					velocity_0	= getValue0;
-					velocity_1	= getValue1;
-					velocity_2	= getValue2;
-					velocity_3	= getValue3;
-					accel_0		= getValue4;
-					accel_1		= getValue4;
+					velocity_0 = getValue0;
+					velocity_1 = getValue1;
+					velocity_2 = getValue2;
+					velocity_3 = getValue3;
+					accel_0 = getValue4;
+					accel_1 = getValue4;
 				}
 			}
 			catch (Exception ex)
@@ -6052,7 +6238,7 @@ namespace EMotionSnetBase
 		/// <param name="axis">	: axis index						</param>						
 		/// <returns>			: (see enum "eSnetApiReturnCode")	</returns>	
 		public int StartHomingMethod(int axis)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -6721,7 +6907,7 @@ namespace EMotionSnetBase
 		///										SplineSamplingCountOver	(2501) ~						
 		///										SplineMovingCommandPositionError (2508)																	</returns>
 		public int MoveSpline(int axis_x, int axis_y, int point_count, int[] x_points, int[] y_points,
-			int sampling_count, float[] xs, float[] ys, eSnetSplineType type, 
+			int sampling_count, float[] xs, float[] ys, eSnetSplineType type,
 			int axis3, int[] axis3_positions,
 			int velocity, int accel, int decel, int jerk_acc, int jerk_dec)
 		{
@@ -6734,7 +6920,7 @@ namespace EMotionSnetBase
 					setType = 1;
 
 				returnCode = eSnetMoveSpline(NetID, axis_x, axis_y, point_count, out x_points[0], out y_points[0],
-					sampling_count, out xs[0], out ys[0], setType, 
+					sampling_count, out xs[0], out ys[0], setType,
 					axis3, out axis3_positions[0], velocity, accel, decel, jerk_acc, jerk_dec);
 
 				if (returnCode != (int)eSnetApiReturnCode.Success)
@@ -6817,7 +7003,7 @@ namespace EMotionSnetBase
 		public int GetContiCh(ref int channel)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-			
+
 			try
 			{
 				returnCode = eSnetGetContiCh(NetID, out int getValue);
@@ -6903,7 +7089,7 @@ namespace EMotionSnetBase
 		public int GetContiJobIndexCount(ref int all_index_count, ref int moving_step_count)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-			
+
 			try
 			{
 				returnCode = eSnetGetContiJobIndexCount(NetID, out int getValue0, out int getValue1);
@@ -6914,8 +7100,8 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					all_index_count		= getValue0;
-					moving_step_count	= getValue1;
+					all_index_count = getValue0;
+					moving_step_count = getValue1;
 				}
 			}
 			catch (Exception ex)
@@ -7003,7 +7189,7 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					is_moving			= ((getValue0 == 1) ? true : false);
+					is_moving = ((getValue0 == 1) ? true : false);
 					current_motion_step = getValue1;
 				}
 			}
@@ -7038,7 +7224,7 @@ namespace EMotionSnetBase
 		public int GetContiInfoResult(int channel, ref bool is_moving, ref int current_motion_step, ref eSnetContiMovingInfo current_motion_command)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-			
+
 			try
 			{
 				returnCode = eSnetGetContiInfoResult(NetID, channel, out int getValue0, out int getValue1, out int getValue2);
@@ -7049,9 +7235,9 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					is_moving				= ((getValue0 == 1) ? true : false);
-					current_motion_step		= getValue1;
-					current_motion_command	= (eSnetContiMovingInfo)getValue2;
+					is_moving = ((getValue0 == 1) ? true : false);
+					current_motion_step = getValue1;
+					current_motion_command = (eSnetContiMovingInfo)getValue2;
 				}
 			}
 			catch (Exception ex)
@@ -7121,7 +7307,7 @@ namespace EMotionSnetBase
 				}
 
 				int setValue = select_distance_or_time ? 1 : 0;
-				returnCode = eSnetSetContiOutputConfig(NetID, output_count, setValue, 
+				returnCode = eSnetSetContiOutputConfig(NetID, output_count, setValue,
 					out output_type[0], out port[0], out point[0], out onOffTemp[0], out distance_before_moving_step_end[0]);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
@@ -7185,7 +7371,7 @@ namespace EMotionSnetBase
 					output_count = countTemp;
 					select_distance_or_time = (distanceTemp == 1);
 					for (int index = 0; index < onOffTemp.Length; index++)
-					{						
+					{
 						on_off[index] = ((onOffTemp[index] == 1) ? true : false);
 					}
 				}
@@ -7413,7 +7599,7 @@ namespace EMotionSnetBase
 		public int GetPtpStatus(int ptp_index, ref int status)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-			
+
 			try
 			{
 				returnCode = eSnetGetPtpStatus(NetID, ptp_index, out int getValue);
@@ -7781,7 +7967,7 @@ namespace EMotionSnetBase
 		public int SetLoopback(int axis, bool loopback)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-			
+
 			try
 			{
 				int setValue = (loopback ? 1 : 0);
@@ -7937,21 +8123,21 @@ namespace EMotionSnetBase
 			return returnCode;
 		}
 
-        #endregion
+		#endregion
 
-        #region Actual Position
+		#region Actual Position
 
-        /// <summary>
-        /// 축 "Actual Position(기계 좌표)" 변경  
-        /// (tip 1) "Actual Position" 변경 후,변경 전후 좌표 편차를 이용하여 "Command Position"자동 변경 
-        /// (tip 2)"Command Position 과 Actual Position"이 일치하면 "eSnetSetCommandPosition" 사용과 
-        ///			동일한 결과를 보여 줍니다.
+		/// <summary>
+		/// 축 "Actual Position(기계 좌표)" 변경  
+		/// (tip 1) "Actual Position" 변경 후,변경 전후 좌표 편차를 이용하여 "Command Position"자동 변경 
+		/// (tip 2)"Command Position 과 Actual Position"이 일치하면 "eSnetSetCommandPosition" 사용과 
+		///			동일한 결과를 보여 줍니다.
 		///	: old version name ->"eSnetSetAxisActualPosition"
-        /// </summary>	
-        /// <param name="axis">		: axis index					</param>						
-        /// <param name="position">	: actual position				</param>						
-        /// <returns>				(see enum "eSnetApiReturnCode")	</returns>
-        public int SetActualPosition(int axis, int position)
+		/// </summary>	
+		/// <param name="axis">		: axis index					</param>						
+		/// <param name="position">	: actual position				</param>						
+		/// <returns>				(see enum "eSnetApiReturnCode")	</returns>
+		public int SetActualPosition(int axis, int position)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
@@ -7993,7 +8179,7 @@ namespace EMotionSnetBase
 						"SnetDevice.GetActualPosition");
 				}
 				else
-                {
+				{
 					position = getValue;
 				}
 			}
@@ -8018,7 +8204,7 @@ namespace EMotionSnetBase
 		///											 positionActual[1] : "1"번 축(두번째 축) 현재 실제 위치,	</param>
 		/// <returns>						: (see enum "eSnetApiReturnCode")									</returns>
 		public int GetPosition(int axisCount, int[] positionCommand, int[] positionActual)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -8103,25 +8289,25 @@ namespace EMotionSnetBase
 			return returnCode;
 		}
 
-        #endregion
+		#endregion
 
-        #region Roll Over
+		#region Roll Over
 
-        /// <summary>
-        /// 축 이송 중 현재 지령 좌표가 설정 좌표 보다 크거나 작으면 "0"으로 변경하고 다시 시작
-        /// (tip 1) 무한 회전 운동"이 요구되는 응용 분야에 적용
-        /// : old version name -->"eSnetSetAxisRollover"
-        /// </summary>
-        /// <param name="axis">		: axis index																</param>
-        /// <param name="position">	: 좌표 재설정 기준 좌표
-        ///								-. 양수
-        ///								  -> 현재 좌표가 설정값 보다 크거나 같으면 현재 좌표를 "0"으로 초기화 
-        ///								-. 음수
-        ///								  -> 현재 좌표가 설정값 보다 작거나 같으면 현재 좌표를 "0"으로 초기화	</param>
-        /// <returns>				: (see enum "eSnetApiReturnCode")
-        ///								CommunicationEventCode,
-        ///								PositionAutoResetOverAxisIndex (2301)	
-        public int SetRollover(int axis, int position)
+		/// <summary>
+		/// 축 이송 중 현재 지령 좌표가 설정 좌표 보다 크거나 작으면 "0"으로 변경하고 다시 시작
+		/// (tip 1) 무한 회전 운동"이 요구되는 응용 분야에 적용
+		/// : old version name -->"eSnetSetAxisRollover"
+		/// </summary>
+		/// <param name="axis">		: axis index																</param>
+		/// <param name="position">	: 좌표 재설정 기준 좌표
+		///								-. 양수
+		///								  -> 현재 좌표가 설정값 보다 크거나 같으면 현재 좌표를 "0"으로 초기화 
+		///								-. 음수
+		///								  -> 현재 좌표가 설정값 보다 작거나 같으면 현재 좌표를 "0"으로 초기화	</param>
+		/// <returns>				: (see enum "eSnetApiReturnCode")
+		///								CommunicationEventCode,
+		///								PositionAutoResetOverAxisIndex (2301)	
+		public int SetRollover(int axis, int position)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
@@ -8317,7 +8503,7 @@ namespace EMotionSnetBase
 		/// <param name="points">	: point : 0 ~ 31 (bit number)														</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")											</returns>
 		public int SetMcbUserOutputPort(int port, int points)
-		{ 
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -8406,7 +8592,7 @@ namespace EMotionSnetBase
 
 			try
 			{
-				returnCode = eSnetGetAxisIo(NetID, axis, out int getValue0, out int getValue1, 
+				returnCode = eSnetGetAxisIo(NetID, axis, out int getValue0, out int getValue1,
 					out int getValue2, out int getValue3, out int getValue4, out int getValue5);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
@@ -8415,12 +8601,12 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					limit_minus		= getValue0;
-					limit_plus		= getValue1;
-					sensor_origin	= getValue2;
-					sv_alarm		= getValue3;
-					sv_ready		= getValue4;
-					sv_on			= getValue5;
+					limit_minus = getValue0;
+					limit_plus = getValue1;
+					sensor_origin = getValue2;
+					sv_alarm = getValue3;
+					sv_ready = getValue4;
+					sv_on = getValue5;
 				}
 			}
 			catch (Exception ex)
@@ -8486,11 +8672,11 @@ namespace EMotionSnetBase
 		public int SetLimitAction(int axis, bool enable)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-			
+
 			try
 			{
 				int setValue = (enable ? 1 : 0);
-				
+
 				returnCode = eSnetSetLimitAction(NetID, axis, setValue);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
@@ -9237,7 +9423,7 @@ namespace EMotionSnetBase
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
-			{				
+			{
 				returnCode = eSnetGetParam015EncoderType(NetID, axis, out int getValue);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
@@ -9245,9 +9431,9 @@ namespace EMotionSnetBase
 						"SnetDevice.GetParam015EncoderType");
 				}
 				else
-                {
+				{
 					encoder_type = getValue;
-                }
+				}
 			}
 			catch (Exception ex)
 			{
@@ -12920,11 +13106,10 @@ namespace EMotionSnetBase
 
 		#endregion
 
-		#region Trigger (주기 출력) 
-		// Method 1 //
+		#region Trigger 1 (주기 출력 - Pulse 축) ( SNET-P / SNET-RTEX )
 
 		/// <summary>
-		/// endoer를 읽을 축과 output을 내 보낼 축을 설정 하기 ( SNET-P / SNET-RTEX )
+		/// "Trigger 1 출력(주기)" Encoder를 읽을 축과 output을 내 보낼 축을 설정 하기 ( SNET-P / SNET-RTEX )
 		/// </summary>
 		/// <param name="encoder_axis">	: # SNET-P		
 		///										-> encoder값을 읽을 축 번호 (구동할 축)
@@ -12938,7 +13123,7 @@ namespace EMotionSnetBase
 		///										-> "0(P1) ~ 5(P6)"					</param>	
 		/// <returns>					: (see enum "eSnetApiReturnCode")			</returns>	
 		public int SetTriggerPort(int encoder_axis, int output_axis)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -12948,7 +13133,7 @@ namespace EMotionSnetBase
 				{
 					Debug.WriteLine("Failed to call 'eSnetSetTriggerPort'. error : " + returnCode,
 						"SnetDevice.SetTriggerPort");
-				}				
+				}
 			}
 			catch (Exception ex)
 			{
@@ -12960,7 +13145,7 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// endoer를 읽을 축과 output을 내 보낼 축을 설정값 읽기 ( SNET-P / SNET-RTEX )
+		/// "Trigger 1 출력(주기)" Encoder를 읽을 축과 output을 내 보낼 축을 설정값 읽기 ( SNET-P / SNET-RTEX )
 		/// </summary>
 		/// <param name="encoder_axis">	: # SNET-P		
 		///										-> encoder값을 읽을 축 번호 (구동할 축)
@@ -13001,8 +13186,7 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// "Trigger 1 출력(주기)" 관련 파라미터 설정 ( SNET-P )
-		/// (tip 1) "SNET-RTEX" 제품의 경우 "eSnetRtexSetTriggerParameter"를 참조 하십시요  
+		/// "Trigger 1 출력(주기)" 관련 파라미터 설정 ( SNET-P / SNET-RTEX )
 		/// </summary>
 		/// <param name="pulse_count">		: 출력 갯수 												</param>						
 		/// <param name="first_position">	: [um] 첫번째 Trigger 신호를 출력할 좌표  					</param>
@@ -13034,8 +13218,7 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// "Trigger 1 출력(주기)" 관련 파라미터 설정값 읽기 ( SNET-P )
-		/// (tip 1) "SNET-RTEX" 제품의 경우 "eSnetRtexGetTriggerParameter"를 참조 하십시요  
+		/// "Trigger 1 출력(주기)" 관련 파라미터 설정값 읽기 ( SNET-P / SNET-RTEX)
 		/// </summary>
 		/// <param name="pulse_count">		: 출력 갯수 												</param>						
 		/// <param name="first_position">	: [um] 첫번째 Trigger 신호를 출력할 좌표  					</param>
@@ -13045,7 +13228,7 @@ namespace EMotionSnetBase
 		/// <param name="pulse_on_time">	: [msec] 	: 출력 on 유지 시간 							</param>	
 		/// <returns>						: (see enum "eSnetApiReturnCode")							</returns>			
 		public int GetTriggerParameter(ref int pulse_count, ref int first_position, ref int pulse_interval, ref int pulse_on_time)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13058,10 +13241,10 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					pulse_count		= getValue0;
-					first_position	= getValue1;
-					pulse_interval	= getValue2;
-					pulse_on_time	= getValue3;
+					pulse_count = getValue0;
+					first_position = getValue1;
+					pulse_interval = getValue2;
+					pulse_on_time = getValue3;
 				}
 			}
 			catch (Exception ex)
@@ -13072,15 +13255,74 @@ namespace EMotionSnetBase
 
 			return returnCode;
 		}
+		/// <summary>
+		/// "Trigger 1 출력(주기)" 연동 축 번호 설정 ( SNET-RTEX )
+		/// (tip 1)지정된 "Rtex 드라이버"의 엔코더 출력 신호를 
+		///		   "SetTriggerPort"로 지정된 제어기의 엔코더 입력 단자(ENC1 or ENC2)로 연결 합니다. 
+		/// </summary>
+		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
+		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
+		public int RtexSetTriggerSource(int source)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetRtexSetTriggerSource(NetID, source);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetRtexSetTriggerSource'. error : " + returnCode,
+						"SnetDevice.RtexSetTriggerSource");
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.RtexSetTriggerSource");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
 
 		/// <summary>
-		/// Trigger 신호 출력 상태 정보 확인 
+		/// "Trigger 1 출력(주기)" "RtexSetTriggerSource" 사용자 설정값 확인 
+		/// </summary>
+		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
+		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
+		public int RtexGetTriggerSource(ref int source)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetRtexGetTriggerSource(NetID, out int getValue);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetRtexGetTriggerSource'. error : " + returnCode,
+						"SnetDevice.RtexGetTriggerSource");
+				}
+				else
+				{
+					source = getValue;
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.RtexGetTriggerSource");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// "Trigger 1 출력(주기)" Trigger 신호 출력 상태 정보 확인 
 		/// </summary>
 		/// <param name="run_flag">			: "1"->trigger기능 사용 중, "0"->trigger기능 사용 안함	</param>						
 		/// <param name="trigger_count">	: 현재까지 출력된 trigger 신호 갯수						</param>						
 		/// <returns>						: (see enum "eSnetApiReturnCode")						</returns>	
 		public int GetTriggerStatus(ref bool run_flag, ref int trigger_count)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13093,7 +13335,7 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					run_flag	  =	((getValue0 == 1) ? true : false);
+					run_flag = ((getValue0 == 1) ? true : false);
 					trigger_count = getValue1;
 				}
 			}
@@ -13107,14 +13349,14 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// Trigger 신호 출력 기능 시작 하기 
-		/// (tip 1) eSnetStartTrigger() 지령 후 "축 이송 명령"을 사용 하십시요 
+		/// "Trigger 1 출력(주기)" Trigger 신호 출력 기능 시작 
+		/// (tip 1) StartTrigger() 지령 후 "축 이송 명령"을 사용 하십시요 
 		/// : old version name ->"eSnetSetTriggerStart"
 		/// </summary>
 		/// <param name="enable">	: "1"->trigger기능 사용, "0"->trigger기능 사용 안함	</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")					</returns>	
 		public int StartTrigger(bool enable)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13126,7 +13368,7 @@ namespace EMotionSnetBase
 				{
 					Debug.WriteLine("Failed to call 'eSnetStartTrigger'. error : " + returnCode,
 						"SnetDevice.StartTrigger");
-				}				
+				}
 			}
 			catch (Exception ex)
 			{
@@ -13300,7 +13542,6 @@ namespace EMotionSnetBase
 		#endregion
 
 		#region Trigger (비주기 출력) (SNET-P / SNET-RTEX)
-		// Method 2 //
 
 		/// <summary>
 		/// eSnetTriggerOnlyAbs(...) 함수 사용 전 트리거 출력 채널 번호, 출력 시간, 축 번호, 출력 극성, 기준 위치 소스 의 종류를 설정하기
@@ -13317,7 +13558,7 @@ namespace EMotionSnetBase
 		///								TriggerChannelOverCount		(2101),
 		///								TriggerOutPositionOverCount (2102),									</returns>	
 		public int SetTriggerTimeLevel(int channel, int axis, int time, bool level, bool mode)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13355,7 +13596,7 @@ namespace EMotionSnetBase
 		///								TriggerChannelOverCount		(2101),
 		///								TriggerOutPositionOverCount (2102),									</returns>	
 		public int GetTriggerTimeLevel(int channel, ref int axis, ref int time, ref bool level, ref bool mode)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13368,10 +13609,10 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					axis  = getValue0;
-					time  = getValue1;
+					axis = getValue0;
+					time = getValue1;
 					level = (getValue2 == 1);
-					mode  = (getValue3 == 1);
+					mode = (getValue3 == 1);
 				}
 			}
 			catch (Exception ex)
@@ -13395,7 +13636,7 @@ namespace EMotionSnetBase
 		///											TriggerChannelOverCount		(2101),
 		///											TriggerOutPositionOverCount (2102),						</returns>	
 		public int SetTriggerOnlyAbs(int channel, int set_count, int[] set_position)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13423,7 +13664,7 @@ namespace EMotionSnetBase
 		/// <param name="channel">	: 트리거 출력 채널 번호				</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")	</returns>
 		public int ResetTrigger(int channel)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13446,74 +13687,10 @@ namespace EMotionSnetBase
 
 		#endregion
 
-		#region Trigger (주기 출력) (SNET-RTEX)
-
-		/*** Trigger : SNET-RTEX ***/
+		#region Trigger 2 (주기 출력) (SNET-RTEX)
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)"연동 축 번호 설정 
-		/// (tip 1)지정된 "Rtex 드라이버"의 엔코더 출력 신호를 "eSnetRtexSetTriggerPort"로 지정된 제어기  
-		///		  엔코더 입력 단자(ENC1 or ENC2)로 연결 합니다. 
-		/// : old version name -->"eSnetSetTriggerSource"
-		/// </summary>
-		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
-		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
-		public int RtexSetTriggerSource(int source)
-		{
-			int returnCode = (int)eSnetApiReturnCode.Success;
-
-			try
-			{
-				returnCode = eSnetRtexSetTriggerSource(NetID, source);
-				if (returnCode != (int)eSnetApiReturnCode.Success)
-				{
-					Debug.WriteLine("Failed to call 'eSnetRtexSetTriggerSource'. error : " + returnCode,
-						"SnetDevice.RtexSetTriggerSource");
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex.Message, "SnetDevice.RtexSetTriggerSource");
-				returnCode = (int)eSnetApiReturnCode.Exception;
-			}
-
-			return returnCode;
-		}
-
-		/// <summary>
-		/// SNET-RTEX "eSnetRtexSetTriggerSource" 사용자 설정값 확인 
-		/// : old version name -->"eSnetGetTriggerSource"
-		/// </summary>
-		/// <param name="source">	: Rtex축 번호,"0(축0)" ~ "31(축31)"		</param>
-		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
-		public int RtexGetTriggerSource(ref int source)
-		{
-			int returnCode = (int)eSnetApiReturnCode.Success;
-
-			try
-			{
-				returnCode = eSnetRtexGetTriggerSource(NetID, out int getValue);
-				if (returnCode != (int)eSnetApiReturnCode.Success)
-				{
-					Debug.WriteLine("Failed to call 'eSnetRtexGetTriggerSource'. error : " + returnCode,
-						"SnetDevice.RtexGetTriggerSource");
-				}
-				else
-				{
-					source = getValue;
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex.Message, "SnetDevice.RtexGetTriggerSource");
-				returnCode = (int)eSnetApiReturnCode.Exception;
-			}
-
-			return returnCode;
-		}
-
-		/// <summary>
-		/// SNET-RTEX "Trigger 출력2(주기 출력)" rtex 축 번호 선택 
+		/// "Trigger 2 (주기 출력)" 축 번호 선택 ( SNET-RTEX )
 		/// (tip 1)"ENC1","ENC2","P1 ~ P6"는 제품에 표시된 커넥터 label 입니다. 
 		/// : old version name -->"eSnetSetTriggerPortRtex"
 		/// </summary>
@@ -13544,7 +13721,7 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// SNET-RTEX "eSnetRtexSetTriggerPort" 사용자 설정값 확인  
+		/// "Trigger 2 (주기 출력)" "eSnetRtexSetTriggerPort" 사용자 설정값 확인 ( SNET-RTEX )
 		/// : old version name -->"eSnetGetTriggerPortRtex"
 		/// </summary>
 		/// <param name="encoder_port">	: rtex 축 번호								</param>
@@ -13579,7 +13756,7 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)"관련 세부 파라미터 설정 
+		/// "Trigger 2 (주기 출력)" 관련 세부 파라미터 설정 ( SNET-RTEX )
 		/// : old version name -->"eSnetSetTriggerParameterRtex"
 		/// </summary>
 		/// <param name="pulse_count">		: trigger 신호 출력 개수 					</param>
@@ -13610,13 +13787,13 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// SNET-RTEX "eSnetRtexSetTriggerParameter" 사용자 설정값 확인 
+		/// "Trigger 2 (주기 출력)" "eSnetRtexSetTriggerParameter" 사용자 설정값 확인 ( SNET-RTEX )
 		/// : old version name -->"eSnetGetTriggerParameterRtex"
 		/// </summary>
 		/// <param name="pulse_count">		: trigger 신호 출력 개수 					</param>
-		/// <param name="first_position">	: [um],trigger 신호 출력 "시작 좌표"		</param>
-		/// <param name="pulse_interval">	: [um],trigger 신호 출력 "거리 간격" 		</param>
-		/// <param name="pulse_time">		: [usec],trigger 신호 "출력 ON" 유지시간	</param>
+		/// <param name="first_position">	: [um],trigger 신호 출력 "시작 좌표"			</param>
+		/// <param name="pulse_interval">	: [um],trigger 신호 출력 "거리 간격" 			</param>
+		/// <param name="pulse_on_time">	: [usec],trigger 신호 "출력 ON" 유지시간		</param>
 		/// <returns>						: (see enum "eSnetApiReturnCode")			</returns>	
 		public int RtexGetTriggerParameter(ref int pulse_count, ref int first_position, ref int pulse_interval, ref int pulse_on_time)
 		{
@@ -13632,10 +13809,10 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					pulse_count		= getValue0;
-					first_position	= getValue1;
-					pulse_interval	= getValue2;
-					pulse_on_time	= getValue3;
+					pulse_count = getValue0;
+					first_position = getValue1;
+					pulse_interval = getValue2;
+					pulse_on_time = getValue3;
 				}
 			}
 			catch (Exception ex)
@@ -13648,7 +13825,7 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)" 동작 상태 확인 
+		/// "Trigger 2 (주기 출력)" 동작 상태 확인 ( SNET-RTEX )
 		/// : old version name -->"eSnetGetTriggerStatusRtex"
 		/// </summary>
 		/// <param name="run_flag">			: "1"->동작 중,"0"->정지 상태 			</param>
@@ -13682,7 +13859,7 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// SNET-RTEX "Trigger 출력1(주기 출력)" 시작 
+		/// "Trigger 2 (주기 출력)" 시작 ( SNET-RTEX )
 		/// : old version name -->"eSnetSetTriggerStartRtex"
 		/// </summary>
 		/// <param name="enable">	: "true"->기능 시작, "false"->기능 정지	</param>
@@ -13723,7 +13900,7 @@ namespace EMotionSnetBase
 		/// <param name="settrq">	: 토오크 제한값,[%]					</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")	</returns>	
 		public int RtexSetTrqLimit(int axis, int settrq)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13752,7 +13929,7 @@ namespace EMotionSnetBase
 		/// <param name="gettrq">	: 토오크 제한 설정값,[%]			</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")	</returns>	
 		public int RtexGetTrqLimit(int axis, ref int gettrq)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13764,9 +13941,9 @@ namespace EMotionSnetBase
 						"SnetDevice.RtexGetTrqLimit");
 				}
 				else
-                {
+				{
 					gettrq = getValue;
-                }
+				}
 			}
 			catch (Exception ex)
 			{
@@ -13785,7 +13962,7 @@ namespace EMotionSnetBase
 		/// <param name="curtrq">	: 실시간 토오크값,[0.1%]  			</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")	</returns>	
 		public int RtexGetCurTrq(int axis, ref int curtrq)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13824,7 +14001,7 @@ namespace EMotionSnetBase
 		///							  상태가 유지 되면 정지 ,[msec]			</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
 		public int RtexMoveAxisUntilTrqLimit(int axis, int pos, int vel, int accel, int decel, int jerk, int time)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -13903,7 +14080,7 @@ namespace EMotionSnetBase
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
-			{				
+			{
 				returnCode = eSnetGetCaptureConfig(NetID, channel, out int getValue0, out int getValue1, out int getValue2, out int getValue3);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
@@ -13980,10 +14157,10 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					enable			= ((getValue0 == 1) ? true : false);
-					current_count	= getValue1;
-					rising_count	= getValue2;
-					falling_count	= getValue3;
+					enable = ((getValue0 == 1) ? true : false);
+					current_count = getValue1;
+					rising_count = getValue2;
+					falling_count = getValue3;
 				}
 			}
 			catch (Exception ex)
@@ -14017,7 +14194,7 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					rising_position  = getValue0;
+					rising_position = getValue0;
 					falling_position = getValue1;
 				}
 			}
@@ -14082,7 +14259,7 @@ namespace EMotionSnetBase
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
-			{				
+			{
 				returnCode = eSnetRtexGetCaptureStatus(NetID, axis, out int getValue0, out int getValue1, out int getValue2, out int getValue3);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
@@ -14090,12 +14267,12 @@ namespace EMotionSnetBase
 						"SnetDevice.RtexGetCaptureStatus");
 				}
 				else
-                {
-					enable			= ((getValue0 == 1) ? true : false);
-					set_count		= getValue1;
-					rising_count	= getValue2;
-					falling_count	= getValue3;
-                }
+				{
+					enable = ((getValue0 == 1) ? true : false);
+					set_count = getValue1;
+					rising_count = getValue2;
+					falling_count = getValue3;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -14129,8 +14306,8 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					rising_position	 = getValue0;
-					falling_position = getValue1;					
+					rising_position = getValue0;
+					falling_position = getValue1;
 				}
 			}
 			catch (Exception ex)
@@ -14156,7 +14333,7 @@ namespace EMotionSnetBase
 		/// <param name="warning_sub">	: warning Code Sub					</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")	</returns>	
 		public int RtexGetAlarmWarning(int axis, ref int alarm_main, ref int alarm_sub, ref int warning_main, ref int warning_sub)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
@@ -14169,10 +14346,10 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					alarm_main		= getValue0;
-					alarm_sub		= getValue1;
-					warning_main	= getValue2;
-					warning_sub		= getValue3;
+					alarm_main = getValue0;
+					alarm_sub = getValue1;
+					warning_main = getValue2;
+					warning_sub = getValue3;
 				}
 			}
 			catch (Exception ex)
@@ -14243,9 +14420,9 @@ namespace EMotionSnetBase
 						"SnetDevice.GetCmdFilterConfig");
 				}
 				else
-                {
+				{
 					enable = (getValue == 1 ? true : false);
-                }
+				}
 			}
 			catch (Exception ex)
 			{
@@ -14276,10 +14453,11 @@ namespace EMotionSnetBase
 		///									 correction[0]는 항상"0"을 설정 하십시요	</param>
 		/// <returns>						: (see enum "eSnetApiReturnCode")			</returns>	
 		public int SetPositionCompensation(int axis, int count, int start_position, int[] position, int[] correction)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-            try
-            {
+
+			try
+			{
 				returnCode = eSnetSetPositionCompensation(NetID, axis, count, start_position, out position[0], out correction[0]);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
@@ -14288,10 +14466,11 @@ namespace EMotionSnetBase
 				}
 			}
 			catch (Exception ex)
-            {
+			{
 				Debug.WriteLine(ex.Message, "SnetDevice.SetPositionCompensation");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
+
 			return returnCode;
 		}
 
@@ -14308,28 +14487,30 @@ namespace EMotionSnetBase
 		///										보정 테이블 보정 좌표 [um]		</param>
 		/// <returns>						: (see enum "eSnetApiReturnCode")	</returns>	
 		public int GetPositionCompensation(int axis, ref bool enable, ref int count, ref int start_position, int[] position, int[] correction)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-            try
-            {
-				returnCode=eSnetGetPositionCompensation(NetID, axis, out int getEnable, out int getCount, out int getStartPosition, out position[0], out correction[0]);
+
+			try
+			{
+				returnCode = eSnetGetPositionCompensation(NetID, axis, out int getEnable, out int getCount, out int getStartPosition, out position[0], out correction[0]);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
 					Debug.WriteLine("Failed to call 'eSnetGetPositionCompensation'. error : " + returnCode,
 									"SnetDevice.GetPositionCompensation");
 				}
-                else
-                {
-					enable			= (getEnable == 1 ? true : false);
-					count			= getCount;
-					start_position	= getStartPosition;
+				else
+				{
+					enable = (getEnable == 1 ? true : false);
+					count = getCount;
+					start_position = getStartPosition;
 				}
 			}
 			catch (Exception ex)
-            {
+			{
 				Debug.WriteLine(ex.Message, "SnetDevice.GetPositionCompensation");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
+
 			return returnCode;
 		}
 
@@ -14342,10 +14523,11 @@ namespace EMotionSnetBase
 		/// <param name="enable">	: "1"-> enable, "0"-> disable		</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")	</returns>	
 		public int SetPositionCompensationEnable(int axis, bool enable)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-            try
-            {
+
+			try
+			{
 				int setEnable = enable ? 1 : 0;
 				returnCode = eSnetSetPositionCompensationEnable(NetID, axis, setEnable);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
@@ -14355,10 +14537,11 @@ namespace EMotionSnetBase
 				}
 			}
 			catch (Exception ex)
-            {
+			{
 				Debug.WriteLine(ex.Message, "SnetDevice.SetPositionCompensationEnable");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
+
 			return returnCode;
 		}
 
@@ -14369,26 +14552,28 @@ namespace EMotionSnetBase
 		/// <param name="enable">	: "true"-> enable, "false"-> disable	</param>
 		/// <returns>				: (see enum "eSnetApiReturnCode")		</returns>	
 		public int GetPositionCompensationEnable(int axis, ref bool enable)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-            try
-            {
+
+			try
+			{
 				returnCode = eSnetGetPositionCompensationEnable(NetID, axis, out int getEnable);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
 					Debug.WriteLine("Failed to call 'eSnetGetPositionCompensationEnable'. error : " + returnCode,
 													"SnetDevice.GetPositionCompensationEnable");
 				}
-                else
-                {
+				else
+				{
 					enable = (getEnable == 1 ? true : false);
 				}
 			}
 			catch (Exception ex)
-            {
+			{
 				Debug.WriteLine(ex.Message, "SnetDevice.GetPositionCompensationEnable");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
+
 			return returnCode;
 		}
 
@@ -14402,27 +14587,28 @@ namespace EMotionSnetBase
 		/// <param name="compensation_position">	: 보정 테이블이 적용된 return 좌표	</param>
 		/// <returns>								: (see enum "eSnetApiReturnCode")	</returns>	
 		public int GetPositionCompensationResult(int axis, int command_position, ref int compensation_position)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-            try
+
+			try
 			{
-				returnCode= eSnetGetPositionCompensationResult(NetID,axis, command_position, out int getValue);
+				returnCode = eSnetGetPositionCompensationResult(NetID, axis, command_position, out int getValue);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
 					Debug.WriteLine("Failed to call 'eSnetGetPositionCompensationResult'. error : " + returnCode,
 													"SnetDevice.GetPositionCompensationResult");
 				}
-				else 
+				else
 					compensation_position = getValue;
 			}
 			catch (Exception ex)
-            {
+			{
 				Debug.WriteLine(ex.Message, "SnetDevice.GetPositionCompensationResult");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
 
 			return returnCode;
-        }
+		}
 
 		/// <summary>
 		/// "축 좌표 보정" 기능 사용시 "보정값이 적용되지 않은 Command Position(절대 좌표)"과  
@@ -14433,19 +14619,19 @@ namespace EMotionSnetBase
 		/// <param name="position">		: 보정값이 적용되지 않은 command position, [um]			</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")						</returns>					
 		public int GetCommandPositionCompensation(int axis, ref int real_position, ref int position)
-        {
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
 			{
-				returnCode = eSnetGetCommandPositionCompensation(NetID, axis,out int getpos1,out int getpos2);
+				returnCode = eSnetGetCommandPositionCompensation(NetID, axis, out int getpos1, out int getpos2);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
 					Debug.WriteLine("Failed to call 'eSnetGetCommandPositionCompensation'. error : " + returnCode,
 													"SnetDevice.GetCommandPositionCompensation");
 				}
-                else
-                {
+				else
+				{
 					real_position = getpos1;
 					position = getpos2;
 				}
@@ -14455,6 +14641,7 @@ namespace EMotionSnetBase
 				Debug.WriteLine(ex.Message, "SnetDevice.GetCommandPositionCompensation");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
+
 			return returnCode;
 		}
 
@@ -14466,9 +14653,10 @@ namespace EMotionSnetBase
 		/// <param name="real_position">: 보정값이 적용된 실제 제어기 Actual position, [um]	</param>
 		/// <param name="position">		: 보정값이 적용되지 않은 Actual position ,[um]		</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
-		public int GetActualPositionCompensation(int axis, ref int real_position,ref int position)
-        {
+		public int GetActualPositionCompensation(int axis, ref int real_position, ref int position)
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
+
 			try
 			{
 				returnCode = eSnetGetActualPositionCompensation(NetID, axis, out int getpos1, out int getpos2);
@@ -14477,8 +14665,8 @@ namespace EMotionSnetBase
 					Debug.WriteLine("Failed to call 'eSnetGetActualPositionCompensation'. error : " + returnCode,
 													"SnetDevice.GetActualPositionCompensation");
 				}
-                else
-                {
+				else
+				{
 					real_position = getpos1;
 					position = getpos2;
 				}
@@ -14488,50 +14676,265 @@ namespace EMotionSnetBase
 				Debug.WriteLine(ex.Message, "SnetDevice.GetActualPositionCompensation");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
+
 			return returnCode;
 		}
 
 		#endregion
 
-		#region Read Memory
+		#region Interrupt Event
 
 		/// <summary>
-		/// 메모리 데이터 읽기
+		/// Interrupt event table 특정 번호의 설정 정보 쓰기
 		/// </summary>
-		/// <param name="address">	: memory address									</param>
-		/// <param name="length">	: 몇 개의 address data까지 볼 것인가?				</param>
-		/// <param name="data">		: 배열 (배열 count는 16개 이하)
-		///								(예) address->"1711276032"(==0x66000000)" 이고, 
-		///                                  length->"3" 이라고 하면,
-		///								     data[0]->address "0x66000000"의 data 값,
-		///								     data[1]->address "0x66000004"의 data 값,
-		///								     data[2]->address "0x66000008"의 data 값,	</param>
-		/// <returns>				: (see enum "eSnetApiReturnCode")					</returns>	
-		public int ReadSystemMemory(int address, int length, int[] data)
-        {
+		/// <remarks>
+		/// Interrupt event table의 번호는 0 ~ 127 설정이 가능
+		/// </remarks>
+		/// <param name="table_index">	: 설정을 쓸 Interrupt event table 번호</param>
+		/// <param name="enable">		: 'table_index' 에 해당하는 Interrupt event table 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <param name="info">			: 'table_index' 에 해당하는 Interrupt event table 설정 정보. struct 'InterruptEventTableInfo' 참조</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int SetInterruptEventTable(int table_index, bool enable, InterruptEventTableInfo info)
+		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
-						
+			int enableTemp = 0;
+
 			try
 			{
-				int[] getValue = new int[length];
+				if (enable)
+					enableTemp = 1;
+				else
+					enableTemp = 0;
 
-				returnCode = eSnetReadSystemMemory(NetID, address, (short)length, out getValue[0]);
+				returnCode = eSnetSetInterruptEventTable(NetID, table_index, enableTemp, info);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
-					Debug.WriteLine("Failed to call 'eSnetReadSystemMemory'. error : " + returnCode,
-						"SnetDevice.ReadSystemMemory");
-				}
-				else
-				{
-					for (int i = 0; i < length; i++)
-                    {
-						data[i] = getValue[i];
-                    }
+					Debug.WriteLine("Failed to call 'eSnetSetInterruptEventTable'. error : " + returnCode,
+													"SnetDevice.SetInterruptEventTable");
 				}
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex.Message, "SnetDevice.ReadSystemMemory");
+				Debug.WriteLine(ex.Message, "SnetDevice.SetInterruptEventTable");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event table 특정 번호의 설정 정보 읽기
+		/// </summary>
+		/// <param name="table_index">	: 설정을 읽을 Interrupt event table 번호</param>
+		/// <param name="enable">		: 'table_index' 에 해당하는 Interrupt event table 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <param name="info">			: 'table_index' 에 해당하는 Interrupt event table 설정 정보. struct 'InterruptEventTableInfo' 참조</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int GetInterruptEventTable(int table_index, ref bool enable, ref InterruptEventTableInfo info)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetGetInterruptEventTable(NetID, table_index, out int enableTemp, out InterruptEventTableInfo infoTemp);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetGetInterruptEventTable'. error : " + returnCode,
+													"SnetDevice.GetInterruptEventTable");
+				}
+				else 
+				{
+					if (enableTemp > 0)
+						enable = true;
+					else
+						enable = false;
+					info = infoTemp;
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.GetInterruptEventTable");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event table 특정 번호 삭제
+		/// </summary>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int EraseInterruptEventTable(int table_index)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetEraseInterruptEventTable(NetID, table_index);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetEraseInterruptEventTable'. error : " + returnCode,
+													"SnetDevice.EraseInterruptEventTable");
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.EraseInterruptEventTable");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event table 전체 번호 삭제
+		/// </summary>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int ClearInterruptEventTable()
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetClearInterruptEventTable(NetID);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetClearInterruptEventTable'. error : " + returnCode,
+													"SnetDevice.ClearInterruptEventTable");
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.ClearInterruptEventTable");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event routine(function) 등록
+		/// </summary>
+		/// <remarks>
+		/// Interrupt event 발생 시, 자동으로 호출될 Function pointer(handle)를 등록한다.
+		/// 등록된 Function 호출 시, 'table_index' 인자로 발생한 Interrupt event table 번호가 전달된다
+		/// </remarks>
+		/// <param name="routine">		: Interrupt event 발생 시, 호출 될 Function pointer(handle)</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int SetInterruptEventRoutine(InterruptEventRoutine routine)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetSetInterruptEventRoutine(NetID, routine);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetSetInterruptEventRoutine'. error : " + returnCode,
+													"SnetDevice.SetInterruptEventRoutine");
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.SetInterruptEventRoutine");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event 기능 활성화/비활성화 정보 쓰기
+		/// </summary>
+		/// <param name="enable">		: Interrupt event 기능 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int EnableInterruptEvent(bool enable)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+			int enableTemp = 0;
+
+			try
+			{
+				if (enable)
+					enableTemp = 1;
+				else
+					enableTemp = 0;
+
+				returnCode = eSnetEnableInterruptEvent(NetID, enableTemp);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetEnableInterruptEvent'. error : " + returnCode,
+													"SnetDevice.EnableInterruptEvent");
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.EnableInterruptEvent");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event 기능 활성화/비활성화 정보 읽기
+		/// </summary>
+		/// <param name="enable">		: Interrupt event 기능 활성화 유무. 1: 활성화, 0: 비활성화</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int IsInterruptEvent(ref bool enable)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetIsInterruptEvent(NetID, out int enableTemp);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetIsInterruptEvent'. error : " + returnCode,
+													"SnetDevice.IsInterruptEvent");
+				}
+				else
+				{
+					if (enableTemp > 0)
+						enable = true;
+					else
+						enable = false;
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.IsInterruptEvent");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event table의 이벤트 발생 대기
+		/// </summary>
+		/// <remarks>
+		/// Interrupt event table 정보에 맞는 event 발생이 있을 때까지 대기한다
+		/// </remarks>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <param name="timeout">		: 대기 시간(milliseconds). 0으로 설정 시, 무한 대기</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int WaitInterruptEvent(int table_index, int timeout)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetWaitInterruptEvent(NetID, table_index, timeout);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetWaitInterruptEvent'. error : " + returnCode,
+													"SnetDevice.WaitInterruptEvent");
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.WaitInterruptEvent");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
 
@@ -14540,9 +14943,6 @@ namespace EMotionSnetBase
 
 		#endregion
 
-		///
-		/// Operations(EtherCAT Drive only)
-		/// 
 		#endregion
 	}
 }
