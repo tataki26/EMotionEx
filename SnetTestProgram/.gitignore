@@ -1,6 +1,7 @@
 SnetDevice.cs
 SnetCommunicator.cs
 
+*.suo
 *.lo
 *.[ao]
 *.so
@@ -9,10 +10,10 @@ SnetCommunicator.cs
 *.aps
 *.vspscc
 *.user
+/.vs/
 /obj/
 /bin/
 /bin_x64/
 /Debug/
 /Release/
 /x64/
-/.vs/
