@@ -12,9 +12,8 @@ namespace SnetTestProgram
 {
     public class Job
     {
-
         private PollingWait _pollingWait;
-
+        private InterruptWait _interruptWait;
 
         public Job(PollingWait pollingWait)
         {
@@ -45,6 +44,28 @@ namespace SnetTestProgram
             }
 
             _pollingWait.WaitMotionDone(axis);
+
+            stopWatch.Stop();
+
+            return (stopWatch.ElapsedMilliseconds).ToString();
+        }
+
+        public string DoJobInterrupt(Queue<Action> jobQueue, int axis)
+        {
+            Stopwatch stopWatch = Stopwatch.StartNew();
+
+            while (jobQueue.Count > 0)
+            {
+                int motionDone = _interruptWait.WaitMotionDone(axis);
+
+                if (motionDone == 0)
+                {
+                    Action action = jobQueue.Dequeue();
+                    action.Invoke();
+                }
+            }
+
+            _interruptWait.WaitMotionDone(axis);
 
             stopWatch.Stop();
 

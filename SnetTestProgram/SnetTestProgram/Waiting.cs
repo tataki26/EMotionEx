@@ -67,7 +67,26 @@ namespace SnetTestProgram
 
         public int WaitMotionDone(int axis)
         {
-            return axis;
+            // Event 방식
+            SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
+
+            ieti.oneshot = 0;
+            ieti.axis_index = 0;
+            ieti.axis_type = 1;
+            ieti.input_channel = -1;
+            ieti.input_type = -1;
+            ieti.input_port = -1;
+            ieti.input_point = -1;
+            ieti.input_active = 0;
+
+            int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+
+            _snetDevice.SetInterruptEventTable(0, true, ieti);
+            _snetDevice.EnableInterruptEvent(true);
+            
+            returnCode = _snetDevice.WaitInterruptEvent(0, 1000);
+
+            return returnCode;
         }
     }
         
