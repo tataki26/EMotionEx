@@ -10,7 +10,7 @@ using System.Security;
 
 namespace SnetTestProgram
 { 
-    interface IControllerWait
+    public interface IControllerWait
     {
         int WaitMotionDone(int axis);
     }
@@ -28,6 +28,7 @@ namespace SnetTestProgram
         public PollingWait(SnetDevice snetDevice)
         {
             _snetDevice = snetDevice;
+
         }
 
         public int WaitMotionDone(int axis)
@@ -59,31 +60,51 @@ namespace SnetTestProgram
     public class InterruptWait : IControllerWait
     {
         private SnetDevice _snetDevice;
+        SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
 
         public InterruptWait(SnetDevice snetDevice)
         {
             _snetDevice = snetDevice;
         }
 
+        public void InitInterruptTable(bool enable)
+        {
+            if (enable == true)
+            {
+                ieti.oneshot = 0;
+                ieti.axis_index = 0;
+                ieti.axis_type = 1;
+                ieti.input_channel = -1;
+                ieti.input_type = -1;
+                ieti.input_port = -1;
+                ieti.input_point = -1;
+                ieti.input_active = 0;
+
+                _snetDevice.SetInterruptEventTable(0, true, ieti);
+                // Event 방식
+                _snetDevice.EnableInterruptEvent(true);
+
+            }
+            else
+            {
+                ieti.oneshot = 0;
+                ieti.axis_index = 0;
+                ieti.axis_type = 0;
+                ieti.input_channel = -1;
+                ieti.input_type = -1;
+                ieti.input_port = -1;
+                ieti.input_point = -1;
+                ieti.input_active = 0;
+
+                _snetDevice.EnableInterruptEvent(false);
+
+            }
+
+        }
+
         public int WaitMotionDone(int axis)
         {
-            // Event 방식
-            SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
-
-            ieti.oneshot = 0;
-            ieti.axis_index = 0;
-            ieti.axis_type = 1;
-            ieti.input_channel = -1;
-            ieti.input_type = -1;
-            ieti.input_port = -1;
-            ieti.input_point = -1;
-            ieti.input_active = 0;
-
             int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
-
-            _snetDevice.SetInterruptEventTable(0, true, ieti);
-            _snetDevice.EnableInterruptEvent(true);
-            
             returnCode = _snetDevice.WaitInterruptEvent(0, 1000);
 
             return returnCode;

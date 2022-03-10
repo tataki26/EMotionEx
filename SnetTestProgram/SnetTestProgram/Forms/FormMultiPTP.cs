@@ -148,7 +148,7 @@ namespace SnetTestProgram.Forms
 
             string time = null;
             // Job 실행 함수 람다식 선언
-            Action action = () => { time = _job.DoJobPolling(jobQueue, axis_1); };
+            Action action = () => { time = _job.DoJob(jobQueue, axis_1); };
             // 스레드로 action 실행
             Task task = Task.Factory.StartNew(action);
             // task 끝날 때까지 대기

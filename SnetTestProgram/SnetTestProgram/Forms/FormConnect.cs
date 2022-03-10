@@ -28,15 +28,23 @@ namespace SnetTestProgram.Forms
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             int status = 0;
-
-            status = _snetDevice.Connect(_net, false);
-            if (status == 0)
+            try
             {
-                Debug.WriteLine("Connect Success!!!");
-                MessageBox.Show("Connect Success!!!");
-                _bConnect = true;
+                status = _snetDevice.Connect(_net, false);
+                if (status == 0)
+                {
+                    Debug.WriteLine("Connect Success!!!");
+                    MessageBox.Show("Connect Success!!!");
+                    _bConnect = true;
+                }
+                else Debug.WriteLine("Connect Fail!!!");
             }
-            else Debug.WriteLine("Connect Fail!!!");
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+           
 
         }
 

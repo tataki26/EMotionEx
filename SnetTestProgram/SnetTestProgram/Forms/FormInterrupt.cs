@@ -15,20 +15,21 @@ namespace SnetTestProgram.Forms
     {
         private SnetDevice _snetDevice;
         private Job _job;
+        private InterruptWait _interruptWait;
 
-        public FormInterrupt(SnetDevice snetDevice, Job job)
+        public FormInterrupt(SnetDevice snetDevice, Job job, InterruptWait interruptWait)
         {
             InitializeComponent();
 
             _snetDevice = snetDevice;
             _job = job;
+            _interruptWait = interruptWait;
         }
 
         private void btnMoveSingle_Click(object sender, EventArgs e)
         {
             FormSinglePTP singlePTP = new FormSinglePTP(_snetDevice, _job);
             singlePTP.Show();
-
         }
 
         private void btnMoveMulti_Click(object sender, EventArgs e)
@@ -65,6 +66,19 @@ namespace SnetTestProgram.Forms
         {
             FormAxis formAxis = new FormAxis();
             formAxis.Show();
+        }
+
+
+        private void cbPolling_CheckedChanged(object sender, EventArgs e)
+        {
+            bool check = cbInterrupt.Checked;
+            _interruptWait.InitInterruptTable(check); //false
+        }
+
+        private void cbInterrupt_CheckedChanged(object sender, EventArgs e)
+        {
+            bool check = cbInterrupt.Checked;
+            _interruptWait.InitInterruptTable(check);
         }
     }
 }

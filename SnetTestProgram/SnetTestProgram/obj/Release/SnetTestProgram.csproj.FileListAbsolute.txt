@@ -1,7 +1,6 @@
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\bin\Release\SnetTestProgram.exe.config
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\bin\Release\SnetTestProgram.exe
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\bin\Release\SnetTestProgram.pdb
-D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Release\SnetTestProgram.csproj.AssemblyReference.cache
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Release\SnetTestProgram.FormMainMenu.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Release\SnetTestProgram.Forms.FormAxis.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Release\SnetTestProgram.Forms.FormConnect.resources

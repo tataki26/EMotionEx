@@ -12,12 +12,11 @@ namespace SnetTestProgram
 {
     public class Job
     {
-        private PollingWait _pollingWait;
-        private InterruptWait _interruptWait;
+        private IControllerWait _iControllerWait;
 
-        public Job(PollingWait pollingWait)
+        public Job(IControllerWait controllerWait)
         {
-            _pollingWait = pollingWait;
+            _iControllerWait = controllerWait;
         }
 
         #region Methods
@@ -28,13 +27,13 @@ namespace SnetTestProgram
             return jobQueue;
         }
 
-        public string DoJobPolling(Queue<Action> jobQueue, int axis)
+        public string DoJob(Queue<Action> jobQueue, int axis)
         {
             Stopwatch stopWatch = Stopwatch.StartNew();
 
             while (jobQueue.Count > 0)
             {
-                int motionDone = _pollingWait.WaitMotionDone(axis);
+                int motionDone = _iControllerWait.WaitMotionDone(axis);
 
                 if (motionDone == 0)
                 {
@@ -43,29 +42,7 @@ namespace SnetTestProgram
                 }
             }
 
-            _pollingWait.WaitMotionDone(axis);
-
-            stopWatch.Stop();
-
-            return (stopWatch.ElapsedMilliseconds).ToString();
-        }
-
-        public string DoJobInterrupt(Queue<Action> jobQueue, int axis)
-        {
-            Stopwatch stopWatch = Stopwatch.StartNew();
-
-            while (jobQueue.Count > 0)
-            {
-                int motionDone = _interruptWait.WaitMotionDone(axis);
-
-                if (motionDone == 0)
-                {
-                    Action action = jobQueue.Dequeue();
-                    action.Invoke();
-                }
-            }
-
-            _interruptWait.WaitMotionDone(axis);
+            _iControllerWait.WaitMotionDone(axis);
 
             stopWatch.Stop();
 

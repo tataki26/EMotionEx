@@ -1,7 +1,6 @@
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\bin\Debug\SnetTestProgram.exe.config
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\bin\Debug\SnetTestProgram.exe
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\bin\Debug\SnetTestProgram.pdb
-D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.csproj.AssemblyReference.cache
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.FormMainMenu.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Properties.Resources.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.csproj.GenerateResource.cache
@@ -15,3 +14,4 @@ D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormSinglePTP.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormMultiPTP.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormInterrupt.resources
+D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.csproj.AssemblyReference.cache

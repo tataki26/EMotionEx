@@ -19,6 +19,7 @@ namespace SnetTestProgram
 
         private SnetDevice _snetDevice = new SnetDevice();
         private PollingWait _pollingWait = null;
+        private InterruptWait _interruptWait = null;
         private Job _job = null;
         #endregion
 
@@ -27,6 +28,7 @@ namespace SnetTestProgram
             InitializeComponent();
 
             _pollingWait = new PollingWait(_snetDevice);
+            _interruptWait = new InterruptWait(_snetDevice);
             _job = new Job(_pollingWait);
         }
 
@@ -94,7 +96,7 @@ namespace SnetTestProgram
 
         private void btnInterrupt_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormInterrupt(_snetDevice, _job), sender);
+            OpenChildForm(new Forms.FormInterrupt(_snetDevice, _job, _interruptWait), sender);
         }
         #endregion
 
