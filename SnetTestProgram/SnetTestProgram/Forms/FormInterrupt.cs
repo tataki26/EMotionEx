@@ -70,10 +70,9 @@ namespace SnetTestProgram.Forms
             formAxis.Show();
         }
 
-
-        private void cbPolling_CheckedChanged(object sender, EventArgs e)
+        private void rbPolling_CheckedChanged(object sender, EventArgs e)
         {
-            bool check = cbInterrupt.Checked;
+            bool check = rbInterrupt.Checked;
 
             if (!check)
             {
@@ -83,14 +82,15 @@ namespace SnetTestProgram.Forms
             _interruptWait.InitInterruptTable(check); //false
         }
 
-        private void cbInterrupt_CheckedChanged(object sender, EventArgs e)
+        private void rbInterrupt_CheckedChanged(object sender, EventArgs e)
         {
-            bool check = cbInterrupt.Checked;
+            bool check = rbInterrupt.Checked;
             if (check)
             {
                 _job.SetWait(_interruptWait);
             }
             _interruptWait.InitInterruptTable(check);
         }
+
     }
 }

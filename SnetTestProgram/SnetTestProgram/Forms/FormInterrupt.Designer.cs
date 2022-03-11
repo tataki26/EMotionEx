@@ -39,11 +39,9 @@ namespace SnetTestProgram.Forms
             this.labelPTP = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbPolling = new System.Windows.Forms.CheckBox();
-            this.cbInterrupt = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbPolling = new System.Windows.Forms.RadioButton();
+            this.rbInterrupt = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // btnMoveSingle
@@ -51,7 +49,7 @@ namespace SnetTestProgram.Forms
             this.btnMoveSingle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnMoveSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMoveSingle.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMoveSingle.Location = new System.Drawing.Point(126, 234);
+            this.btnMoveSingle.Location = new System.Drawing.Point(126, 191);
             this.btnMoveSingle.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
             this.btnMoveSingle.Name = "btnMoveSingle";
             this.btnMoveSingle.Size = new System.Drawing.Size(152, 35);
@@ -65,7 +63,7 @@ namespace SnetTestProgram.Forms
             this.btnViaPos.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnViaPos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnViaPos.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViaPos.Location = new System.Drawing.Point(568, 325);
+            this.btnViaPos.Location = new System.Drawing.Point(568, 282);
             this.btnViaPos.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
             this.btnViaPos.Name = "btnViaPos";
             this.btnViaPos.Size = new System.Drawing.Size(152, 35);
@@ -79,7 +77,7 @@ namespace SnetTestProgram.Forms
             this.btnAngle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnAngle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAngle.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAngle.Location = new System.Drawing.Point(568, 280);
+            this.btnAngle.Location = new System.Drawing.Point(568, 237);
             this.btnAngle.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
             this.btnAngle.Name = "btnAngle";
             this.btnAngle.Size = new System.Drawing.Size(152, 35);
@@ -93,7 +91,7 @@ namespace SnetTestProgram.Forms
             this.btnRadius.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnRadius.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRadius.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRadius.Location = new System.Drawing.Point(568, 234);
+            this.btnRadius.Location = new System.Drawing.Point(568, 191);
             this.btnRadius.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
             this.btnRadius.Name = "btnRadius";
             this.btnRadius.Size = new System.Drawing.Size(152, 35);
@@ -107,7 +105,7 @@ namespace SnetTestProgram.Forms
             this.btnMultiLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnMultiLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMultiLine.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMultiLine.Location = new System.Drawing.Point(343, 325);
+            this.btnMultiLine.Location = new System.Drawing.Point(343, 282);
             this.btnMultiLine.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
             this.btnMultiLine.Name = "btnMultiLine";
             this.btnMultiLine.Size = new System.Drawing.Size(152, 35);
@@ -121,7 +119,7 @@ namespace SnetTestProgram.Forms
             this.btnSingleLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnSingleLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSingleLine.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSingleLine.Location = new System.Drawing.Point(343, 234);
+            this.btnSingleLine.Location = new System.Drawing.Point(343, 191);
             this.btnSingleLine.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
             this.btnSingleLine.Name = "btnSingleLine";
             this.btnSingleLine.Size = new System.Drawing.Size(152, 35);
@@ -135,7 +133,7 @@ namespace SnetTestProgram.Forms
             this.btnMoveMulti.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnMoveMulti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMoveMulti.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMoveMulti.Location = new System.Drawing.Point(126, 325);
+            this.btnMoveMulti.Location = new System.Drawing.Point(126, 282);
             this.btnMoveMulti.Margin = new System.Windows.Forms.Padding(30, 10, 30, 15);
             this.btnMoveMulti.Name = "btnMoveMulti";
             this.btnMoveMulti.Size = new System.Drawing.Size(152, 35);
@@ -149,7 +147,7 @@ namespace SnetTestProgram.Forms
             this.labelPTP.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelPTP.AutoSize = true;
             this.labelPTP.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPTP.Location = new System.Drawing.Point(110, 147);
+            this.labelPTP.Location = new System.Drawing.Point(110, 104);
             this.labelPTP.Margin = new System.Windows.Forms.Padding(60, 0, 3, 0);
             this.labelPTP.Name = "labelPTP";
             this.labelPTP.Size = new System.Drawing.Size(122, 23);
@@ -161,7 +159,7 @@ namespace SnetTestProgram.Forms
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(309, 147);
+            this.label1.Location = new System.Drawing.Point(309, 104);
             this.label1.Margin = new System.Windows.Forms.Padding(60, 0, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(160, 23);
@@ -173,81 +171,59 @@ namespace SnetTestProgram.Forms
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(538, 147);
+            this.label2.Location = new System.Drawing.Point(538, 104);
             this.label2.Margin = new System.Windows.Forms.Padding(60, 0, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(152, 23);
             this.label2.TabIndex = 12;
             this.label2.Text = "Arc Interpolation";
             // 
-            // cbPolling
-            // 
-            this.cbPolling.AutoSize = true;
-            this.cbPolling.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPolling.Location = new System.Drawing.Point(343, 63);
-            this.cbPolling.Name = "cbPolling";
-            this.cbPolling.Size = new System.Drawing.Size(78, 23);
-            this.cbPolling.TabIndex = 13;
-            this.cbPolling.Text = "Polling";
-            this.cbPolling.UseVisualStyleBackColor = true;
-            this.cbPolling.CheckedChanged += new System.EventHandler(this.cbPolling_CheckedChanged);
-            // 
-            // cbInterrupt
-            // 
-            this.cbInterrupt.AutoSize = true;
-            this.cbInterrupt.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbInterrupt.Location = new System.Drawing.Point(500, 63);
-            this.cbInterrupt.Name = "cbInterrupt";
-            this.cbInterrupt.Size = new System.Drawing.Size(92, 23);
-            this.cbInterrupt.TabIndex = 14;
-            this.cbInterrupt.Text = "Interrupt";
-            this.cbInterrupt.UseVisualStyleBackColor = true;
-            this.cbInterrupt.CheckedChanged += new System.EventHandler(this.cbInterrupt_CheckedChanged);
-            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(110, 36);
+            this.label3.Location = new System.Drawing.Point(409, 10);
             this.label3.Margin = new System.Windows.Forms.Padding(60, 0, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 23);
+            this.label3.Size = new System.Drawing.Size(86, 23);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Type";
+            this.label3.Text = "Test Type";
             // 
-            // radioButton1
+            // rbPolling
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(353, 22);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(92, 16);
-            this.radioButton1.TabIndex = 16;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbPolling.AutoSize = true;
+            this.rbPolling.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbPolling.Location = new System.Drawing.Point(580, 37);
+            this.rbPolling.Name = "rbPolling";
+            this.rbPolling.Size = new System.Drawing.Size(77, 23);
+            this.rbPolling.TabIndex = 16;
+            this.rbPolling.TabStop = true;
+            this.rbPolling.Text = "Polling";
+            this.rbPolling.UseVisualStyleBackColor = true;
+            this.rbPolling.CheckedChanged += new System.EventHandler(this.rbPolling_CheckedChanged);
             // 
-            // radioButton2
+            // rbInterrupt
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(516, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(92, 16);
-            this.radioButton2.TabIndex = 17;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbInterrupt.AutoSize = true;
+            this.rbInterrupt.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbInterrupt.Location = new System.Drawing.Point(702, 37);
+            this.rbInterrupt.Name = "rbInterrupt";
+            this.rbInterrupt.Size = new System.Drawing.Size(91, 23);
+            this.rbInterrupt.TabIndex = 17;
+            this.rbInterrupt.TabStop = true;
+            this.rbInterrupt.Text = "Interrupt";
+            this.rbInterrupt.UseVisualStyleBackColor = true;
+            this.rbInterrupt.CheckedChanged += new System.EventHandler(this.rbInterrupt_CheckedChanged);
             // 
             // FormInterrupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.rbInterrupt);
+            this.Controls.Add(this.rbPolling);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cbInterrupt);
-            this.Controls.Add(this.cbPolling);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelPTP);
@@ -277,10 +253,8 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Label labelPTP;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox cbPolling;
-        private System.Windows.Forms.CheckBox cbInterrupt;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rbPolling;
+        private System.Windows.Forms.RadioButton rbInterrupt;
     }
 }
