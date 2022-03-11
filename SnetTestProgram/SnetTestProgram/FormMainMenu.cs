@@ -28,7 +28,7 @@ namespace SnetTestProgram
             InitializeComponent();
 
             _pollingWait = new PollingWait(_snetDevice);
-            _interruptWait = new InterruptWait(_snetDevice);
+            _interruptWait = new InterruptWait(_snetDevice,_job);
             _job = new Job(_pollingWait);
         }
 

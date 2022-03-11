@@ -49,6 +49,7 @@ namespace SnetTestProgram.Forms
             this.tbAxis_1 = new System.Windows.Forms.TextBox();
             this.tbResult = new System.Windows.Forms.TextBox();
             this.timerSPTP = new System.Windows.Forms.Timer(this.components);
+            this.buttonStop = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +65,6 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label12, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.tbDwell, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.buttonStart, 5, 6);
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.tbDecTime, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 4);
@@ -78,6 +78,8 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Controls.Add(this.tbPosition_2, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbAxis_1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbResult, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.buttonStart, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.buttonStop, 5, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(56, 47);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -126,7 +128,7 @@ namespace SnetTestProgram.Forms
             this.buttonStart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStart.Location = new System.Drawing.Point(596, 323);
+            this.buttonStart.Location = new System.Drawing.Point(462, 323);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(90, 30);
             this.buttonStart.TabIndex = 20;
@@ -250,6 +252,20 @@ namespace SnetTestProgram.Forms
             // 
             this.timerSPTP.Tick += new System.EventHandler(this.timerSPTP_Tick);
             // 
+            // buttonStop
+            // 
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStop.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStop.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStop.Location = new System.Drawing.Point(596, 323);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(90, 30);
+            this.buttonStop.TabIndex = 35;
+            this.buttonStop.Text = "Stop";
+            this.buttonStop.UseVisualStyleBackColor = false;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            // 
             // FormSinglePTP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -285,5 +301,6 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbDwell;
         private System.Windows.Forms.Timer timerSPTP;
+        private System.Windows.Forms.Button buttonStop;
     }
 }

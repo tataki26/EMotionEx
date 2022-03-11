@@ -60,11 +60,13 @@ namespace SnetTestProgram
     public class InterruptWait : IControllerWait
     {
         private SnetDevice _snetDevice;
+        private Job _job;
         SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
 
-        public InterruptWait(SnetDevice snetDevice)
+        public InterruptWait(SnetDevice snetDevice, Job job)
         {
             _snetDevice = snetDevice;
+            _job = job;
         }
 
         public void InitInterruptTable(bool enable)

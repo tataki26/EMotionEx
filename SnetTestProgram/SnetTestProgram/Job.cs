@@ -19,13 +19,60 @@ namespace SnetTestProgram
             _iControllerWait = controllerWait;
         }
 
+        public int axis;
+        bool enable = true;
+
         #region Methods
+
+        public void SetAxis(int ax)
+        {
+            axis = ax;
+        }
         
         public void AddJob(Queue<Action>jobQueue, Action action)
         {
             jobQueue.Enqueue(action);
             
             // return jobQueue;
+        }
+
+        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis)
+        {
+            int total=0;
+            int time = 0;
+
+            if (repeatNum >= 0)
+            {
+                for (int i = 0; i <= repeatNum; i++)
+                {
+                    //List<Queue<Action>> queueList = new List<Queue<Action>>();
+                    Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
+
+                    int.TryParse(DoJob(tempJobQueue, axis), out time);
+                    total += time;
+                    Thread.Sleep(dwell);
+                }
+            }
+            else if(repeatNum==-1)
+            { 
+                while (enable)
+                {
+                    if (enable == false) break;
+
+                    Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
+
+                    int.TryParse(DoJob(tempJobQueue, axis), out time);
+                    total += time;
+                    Thread.Sleep(dwell);
+                }
+            }
+
+            return total.ToString();
+        }
+
+        public void StopJob()
+        {
+            enable = false;
         }
 
         public string DoJob(Queue<Action> jobQueue, int axis)

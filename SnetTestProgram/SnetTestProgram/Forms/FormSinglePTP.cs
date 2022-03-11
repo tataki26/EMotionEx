@@ -51,41 +51,39 @@ namespace SnetTestProgram.Forms
             int.TryParse(tbRepeatNumber.Text, out repeatNum);
             int.TryParse(tbDwell.Text, out dwell);
 
+            _job.SetAxis(axis_1);
+
             Queue<Action> jobQueue = new Queue<Action>();
 
             // JobQueue에 Job 할당하기 - 사용자 영역
 
             // 단축 왕복 운동
-            for (int i = 0; i <= repeatNum; i++)
+            SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Trapezoidal;
+
+            int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+
+            Action job1 = () =>
             {
-                SnetDevice.eSnetMoveType moveType = SnetDevice.eSnetMoveType.Trapezoidal;
+                returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
+            };
 
-                int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+            Action job2 = () =>
+            {
+                returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, endPos);
+            };
 
-                Action job1 = () =>
-                {
-                    returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
-                };
+            Action job3 = () =>
+            {
+                returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
+            };
 
-                Action job2 = () =>
-                {
-                    returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, endPos);
-                };
-
-                Action job3 = () =>
-                {
-                    returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
-                };
-
-                _job.AddJob(jobQueue, job1);
-                _job.AddJob(jobQueue, job2);
-                _job.AddJob(jobQueue, job3);
-
-            }
+            _job.AddJob(jobQueue, job1);
+            _job.AddJob(jobQueue, job2);
+            _job.AddJob(jobQueue, job3);
 
             string time = null;
             // Job 실행 함수 람다식 선언
-            Action action = () => { time = _job.DoJob(jobQueue, axis_1); };
+            Action action = () => { time = _job.RepeatJob(repeatNum, dwell, jobQueue, axis_1); };
             // 스레드로 action 실행
             Task task = Task.Factory.StartNew(action);
             // task 끝날 때까지 대기
@@ -103,6 +101,11 @@ namespace SnetTestProgram.Forms
             _snetDevice.GetCommandPosition(axis_1, ref position);
 
             tbResult.Text = position.ToString();
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            _job.StopJob();
         }
     }
 }
