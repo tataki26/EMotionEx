@@ -72,7 +72,7 @@ namespace SnetTestProgram
             if (enable == true)
             {
                 ieti.oneshot = 0;
-                ieti.axis_index = 0;
+                ieti.axis_index = 2;
                 ieti.axis_type = 1;
                 ieti.input_channel = -1;
                 ieti.input_type = -1;
@@ -104,8 +104,14 @@ namespace SnetTestProgram
 
         public int WaitMotionDone(int axis)
         {
+            bool motionDone = false;
             int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
-            returnCode = _snetDevice.WaitInterruptEvent(0, 1000);
+            returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
+
+            if ((!motionDone) && returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
+            {
+                returnCode = _snetDevice.WaitInterruptEvent(0, 10000);
+            }
 
             return returnCode;
         }

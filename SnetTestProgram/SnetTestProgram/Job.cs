@@ -48,6 +48,11 @@ namespace SnetTestProgram
 
             return (stopWatch.ElapsedMilliseconds).ToString();
         }
+
+        public void SetWait(IControllerWait cw)
+        {
+            _iControllerWait = cw;
+        }
     
         #endregion
     }

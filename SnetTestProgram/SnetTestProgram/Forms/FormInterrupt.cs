@@ -16,6 +16,7 @@ namespace SnetTestProgram.Forms
         private SnetDevice _snetDevice;
         private Job _job;
         private InterruptWait _interruptWait;
+        private PollingWait _pollingWait;
 
         public FormInterrupt(SnetDevice snetDevice, Job job, InterruptWait interruptWait)
         {
@@ -23,7 +24,8 @@ namespace SnetTestProgram.Forms
 
             _snetDevice = snetDevice;
             _job = job;
-            _interruptWait = interruptWait;
+            _interruptWait = new InterruptWait(_snetDevice);
+            _pollingWait = new PollingWait(_snetDevice);
         }
 
         private void btnMoveSingle_Click(object sender, EventArgs e)
@@ -72,12 +74,22 @@ namespace SnetTestProgram.Forms
         private void cbPolling_CheckedChanged(object sender, EventArgs e)
         {
             bool check = cbInterrupt.Checked;
+
+            if (!check)
+            {
+                _job.SetWait(_pollingWait);
+            }
+
             _interruptWait.InitInterruptTable(check); //false
         }
 
         private void cbInterrupt_CheckedChanged(object sender, EventArgs e)
         {
             bool check = cbInterrupt.Checked;
+            if (check)
+            {
+                _job.SetWait(_interruptWait);
+            }
             _interruptWait.InitInterruptTable(check);
         }
     }
