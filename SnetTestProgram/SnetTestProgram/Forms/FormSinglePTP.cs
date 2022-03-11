@@ -51,8 +51,7 @@ namespace SnetTestProgram.Forms
             int.TryParse(tbRepeatNumber.Text, out repeatNum);
             int.TryParse(tbDwell.Text, out dwell);
 
-            // JobQueue 생성하기
-            Queue<Action> jobQueue = _job.CreateJobQueue();
+            Queue<Action> jobQueue = new Queue<Action>();
 
             // JobQueue에 Job 할당하기 - 사용자 영역
 
@@ -63,20 +62,25 @@ namespace SnetTestProgram.Forms
 
                 int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
 
-                jobQueue.Enqueue(() =>
+                Action job1 = () =>
                 {
                     returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
-                });
+                };
 
-                jobQueue.Enqueue(() =>
+                Action job2 = () =>
                 {
                     returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, endPos);
-                });
+                };
 
-                jobQueue.Enqueue(() =>
+                Action job3 = () =>
                 {
                     returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
-                });
+                };
+
+                _job.AddJob(jobQueue, job1);
+                _job.AddJob(jobQueue, job2);
+                _job.AddJob(jobQueue, job3);
+
             }
 
             string time = null;

@@ -20,11 +20,12 @@ namespace SnetTestProgram
         }
 
         #region Methods
-
-        public Queue<Action> CreateJobQueue()
+        
+        public void AddJob(Queue<Action>jobQueue, Action action)
         {
-            Queue<Action> jobQueue = new Queue<Action>();
-            return jobQueue;
+            jobQueue.Enqueue(action);
+            
+            // return jobQueue;
         }
 
         public string DoJob(Queue<Action> jobQueue, int axis)

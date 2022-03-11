@@ -104,12 +104,13 @@ namespace SnetTestProgram.Forms
             int.TryParse(tbDwell.Text, out dwell);
 
             // JobQueue 생성하기
-            Queue<Action> jobQueue = _job.CreateJobQueue();
+            // Queue<Action> jobQueue = _job.CreateJobQueue();
+            Queue<Action> jobQueue = new Queue<Action>();
 
             // JobQueue에 Job 할당하기 - 사용자 영역
 
             // 다축 동시 운동
-            for(int i = 0; i <= repeatNum; i++)
+            for (int i = 0; i <= repeatNum; i++)
             {
                 int axisCnt = 0;
 
