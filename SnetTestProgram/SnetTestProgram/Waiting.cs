@@ -110,7 +110,7 @@ namespace SnetTestProgram
 
             if ((!motionDone) && returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
             {
-                returnCode = _snetDevice.WaitInterruptEvent(0, 10000);
+                returnCode = _snetDevice.WaitInterruptEvent(0, 0);
             }
 
             return returnCode;
