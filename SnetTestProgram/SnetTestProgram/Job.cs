@@ -46,7 +46,7 @@ namespace SnetTestProgram
         {
             int total=0;
             int time = 0;
-            int cnt = 0;
+            int cnt = 1;
 
             List<int> maxList = new List<int>();
 
@@ -61,8 +61,8 @@ namespace SnetTestProgram
 
                     // maxList.Add(CalcTimeMax(total));
                     _max = 0;
-                    _avg = 0;
-                    _min =CalcTimeMin(time);
+                    _avg = CalcTimeAvg(time,i+1);
+                    _min = CalcTimeMin(time);
                     // avg=CalcTimeAvg(total, repeatNum);
 
                     Thread.Sleep(dwell);

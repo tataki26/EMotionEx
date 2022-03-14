@@ -94,10 +94,7 @@ namespace SnetTestProgram.Forms
             await task;
 
             MessageBox.Show(time + "msec"+'\n'+"min: "+min+"msec"+'\n'+"avg: "+avg+"msec"+'\n');
-            MessageBox.Show(time + "msec" + '\n' + "min: " + min + "msec" + '\n' +"avg: "+avg+"msec"+'\n');
-
-
-            Logger.WriteLog(time + "msec"+", "+ "min: " + min + "msec");
+            // Logger.WriteLog(time + "msec"+", "+ "min: " + min + "msec");
         }
 
         private void timerSPTP_Tick(object sender, EventArgs e)

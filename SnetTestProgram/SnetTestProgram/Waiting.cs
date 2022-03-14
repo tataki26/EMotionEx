@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using EMotionSnetBase;
 using System.Threading;
 using System.Security;
+using System.Diagnostics;
 
 namespace SnetTestProgram
 { 
@@ -113,6 +114,11 @@ namespace SnetTestProgram
             if ((!motionDone) && returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
             {
                 returnCode = _snetDevice.WaitInterruptEvent(0, 0);
+
+                if(returnCode == (int)SnetDevice.eSnetApiReturnCode.TimeOut)
+                {
+                    Debug.WriteLine("TimeOut!!!");
+                }
             }
 
             return returnCode;
