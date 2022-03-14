@@ -449,10 +449,10 @@ namespace EMotionSnetBase
 		/// </summary>
 		public enum InterruptEventAxisType
 		{
-			MotionDone = 0,
-			Alarm = 1,
-			SlowStop = 2,
-			EmergencyStop = 3,
+			MotionDone = 1,
+			Alarm = 2,
+			SlowStop = 3,
+			EmergencyStop = 4,
 		}
 
 		/// <summary>

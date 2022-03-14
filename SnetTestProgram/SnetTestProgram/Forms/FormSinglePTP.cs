@@ -81,17 +81,23 @@ namespace SnetTestProgram.Forms
             _job.AddJob(jobQueue, job2);
             _job.AddJob(jobQueue, job3);
 
+            int max = 0;
+            int min = 0; // calc 함수 만들고 min 값 넘기다가 끝남 0으로 출력
+            int avg=0;
+
             string time = null;
             // Job 실행 함수 람다식 선언
-            Action action = () => { time = _job.RepeatJob(repeatNum, dwell, jobQueue, axis_1); };
+            Action action = () => { time = _job.RepeatJob(repeatNum, dwell, jobQueue, axis_1, ref max, ref min, ref avg); };
             // 스레드로 action 실행
             Task task = Task.Factory.StartNew(action);
             // task 끝날 때까지 대기
             await task;
 
-            MessageBox.Show(time + "msec");
+            MessageBox.Show(time + "msec"+'\n'+"min: "+min+"msec"+'\n'+"avg: "+avg+"msec"+'\n');
+            MessageBox.Show(time + "msec" + '\n' + "min: " + min + "msec" + '\n' +"avg: "+avg+"msec"+'\n');
 
-            Logger.WriteLog(time + "msec");
+
+            Logger.WriteLog(time + "msec"+", "+ "min: " + min + "msec");
         }
 
         private void timerSPTP_Tick(object sender, EventArgs e)

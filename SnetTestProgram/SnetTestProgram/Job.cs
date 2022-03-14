@@ -36,24 +36,39 @@ namespace SnetTestProgram
             // return jobQueue;
         }
 
-        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis)
+        int _max = 0;
+        int _min = 999999999;
+
+        int _sum = 0;
+        int _avg = 0;
+
+        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref int max, ref int min, ref int avg)
         {
             int total=0;
             int time = 0;
+            int cnt = 0;
+
+            List<int> maxList = new List<int>();
 
             if (repeatNum >= 0)
             {
                 for (int i = 0; i <= repeatNum; i++)
                 {
-                    //List<Queue<Action>> queueList = new List<Queue<Action>>();
                     Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
 
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
                     total += time;
+
+                    // maxList.Add(CalcTimeMax(total));
+                    _max = 0;
+                    _avg = 0;
+                    _min =CalcTimeMin(time);
+                    // avg=CalcTimeAvg(total, repeatNum);
+
                     Thread.Sleep(dwell);
                 }
             }
-            else if(repeatNum==-1)
+            else if(repeatNum<0)
             { 
                 while (enable)
                 {
@@ -63,11 +78,42 @@ namespace SnetTestProgram
 
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
                     total += time;
+                    cnt++;
+
+                    maxList.Add(CalcTimeMax(total));
+                    _min =CalcTimeMin(total);
+                    _avg =CalcTimeAvg(total, cnt);
+
                     Thread.Sleep(dwell);
                 }
             }
 
+            min = _min;
+            avg = _avg;
+
             return total.ToString();
+        }
+
+        public int CalcTimeMax(int time)
+        {
+            if (time > _max) _max = time;
+
+            return _max;
+        }
+
+        public int CalcTimeMin(int time)
+        {
+            if (time < _min) _min = time;
+
+            return _min;
+        }
+
+        public int CalcTimeAvg(int time, int cnt)
+        {
+            _sum += time;
+            _avg = _sum / cnt;
+
+            return _avg;
         }
 
         public void StopJob()
