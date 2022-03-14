@@ -1,2 +1,8 @@
 11:27:14.313 SYSTEM(0000001E) UdpServer::Wait : No received data in internal data buffer.
 11:27:14.325 SYSTEM(000004CD) UdpServer::Wait : Not connect to server.
+13:57:27.156 SYSTEM(0000001E) UdpServer::Wait : No received data in internal data buffer.
+13:57:27.166 SYSTEM(000004CD) UdpServer::Wait : Not connect to server.
+14:03:57.624 SYSTEM(0000001E) UdpServer::Wait : No received data in internal data buffer.
+14:03:57.639 SYSTEM(000004CD) UdpServer::Wait : Not connect to server.
+14:46:18.718 SYSTEM(0000001E) UdpServer::Wait : No received data in internal data buffer.
+14:46:18.726 SYSTEM(000004CD) UdpServer::Wait : Not connect to server.

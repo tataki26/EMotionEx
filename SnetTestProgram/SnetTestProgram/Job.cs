@@ -36,19 +36,21 @@ namespace SnetTestProgram
             // return jobQueue;
         }
 
-        int _max = 0;
+        int _max;
         int _min = 999999999;
+
+        List<int> _maxList = new List<int>();
 
         int _sum = 0;
         int _avg = 0;
 
-        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref int max, ref int min, ref int avg)
+        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref List<int> maxList, ref int min, ref int avg)
         {
             int total=0;
             int time = 0;
             int cnt = 1;
 
-            List<int> maxList = new List<int>();
+            // List<int> maxList = new List<int>();
 
             if (repeatNum >= 0)
             {
@@ -59,11 +61,11 @@ namespace SnetTestProgram
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
                     total += time;
 
-                    // maxList.Add(CalcTimeMax(total));
-                    _max = 0;
+                    _max = time;
+                    _maxList.Add(CalcTimeMax(time));
+
                     _avg = CalcTimeAvg(time,i+1);
                     _min = CalcTimeMin(time);
-                    // avg=CalcTimeAvg(total, repeatNum);
 
                     Thread.Sleep(dwell);
                 }
@@ -80,7 +82,9 @@ namespace SnetTestProgram
                     total += time;
                     cnt++;
 
-                    maxList.Add(CalcTimeMax(total));
+                    _max = time;
+                    _maxList.Add(CalcTimeMax(time));
+
                     _min =CalcTimeMin(total);
                     _avg =CalcTimeAvg(total, cnt);
 
@@ -88,6 +92,10 @@ namespace SnetTestProgram
                 }
             }
 
+            _maxList.Sort();
+            _maxList.Reverse();
+
+            maxList = _maxList;
             min = _min;
             avg = _avg;
 
