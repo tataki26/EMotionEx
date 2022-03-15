@@ -72,7 +72,7 @@ namespace SnetTestProgram.Forms
 
         private void rbPolling_CheckedChanged(object sender, EventArgs e)
         {
-            bool check = rbInterrupt.Checked;
+            bool check = rbEvent.Checked;
 
             if (!check)
             {
@@ -82,15 +82,23 @@ namespace SnetTestProgram.Forms
             _interruptWait.InitInterruptTable(check); //false
         }
 
-        private void rbInterrupt_CheckedChanged(object sender, EventArgs e)
+        private void rbEvent_CheckedChanged(object sender, EventArgs e)
         {
-            bool check = rbInterrupt.Checked;
+            bool check = rbEvent.Checked;
+
             if (check)
             {
                 _job.SetWait(_interruptWait);
             }
+
             _interruptWait.InitInterruptTable(check);
         }
 
+        private void rbRoutine_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

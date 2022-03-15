@@ -41,7 +41,8 @@ namespace SnetTestProgram.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.rbPolling = new System.Windows.Forms.RadioButton();
-            this.rbInterrupt = new System.Windows.Forms.RadioButton();
+            this.rbEvent = new System.Windows.Forms.RadioButton();
+            this.rbRoutine = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // btnMoveSingle
@@ -183,7 +184,7 @@ namespace SnetTestProgram.Forms
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(409, 10);
+            this.label3.Location = new System.Drawing.Point(189, 10);
             this.label3.Margin = new System.Windows.Forms.Padding(60, 0, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 23);
@@ -194,7 +195,7 @@ namespace SnetTestProgram.Forms
             // 
             this.rbPolling.AutoSize = true;
             this.rbPolling.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPolling.Location = new System.Drawing.Point(580, 37);
+            this.rbPolling.Location = new System.Drawing.Point(351, 37);
             this.rbPolling.Name = "rbPolling";
             this.rbPolling.Size = new System.Drawing.Size(77, 23);
             this.rbPolling.TabIndex = 16;
@@ -203,25 +204,39 @@ namespace SnetTestProgram.Forms
             this.rbPolling.UseVisualStyleBackColor = true;
             this.rbPolling.CheckedChanged += new System.EventHandler(this.rbPolling_CheckedChanged);
             // 
-            // rbInterrupt
+            // rbEvent
             // 
-            this.rbInterrupt.AutoSize = true;
-            this.rbInterrupt.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbInterrupt.Location = new System.Drawing.Point(702, 37);
-            this.rbInterrupt.Name = "rbInterrupt";
-            this.rbInterrupt.Size = new System.Drawing.Size(91, 23);
-            this.rbInterrupt.TabIndex = 17;
-            this.rbInterrupt.TabStop = true;
-            this.rbInterrupt.Text = "Interrupt";
-            this.rbInterrupt.UseVisualStyleBackColor = true;
-            this.rbInterrupt.CheckedChanged += new System.EventHandler(this.rbInterrupt_CheckedChanged);
+            this.rbEvent.AutoSize = true;
+            this.rbEvent.Checked = true;
+            this.rbEvent.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbEvent.Location = new System.Drawing.Point(462, 37);
+            this.rbEvent.Name = "rbEvent";
+            this.rbEvent.Size = new System.Drawing.Size(146, 23);
+            this.rbEvent.TabIndex = 17;
+            this.rbEvent.TabStop = true;
+            this.rbEvent.Text = "[Interrupt] Event";
+            this.rbEvent.UseVisualStyleBackColor = true;
+            this.rbEvent.CheckedChanged += new System.EventHandler(this.rbEvent_CheckedChanged);
+            // 
+            // rbRoutine
+            // 
+            this.rbRoutine.AutoSize = true;
+            this.rbRoutine.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbRoutine.Location = new System.Drawing.Point(636, 37);
+            this.rbRoutine.Name = "rbRoutine";
+            this.rbRoutine.Size = new System.Drawing.Size(160, 23);
+            this.rbRoutine.TabIndex = 19;
+            this.rbRoutine.Text = "[Interrupt] Routine";
+            this.rbRoutine.UseVisualStyleBackColor = true;
+            this.rbRoutine.CheckedChanged += new System.EventHandler(this.rbRoutine_CheckedChanged);
             // 
             // FormInterrupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.rbInterrupt);
+            this.Controls.Add(this.rbRoutine);
+            this.Controls.Add(this.rbEvent);
             this.Controls.Add(this.rbPolling);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -255,6 +270,7 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton rbPolling;
-        private System.Windows.Forms.RadioButton rbInterrupt;
+        private System.Windows.Forms.RadioButton rbEvent;
+        private System.Windows.Forms.RadioButton rbRoutine;
     }
 }
