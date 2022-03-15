@@ -23,17 +23,11 @@ namespace SnetTestProgram
         bool enable = true;
 
         #region Methods
-
-        public void SetAxis(int ax)
-        {
-            axis = ax;
-        }
         
         public void AddJob(Queue<Action>jobQueue, Action action)
         {
             jobQueue.Enqueue(action);
-            
-            // return jobQueue;
+
         }
 
         int _max;
@@ -49,8 +43,6 @@ namespace SnetTestProgram
             int total=0;
             int time = 0;
             int cnt = 1;
-
-            // List<int> maxList = new List<int>();
 
             if (repeatNum >= 0)
             {
@@ -150,6 +142,8 @@ namespace SnetTestProgram
 
             return (stopWatch.ElapsedMilliseconds).ToString();
         }
+
+        
 
         public void SetWait(IControllerWait cw)
         {

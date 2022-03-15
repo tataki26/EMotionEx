@@ -96,7 +96,7 @@ namespace SnetTestProgram
 
         private void btnInterrupt_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormInterrupt(_snetDevice, _job, _interruptWait), sender);
+            OpenChildForm(new Forms.FormInterrupt(_snetDevice, _job), sender);
         }
         #endregion
 

@@ -124,5 +124,60 @@ namespace SnetTestProgram
             return returnCode;
         }
     }
-        
+
+    public class InterruptRoutine
+    {
+        private SnetDevice _snetDevice;
+        SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
+        SnetDevice.InterruptEventRoutine ier;
+
+        public InterruptRoutine(SnetDevice snetDevice)
+        {
+            _snetDevice = snetDevice;
+        }
+
+        public void OnRoutineIntteruptEvent(int tableIndex)
+        {
+            Debug.WriteLine("Table Index"+tableIndex+" Interrupt!!!");
+        }
+
+        public void InitInterruptTable(bool enable)
+        {
+            if (enable == true)
+            {
+                ier = OnRoutineIntteruptEvent;
+
+                ieti.oneshot = 0;
+                ieti.axis_index = 2;
+                ieti.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
+                ieti.input_channel = -1;
+                ieti.input_type = -1;
+                ieti.input_port = -1;
+                ieti.input_point = -1;
+                ieti.input_active = 0;
+
+                _snetDevice.EnableInterruptEvent(true);
+                _snetDevice.SetInterruptEventTable(0, true, ieti);
+                _snetDevice.SetInterruptEventRoutine(ier);
+
+            }
+            else
+            {
+                ieti.oneshot = 0;
+                ieti.axis_index = 0;
+                ieti.axis_type = 0;
+                ieti.input_channel = -1;
+                ieti.input_type = -1;
+                ieti.input_port = -1;
+                ieti.input_point = -1;
+                ieti.input_active = 0;
+
+                _snetDevice.EnableInterruptEvent(false);
+
+            }
+
+        }
+
+    }
+
 }

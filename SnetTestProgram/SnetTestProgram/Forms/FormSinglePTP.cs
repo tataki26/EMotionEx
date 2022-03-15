@@ -51,8 +51,6 @@ namespace SnetTestProgram.Forms
             int.TryParse(tbRepeatNumber.Text, out repeatNum);
             int.TryParse(tbDwell.Text, out dwell);
 
-            _job.SetAxis(axis_1);
-
             Queue<Action> jobQueue = new Queue<Action>();
 
             // JobQueue에 Job 할당하기 - 사용자 영역
