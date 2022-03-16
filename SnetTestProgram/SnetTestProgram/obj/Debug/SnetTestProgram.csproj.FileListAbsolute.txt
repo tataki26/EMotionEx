@@ -14,4 +14,3 @@ D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormSinglePTP.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormMultiPTP.resources
 D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.Forms.FormInterrupt.resources
-D:\LYS\EMotionEx\SnetTestProgram\SnetTestProgram\obj\Debug\SnetTestProgram.csproj.AssemblyReference.cache

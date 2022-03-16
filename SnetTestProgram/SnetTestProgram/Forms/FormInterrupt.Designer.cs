@@ -194,6 +194,7 @@ namespace SnetTestProgram.Forms
             // rbPolling
             // 
             this.rbPolling.AutoSize = true;
+            this.rbPolling.Checked = true;
             this.rbPolling.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbPolling.Location = new System.Drawing.Point(351, 37);
             this.rbPolling.Name = "rbPolling";
@@ -207,13 +208,11 @@ namespace SnetTestProgram.Forms
             // rbEvent
             // 
             this.rbEvent.AutoSize = true;
-            this.rbEvent.Checked = true;
             this.rbEvent.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbEvent.Location = new System.Drawing.Point(462, 37);
             this.rbEvent.Name = "rbEvent";
             this.rbEvent.Size = new System.Drawing.Size(146, 23);
             this.rbEvent.TabIndex = 17;
-            this.rbEvent.TabStop = true;
             this.rbEvent.Text = "[Interrupt] Event";
             this.rbEvent.UseVisualStyleBackColor = true;
             this.rbEvent.CheckedChanged += new System.EventHandler(this.rbEvent_CheckedChanged);
