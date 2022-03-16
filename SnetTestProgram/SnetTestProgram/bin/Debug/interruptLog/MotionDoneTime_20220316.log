@@ -1,0 +1,8 @@
+2022-03-16 09:56:36: total: 9541msec, min: 3175msec, avg: 3180msec
+2022-03-16 09:56:36: TOP3: 3183msec, 3183msec, 3175msec
+2022-03-16 09:57:43: total: 32325msec, min: 3175msec, avg: 10466msec
+2022-03-16 09:57:43: TOP3: 8100msec, 8079msec, 8073msec
+2022-03-16 11:07:06: total: 24228msec, min: 8067msec, avg: 8076msec
+2022-03-16 11:07:06: TOP3: 8086msec, 8075msec, 8067msec
+2022-03-16 11:08:49: total: 80767msec, min: 8066msec, avg: 10499msec
+2022-03-16 11:08:49: TOP3: 8098msec, 8086msec, 8082msec

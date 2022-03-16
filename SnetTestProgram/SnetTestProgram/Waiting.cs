@@ -61,13 +61,12 @@ namespace SnetTestProgram
     public class InterruptWait : IControllerWait
     {
         private SnetDevice _snetDevice;
-        private Job _job;
         SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
 
-        public InterruptWait(SnetDevice snetDevice, Job job)
+        public InterruptWait(SnetDevice snetDevice)
         {
             _snetDevice = snetDevice;
-            _job = job;
+
         }
 
         public void InitInterruptTable(bool enable)
@@ -84,7 +83,6 @@ namespace SnetTestProgram
                 ieti.input_active = 0;
 
                 _snetDevice.SetInterruptEventTable(0, true, ieti);
-                // Event 방식
                 _snetDevice.EnableInterruptEvent(true);
 
             }
@@ -125,11 +123,12 @@ namespace SnetTestProgram
         }
     }
 
-    public class InterruptRoutine
+    public class InterruptRoutine : IControllerWait
     {
         private SnetDevice _snetDevice;
         SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
         SnetDevice.InterruptEventRoutine ier;
+        EventWaitHandle eventWaitHanlde = new EventWaitHandle(false, EventResetMode.ManualReset);
 
         public InterruptRoutine(SnetDevice snetDevice)
         {
@@ -139,43 +138,42 @@ namespace SnetTestProgram
         public void OnRoutineIntteruptEvent(int tableIndex)
         {
             Debug.WriteLine("Table Index"+tableIndex+" Interrupt!!!");
+            eventWaitHanlde.Set();
         }
 
-        public void InitInterruptTable(bool enable)
+        public void InitInterruptTable()
         {
-            if (enable == true)
+            ier = OnRoutineIntteruptEvent;
+
+            ieti.oneshot = 0;
+            ieti.axis_index = 2;
+            ieti.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
+            ieti.input_channel = -1;
+            ieti.input_type = -1;
+            ieti.input_port = -1;
+            ieti.input_point = -1;
+            ieti.input_active = 0;
+
+            _snetDevice.SetInterruptEventTable(0, true, ieti);
+            _snetDevice.SetInterruptEventRoutine(ier);
+            _snetDevice.EnableInterruptEvent(true);
+            
+        }
+
+        public int WaitMotionDone(int axis)
+        {
+            bool motionDone = false;
+            int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
+            returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
+
+            if ((!motionDone) && returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
             {
-                ier = OnRoutineIntteruptEvent;
-
-                ieti.oneshot = 0;
-                ieti.axis_index = 2;
-                ieti.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
-                ieti.input_channel = -1;
-                ieti.input_type = -1;
-                ieti.input_port = -1;
-                ieti.input_point = -1;
-                ieti.input_active = 0;
-
-                _snetDevice.EnableInterruptEvent(true);
-                _snetDevice.SetInterruptEventTable(0, true, ieti);
-                _snetDevice.SetInterruptEventRoutine(ier);
-
-            }
-            else
-            {
-                ieti.oneshot = 0;
-                ieti.axis_index = 0;
-                ieti.axis_type = 0;
-                ieti.input_channel = -1;
-                ieti.input_type = -1;
-                ieti.input_port = -1;
-                ieti.input_point = -1;
-                ieti.input_active = 0;
-
-                _snetDevice.EnableInterruptEvent(false);
+                eventWaitHanlde.WaitOne();
+                eventWaitHanlde.Reset();
 
             }
 
+            return returnCode;
         }
 
     }
