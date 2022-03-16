@@ -123,14 +123,14 @@ namespace SnetTestProgram
         }
     }
 
-    public class InterruptRoutine : IControllerWait
+    public class InterruptFunction : IControllerWait
     {
         private SnetDevice _snetDevice;
         SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
-        SnetDevice.InterruptEventRoutine ier;
+        SnetDevice.InterruptEventHandler ieh;
         EventWaitHandle eventWaitHanlde = new EventWaitHandle(false, EventResetMode.ManualReset);
 
-        public InterruptRoutine(SnetDevice snetDevice)
+        public InterruptFunction(SnetDevice snetDevice)
         {
             _snetDevice = snetDevice;
         }
@@ -143,7 +143,7 @@ namespace SnetTestProgram
 
         public void InitInterruptTable()
         {
-            ier = OnRoutineIntteruptEvent;
+            ieh = OnRoutineIntteruptEvent;
 
             ieti.oneshot = 0;
             ieti.axis_index = 2;
@@ -155,7 +155,7 @@ namespace SnetTestProgram
             ieti.input_active = 0;
 
             _snetDevice.SetInterruptEventTable(0, true, ieti);
-            _snetDevice.SetInterruptEventRoutine(ier);
+            _snetDevice.SetInterruptEventFunction(ieh);
             _snetDevice.EnableInterruptEvent(true);
             
         }

@@ -32,6 +32,7 @@ namespace EMotionSnetBase
 			FailedCommunication = Success + 13,
 			TimeOut				= Success + 14,
 			InvalidCommand		= Success + 15,
+			NotReceive			= Success + 20,
 			Disconnected		= Success + 50,
 			Disconnecting		= Success + 51,
 			NotInitialize		= Success + 100,
@@ -39,6 +40,7 @@ namespace EMotionSnetBase
 			OutOfMemory			= Success + 110,
 			DataOverflow		= Success + 111,
 			DataUnderflow		= Success + 112,
+			NullPtr				= Success + 113,
 
 			/// Origin Return
 			OriginErrorBase						= 300,
@@ -515,7 +517,7 @@ namespace EMotionSnetBase
 		/// </summary>
 		/// <param name="table_index">The index of interrupt event table when to occur event</param>
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-		public delegate void InterruptEventRoutine(int table_index);
+		public delegate void InterruptEventHandler(int table_index);
 
 		#endregion
 
@@ -4773,17 +4775,17 @@ namespace EMotionSnetBase
 		public static extern int eSnetClearInterruptEventTable(int net);
 
 		/// <summary>
-		/// Interrupt event routine(function) 등록
+		/// Interrupt event handler(callback function) 등록
 		/// </summary>
 		/// <remarks>
-		/// Interrupt event 발생 시, 자동으로 호출될 Function pointer(handle)를 등록한다.
-		/// 등록된 Function 호출 시, 'table_index' 인자로 발생한 Interrupt event table 번호가 전달된다
+		/// Interrupt event 발생 시, 자동으로 호출될 Function pointer(handler)를 등록한다.
+		/// 이벤트가 발생하여 등록된 Function 호출 시, 'table_index' 인자로 발생한 Interrupt event table 번호가 전달된다
 		/// </remarks>
 		/// <param name="net">			: Network id(IPv4 4th address)</param>
-		/// <param name="routine">		: Interrupt event 발생 시, 호출 될 Function pointer(handle)</param>
+		/// <param name="function">		: Interrupt event 발생 시, 호출 될 Function(event handler)</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
 		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int eSnetSetInterruptEventRoutine(int net, InterruptEventRoutine routine);
+		public static extern int eSnetSetInterruptEventFunction(int net, InterruptEventHandler function);
 
 		/// <summary>
 		/// Interrupt event 기능 활성화/비활성화 정보 쓰기
@@ -14813,30 +14815,30 @@ namespace EMotionSnetBase
 		}
 
 		/// <summary>
-		/// Interrupt event routine(function) 등록
+		/// Interrupt event handler(callback function) 등록
 		/// </summary>
 		/// <remarks>
-		/// Interrupt event 발생 시, 자동으로 호출될 Function pointer(handle)를 등록한다.
-		/// 등록된 Function 호출 시, 'table_index' 인자로 발생한 Interrupt event table 번호가 전달된다
+		/// Interrupt event 발생 시, 자동으로 호출될 Function pointer(handler)를 등록한다.
+		/// 이벤트가 발생하여 등록된 Function 호출 시, 'table_index' 인자로 발생한 Interrupt event table 번호가 전달된다
 		/// </remarks>
-		/// <param name="routine">		: Interrupt event 발생 시, 호출 될 Function pointer(handle)</param>
+		/// <param name="function">		: Interrupt event 발생 시, 호출 될 Function(event handler)</param>
 		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
-		public int SetInterruptEventRoutine(InterruptEventRoutine routine)
+		public int SetInterruptEventFunction(InterruptEventHandler function)
 		{
 			int returnCode = (int)eSnetApiReturnCode.Success;
 
 			try
 			{
-				returnCode = eSnetSetInterruptEventRoutine(NetID, routine);
+				returnCode = eSnetSetInterruptEventFunction(NetID, function);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
 				{
-					Debug.WriteLine("Failed to call 'eSnetSetInterruptEventRoutine'. error : " + returnCode,
-													"SnetDevice.SetInterruptEventRoutine");
+					Debug.WriteLine("Failed to call 'eSnetSetInterruptEventFunction'. error : " + returnCode,
+													"SnetDevice.SetInterruptEventFunction");
 				}
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex.Message, "SnetDevice.SetInterruptEventRoutine");
+				Debug.WriteLine(ex.Message, "SnetDevice.SetInterruptEventFunction");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
 

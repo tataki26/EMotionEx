@@ -42,7 +42,7 @@ namespace SnetTestProgram.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.rbPolling = new System.Windows.Forms.RadioButton();
             this.rbEvent = new System.Windows.Forms.RadioButton();
-            this.rbRoutine = new System.Windows.Forms.RadioButton();
+            this.rbFunction = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // btnMoveSingle
@@ -217,24 +217,24 @@ namespace SnetTestProgram.Forms
             this.rbEvent.UseVisualStyleBackColor = true;
             this.rbEvent.CheckedChanged += new System.EventHandler(this.rbEvent_CheckedChanged);
             // 
-            // rbRoutine
+            // rbFunction
             // 
-            this.rbRoutine.AutoSize = true;
-            this.rbRoutine.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbRoutine.Location = new System.Drawing.Point(636, 37);
-            this.rbRoutine.Name = "rbRoutine";
-            this.rbRoutine.Size = new System.Drawing.Size(160, 23);
-            this.rbRoutine.TabIndex = 19;
-            this.rbRoutine.Text = "[Interrupt] Routine";
-            this.rbRoutine.UseVisualStyleBackColor = true;
-            this.rbRoutine.CheckedChanged += new System.EventHandler(this.rbRoutine_CheckedChanged);
+            this.rbFunction.AutoSize = true;
+            this.rbFunction.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbFunction.Location = new System.Drawing.Point(636, 37);
+            this.rbFunction.Name = "rbFunction";
+            this.rbFunction.Size = new System.Drawing.Size(167, 23);
+            this.rbFunction.TabIndex = 19;
+            this.rbFunction.Text = "[Interrupt] Function";
+            this.rbFunction.UseVisualStyleBackColor = true;
+            this.rbFunction.CheckedChanged += new System.EventHandler(this.rbFunction_CheckedChanged);
             // 
             // FormInterrupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.rbRoutine);
+            this.Controls.Add(this.rbFunction);
             this.Controls.Add(this.rbEvent);
             this.Controls.Add(this.rbPolling);
             this.Controls.Add(this.label3);
@@ -270,6 +270,6 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton rbPolling;
         private System.Windows.Forms.RadioButton rbEvent;
-        private System.Windows.Forms.RadioButton rbRoutine;
+        private System.Windows.Forms.RadioButton rbFunction;
     }
 }
