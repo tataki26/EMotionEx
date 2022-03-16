@@ -34,11 +34,11 @@ namespace SnetTestProgram
         int _min = 999999999;
 
         List<int> _maxList = new List<int>();
+        List<int> _timeList = new List<int>();
 
-        int _sum = 0;
         int _avg = 0;
 
-        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref List<int> maxList, ref int min, ref int avg)
+        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref List<int> timeList, ref List<int> maxList, ref int min, ref int avg)
         {
             int total=0;
             int time = 0;
@@ -53,14 +53,17 @@ namespace SnetTestProgram
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
                     total += time;
 
+                    _timeList.Add(time);
+
                     _max = time;
                     _maxList.Add(CalcTimeMax(time));
 
-                    _avg = CalcTimeAvg(time,i+1);
                     _min = CalcTimeMin(time);
 
                     Thread.Sleep(dwell);
                 }
+
+                _avg = total / (repeatNum + 1);
             }
             else if(repeatNum<0)
             { 
@@ -74,20 +77,25 @@ namespace SnetTestProgram
                     total += time;
                     cnt++;
 
+                    _timeList.Add(time);
+
                     _max = time;
                     _maxList.Add(CalcTimeMax(time));
 
                     _min =CalcTimeMin(total);
-                    _avg =CalcTimeAvg(total, cnt);
 
                     Thread.Sleep(dwell);
                 }
+
+                _avg = total / cnt;
             }
 
             _maxList.Sort();
             _maxList.Reverse();
 
             maxList = _maxList;
+            timeList = _timeList;
+            
             min = _min;
             avg = _avg;
 
@@ -106,14 +114,6 @@ namespace SnetTestProgram
             if (time < _min) _min = time;
 
             return _min;
-        }
-
-        public int CalcTimeAvg(int time, int cnt)
-        {
-            _sum += time;
-            _avg = _sum / cnt;
-
-            return _avg;
         }
 
         public void StopJob()

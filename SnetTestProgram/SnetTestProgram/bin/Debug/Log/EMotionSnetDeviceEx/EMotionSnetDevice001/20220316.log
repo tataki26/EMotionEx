@@ -1,2 +1,5 @@
 09:55:57.793 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
 11:06:14.096 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+13:52:23.438 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+13:55:42.625 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.
+13:55:42.651 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.

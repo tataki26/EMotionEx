@@ -79,14 +79,15 @@ namespace SnetTestProgram.Forms
             _job.AddJob(jobQueue, job2);
             _job.AddJob(jobQueue, job3);
 
-            // int max = 0;
-            List<int> maxList = new List<int>(); // >>> 출력
-            int min = 0; // calc 함수 만들고 min 값 넘기다가 끝남 0으로 출력
+            List<int> timeList = new List<int>();
+            List<int> maxList = new List<int>();
+            
+            int min = 0; 
             int avg=0;
 
             string time = null;
             // Job 실행 함수 람다식 선언
-            Action action = () => { time = _job.RepeatJob(repeatNum, dwell, jobQueue, axis_1, ref maxList, ref min, ref avg); };
+            Action action = () => { time = _job.RepeatJob(repeatNum, dwell, jobQueue, axis_1, ref timeList, ref maxList, ref min, ref avg); };
             // 스레드로 action 실행
             Task task = Task.Factory.StartNew(action);
             // task 끝날 때까지 대기
@@ -96,6 +97,10 @@ namespace SnetTestProgram.Forms
             MessageBox.Show("=====Max=====" + '\n' + maxList[0] + "msec" + '\n' + maxList[1] + "msec" + '\n' + maxList[2] + "msec" + '\n');
             Logger.WriteLog("total: "+time + "msec" + ", " + "min: " + min + "msec" + ", " + "avg: " + avg + "msec");
             Logger.WriteLog("TOP3: " + maxList[0] + "msec"+", "+ maxList[1] + "msec" + ", " + maxList[2] + "msec");
+
+            Logger.WriteLog(timeList[0] + "msec" + ", " + timeList[1] + "msec" + ", "+timeList[2] + "msec" + ", "+timeList[3] + "msec" + ", "
+                + timeList[4] + "msec" + ", " + timeList[5] + "msec" + ", " + timeList[6] + "msec" + ", " + timeList[7] + "msec" + ", "
+                + timeList[8] + "msec" + ", " + timeList[9] + "msec" + ", ");
         }
 
         private void timerSPTP_Tick(object sender, EventArgs e)

@@ -1,0 +1,2 @@
+13:56:03.745 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 58447). send index 0 to server
+13:56:04.768 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 58447). send index 1 to server
