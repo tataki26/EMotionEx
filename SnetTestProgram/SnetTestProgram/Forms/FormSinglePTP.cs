@@ -96,11 +96,11 @@ namespace SnetTestProgram.Forms
             MessageBox.Show("total: "+time + "msec"+'\n'+"min: "+min+"msec"+'\n'+"avg: "+avg+"msec"+'\n');
             MessageBox.Show("=====Max=====" + '\n' + maxList[0] + "msec" + '\n' + maxList[1] + "msec" + '\n' + maxList[2] + "msec" + '\n');
 
-            Logger.WriteLog("=================================================================================");
+            Logger.WriteLog("====================================================================================");
             Logger.WriteLog("total: "+time + "msec, "+ "min: " + min + "msec, " + "avg: " + avg + "msec");
-            Logger.WriteLog("TOP3: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec");
+            Logger.WriteLog("TOP5: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec, " + maxList[3] + "msec, " + maxList[4] + "msec");
             Logger.WriteLogList(timeList);
-            Logger.WriteLog("=================================================================================");
+            Logger.WriteLog("====================================================================================");
         }
 
         private void timerSPTP_Tick(object sender, EventArgs e)
