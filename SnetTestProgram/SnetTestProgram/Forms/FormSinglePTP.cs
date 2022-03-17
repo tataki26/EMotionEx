@@ -24,10 +24,12 @@ namespace SnetTestProgram.Forms
             _job = job;
 
             timerSPTP.Start();
+            timerCount.Start();
 
         }
 
         int axis_1;
+        int cnt = 0;
 
         private async void buttonStart_Click(object sender, EventArgs e)
         {
@@ -87,7 +89,7 @@ namespace SnetTestProgram.Forms
 
             string time = null;
             // Job 실행 함수 람다식 선언
-            Action action = () => { time = _job.RepeatJob(repeatNum, dwell, jobQueue, axis_1, ref timeList, ref maxList, ref min, ref avg); };
+            Action action = () => { time = _job.RepeatJob(repeatNum, dwell, jobQueue, axis_1, ref timeList, ref maxList, ref min, ref avg, ref cnt); };
             // 스레드로 action 실행
             Task task = Task.Factory.StartNew(action);
             // task 끝날 때까지 대기
@@ -115,6 +117,11 @@ namespace SnetTestProgram.Forms
         private void buttonStop_Click(object sender, EventArgs e)
         {
             _job.StopJob();
+        }
+
+        private void timerCount_Tick(object sender, EventArgs e)
+        {
+            tbResult2.Text = cnt.ToString();
         }
     }
 }

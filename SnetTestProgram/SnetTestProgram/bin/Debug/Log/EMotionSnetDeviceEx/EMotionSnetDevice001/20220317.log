@@ -18,3 +18,21 @@
 11:42:00.464 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
 11:46:37.424 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.
 11:53:30.741 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+13:46:34.144 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.
+13:49:28.382 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+13:51:59.340 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.
+13:59:03.944 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+14:04:40.673 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+14:10:25.611 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+14:11:17.339 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+14:16:36.693 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+14:38:33.796 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.
+14:39:39.917 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.
+14:47:37.699 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+15:20:00.023 SNTAPI(00000DE9) SnetDevice::EnableInterruptEvent : Failed to start ethernet server.
+15:33:58.332 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+16:00:07.899 SYSTEM(000013AB) SnetDevice::SendNetMessage : Failed to send message to device(Com Error Code : -22).
+16:00:10.959 SYSTEM(000013AB) SnetDevice::SendNetMessage : Failed to send message to device(Com Error Code : -22).
+16:00:38.367 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+16:02:54.786 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.
+16:12:37.052 SNTAPI(00000DEA) SnetDevice::EnableInterruptEvent : Failed to stop ethernet server.

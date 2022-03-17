@@ -38,11 +38,12 @@ namespace SnetTestProgram
 
         int _avg = 0;
 
-        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref List<int> timeList, ref List<int> maxList, ref int min, ref int avg)
+        int _cnt = 0;
+
+        public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref List<int> timeList, ref List<int> maxList, ref int min, ref int avg, ref int cnt)
         {
             int total=0;
             int time = 0;
-            int cnt = 1;
 
             _maxList.Clear();
             _timeList.Clear();
@@ -51,6 +52,8 @@ namespace SnetTestProgram
             {
                 for (int i = 0; i <= repeatNum; i++)
                 {
+                    cnt = i;
+
                     Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
 
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
@@ -72,25 +75,28 @@ namespace SnetTestProgram
             { 
                 while (enable)
                 {
+                    cnt = _cnt;
+
                     if (enable == false) break;
 
                     Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
 
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
                     total += time;
-                    cnt++;
+                    _cnt++;
 
                     _timeList.Add(time);
 
                     _max = time;
                     _maxList.Add(CalcTimeMax(time));
 
-                    _min =CalcTimeMin(total);
+                    _min =CalcTimeMin(time);
 
                     Thread.Sleep(dwell);
                 }
 
-                _avg = total / cnt;
+                _avg = total / (cnt+1);
+                
             }
 
             _maxList.Sort();

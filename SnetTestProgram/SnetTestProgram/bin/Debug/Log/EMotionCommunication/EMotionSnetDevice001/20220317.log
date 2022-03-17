@@ -1,0 +1,9 @@
+16:00:05.852 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 60451). send index 0 to server
+16:00:06.870 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 60451). send index 1 to server
+16:00:07.892 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 60451). send index 2 to server
+16:00:07.893 EVENT0(00000000) UdpClient::Request : No reply data from server. The number of trying to send data is reached max count of trying to send data to server...
+16:00:08.914 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 60451). send index 0 to server
+16:00:09.936 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 60451). send index 1 to server
+16:00:10.955 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 60451). send index 2 to server
+16:00:10.955 EVENT0(00000000) UdpClient::Request : No reply data from server. The number of trying to send data is reached max count of trying to send data to server...
+16:00:11.964 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 60451). send index 0 to server
