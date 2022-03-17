@@ -50,5 +50,58 @@ namespace SnetTestProgram
             }
         }
 
+        public static void WriteLogList(List<int> dataList)
+        {
+            string currentDirectoryPath = Environment.CurrentDirectory.ToString();
+            string directoryPath = Path.Combine(currentDirectoryPath, "interruptLog");
+
+            string filePath = directoryPath + @"\MotionDoneTime_" + DateTime.Today.ToString("yyyyMMdd") + ".log";
+
+            DirectoryInfo di = new DirectoryInfo(directoryPath);
+            FileInfo fi = new FileInfo(filePath);
+
+            try
+            {
+                List<string> msg = new List<string>();
+
+                if (!di.Exists)
+                    Directory.CreateDirectory(directoryPath);
+
+                for (int i = 0; i < dataList.Count(); i++)
+                {
+                    int num = i % 10;
+                    if(i==0) 
+                        msg.Add(string.Format("{0}: {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), dataList[0].ToString())+"msec, ");
+                    else if(i==dataList.Count()-1) 
+                        msg.Add(dataList[i] + "msec"+'\n');
+                    else if (num == 0)
+                        msg.Add(dataList[i] + "msec,"+'\n');
+                    else
+                        msg.Add(dataList[i]+"msec, ");
+
+                    if (!fi.Exists)
+                    {
+                        using (StreamWriter sw = new StreamWriter(filePath))
+                        {
+                            sw.Write(msg[i]);
+                            sw.Close();
+                        }
+                    }
+                    else
+                    {
+                        using (StreamWriter sw = File.AppendText(filePath))
+                        {
+                            sw.Write(msg[i]);
+                            sw.Close();
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                Debug.WriteLine("error");
+            }
+        }
+
     }
 }

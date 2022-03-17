@@ -95,12 +95,12 @@ namespace SnetTestProgram.Forms
 
             MessageBox.Show("total: "+time + "msec"+'\n'+"min: "+min+"msec"+'\n'+"avg: "+avg+"msec"+'\n');
             MessageBox.Show("=====Max=====" + '\n' + maxList[0] + "msec" + '\n' + maxList[1] + "msec" + '\n' + maxList[2] + "msec" + '\n');
-            Logger.WriteLog("total: "+time + "msec" + ", " + "min: " + min + "msec" + ", " + "avg: " + avg + "msec");
-            Logger.WriteLog("TOP3: " + maxList[0] + "msec"+", "+ maxList[1] + "msec" + ", " + maxList[2] + "msec");
 
-            Logger.WriteLog(timeList[0] + "msec" + ", " + timeList[1] + "msec" + ", "+timeList[2] + "msec" + ", "+timeList[3] + "msec" + ", "
-                + timeList[4] + "msec" + ", " + timeList[5] + "msec" + ", " + timeList[6] + "msec" + ", " + timeList[7] + "msec" + ", "
-                + timeList[8] + "msec" + ", " + timeList[9] + "msec" + ", ");
+            Logger.WriteLog("=================================================================================");
+            Logger.WriteLog("total: "+time + "msec, "+ "min: " + min + "msec, " + "avg: " + avg + "msec");
+            Logger.WriteLog("TOP3: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec");
+            Logger.WriteLogList(timeList);
+            Logger.WriteLog("=================================================================================");
         }
 
         private void timerSPTP_Tick(object sender, EventArgs e)
