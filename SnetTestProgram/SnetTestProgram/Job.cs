@@ -44,6 +44,9 @@ namespace SnetTestProgram
             int time = 0;
             int cnt = 1;
 
+            _maxList.Clear();
+            _timeList.Clear();
+
             if (repeatNum >= 0)
             {
                 for (int i = 0; i <= repeatNum; i++)

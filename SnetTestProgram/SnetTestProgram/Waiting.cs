@@ -130,6 +130,8 @@ namespace SnetTestProgram
         SnetDevice.InterruptEventHandler ieh;
         EventWaitHandle eventWaitHanlde = new EventWaitHandle(false, EventResetMode.ManualReset);
 
+        bool motionDone = false;
+
         public InterruptFunction(SnetDevice snetDevice)
         {
             _snetDevice = snetDevice;
@@ -137,8 +139,8 @@ namespace SnetTestProgram
 
         public void OnRoutineIntteruptEvent(int tableIndex)
         {
-            Debug.WriteLine("Table Index"+tableIndex+" Interrupt!!!");
             eventWaitHanlde.Set();
+            Debug.WriteLine("Table Index" + tableIndex + " Interrupt!!!");
         }
 
         public void InitInterruptTable()
@@ -162,7 +164,6 @@ namespace SnetTestProgram
 
         public int WaitMotionDone(int axis)
         {
-            bool motionDone = false;
             int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
             returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
 
@@ -170,7 +171,6 @@ namespace SnetTestProgram
             {
                 eventWaitHanlde.WaitOne();
                 eventWaitHanlde.Reset();
-
             }
 
             return returnCode;

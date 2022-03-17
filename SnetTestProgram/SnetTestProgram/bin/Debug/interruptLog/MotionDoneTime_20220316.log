@@ -40,3 +40,43 @@
 2022-03-16 15:06:23: total: 80874msec, min: 8069msec, avg: 8087msec
 2022-03-16 15:06:23: TOP3: 8093msec, 8093msec, 8092msec
 2022-03-16 15:06:23: 8081msec, 8091msec, 8091msec, 8091msec, 8091msec, 8092msec, 8082msec, 8069msec, 8093msec, 8093msec, 
+2022-03-16 17:09:55: total: 1326msec, min: 406msec, avg: 442msec
+2022-03-16 17:09:55: TOP3: 467msec, 453msec, 406msec
+2022-03-16 17:11:21: total: 1297msec, min: 421msec, avg: 432msec
+2022-03-16 17:11:21: TOP3: 439msec, 437msec, 421msec
+2022-03-16 17:13:31: total: 80695msec, min: 8029msec, avg: 8069msec
+2022-03-16 17:13:31: TOP3: 8123msec, 8123msec, 8076msec
+2022-03-16 17:14:55: total: 583msec, min: 25msec, avg: 58msec
+2022-03-16 17:14:55: TOP3: 62msec, 62msec, 62msec
+2022-03-16 17:15:07: total: 581msec, min: 23msec, avg: 58msec
+2022-03-16 17:15:07: TOP3: 62msec, 62msec, 62msec
+2022-03-16 17:15:20: total: 564msec, min: 6msec, avg: 56msec
+2022-03-16 17:15:20: TOP3: 62msec, 62msec, 62msec
+2022-03-16 17:16:24: total: 18180msec, min: 1372msec, avg: 6060msec
+2022-03-16 17:16:24: TOP3: 12033msec, 8404msec, 8404msec
+2022-03-16 17:17:03: total: 4709msec, min: 467msec, avg: 470msec
+2022-03-16 17:17:03: TOP3: 484msec, 480msec, 469msec
+2022-03-16 17:18:59: total: 80926msec, min: 8084msec, avg: 8092msec
+2022-03-16 17:18:59: TOP3: 8116msec, 8092msec, 8092msec
+2022-03-16 17:20:39: total: 80877msec, min: 8069msec, avg: 8087msec
+2022-03-16 17:20:39: TOP3: 8116msec, 8112msec, 8093msec
+2022-03-16 17:23:10: total: 80293msec, min: 8008msec, avg: 8029msec
+2022-03-16 17:23:10: TOP3: 8061msec, 8030msec, 8030msec
+2022-03-16 17:28:09: total: 80265msec, min: 8008msec, avg: 8026msec
+2022-03-16 17:28:09: TOP3: 8061msec, 8048msec, 8030msec
+2022-03-16 17:40:46: total: 80073msec, min: 8002msec, avg: 8007msec
+2022-03-16 17:40:46: TOP3: 8037msec, 8006msec, 8005msec
+2022-03-16 17:43:21: total: 80066msec, min: 8002msec, avg: 8006msec
+2022-03-16 17:43:21: TOP3: 8037msec, 8033msec, 8006msec
+2022-03-16 17:46:43: total: 80683msec, min: 8067msec, avg: 8068msec
+2022-03-16 17:46:43: TOP3: 8070msec, 8069msec, 8069msec
+2022-03-16 17:49:17: total: 80079msec, min: 8004msec, avg: 8007msec
+2022-03-16 17:49:17: TOP3: 8037msec, 8005msec, 8005msec
+2022-03-16 17:54:32: total: 80083msec, min: 8004msec, avg: 8008msec
+2022-03-16 17:54:32: TOP3: 8037msec, 8006msec, 8006msec
+2022-03-16 17:56:14: total: 80080msec, min: 8004msec, avg: 8008msec
+2022-03-16 17:56:14: TOP3: 8037msec, 8037msec, 8006msec
+2022-03-16 18:17:02: total: 80122msec, min: 8006msec, avg: 8012msec
+2022-03-16 18:17:02: TOP3: 8050msec, 8010msec, 8009msec
+2022-03-16 18:19:20: total: 80049msec, min: 8004msec, avg: 8004msec
+2022-03-16 18:19:20: TOP3: 8006msec, 8006msec, 8005msec
