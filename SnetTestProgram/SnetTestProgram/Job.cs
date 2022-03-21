@@ -30,10 +30,10 @@ namespace SnetTestProgram
 
         }
 
-        int _max;
-        int _min = 999999999;
+        // int _max;
+        // int _min = 999999999;
 
-        List<int> _maxList = new List<int>();
+        // List<int> _maxList = new List<int>();
         List<int> _timeList = new List<int>();
 
         int _avg = 0;
@@ -45,7 +45,7 @@ namespace SnetTestProgram
             int total=0;
             int time = 0;
 
-            _maxList.Clear();
+            // _maxList.Clear();
             _timeList.Clear();
 
             if (repeatNum >= 0)
@@ -61,10 +61,12 @@ namespace SnetTestProgram
 
                     _timeList.Add(time);
 
+                    /*
                     _max = time;
                     _maxList.Add(CalcTimeMax(time));
 
                     _min = CalcTimeMin(time);
+                    */
 
                     Thread.Sleep(dwell);
                 }
@@ -87,10 +89,12 @@ namespace SnetTestProgram
 
                     _timeList.Add(time);
 
+                    /*
                     _max = time;
                     _maxList.Add(CalcTimeMax(time));
 
                     _min =CalcTimeMin(time);
+                    */
 
                     Thread.Sleep(dwell);
                 }
@@ -99,18 +103,28 @@ namespace SnetTestProgram
                 
             }
 
+            /*
             _maxList.Sort();
             _maxList.Reverse();
+            */
 
-            maxList = _maxList;
+            maxList = (from element in _timeList
+                       orderby element descending select element).ToList();
+
+            if (maxList.Count > 5)
+                maxList.Take(5).ToList();
+
             timeList = _timeList;
-            
-            min = _min;
+
+            // min = _min;
+
+            min = _timeList.Min();
             avg = _avg;
 
             return total.ToString();
         }
 
+        /*
         public int CalcTimeMax(int time)
         {
             if (time > _max) _max = time;
@@ -124,6 +138,7 @@ namespace SnetTestProgram
 
             return _min;
         }
+        */
 
         public void StopJob()
         {

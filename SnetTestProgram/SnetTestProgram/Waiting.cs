@@ -113,7 +113,7 @@ namespace SnetTestProgram
             {
                 returnCode = _snetDevice.WaitInterruptEvent(0, 0);
 
-                if(returnCode == (int)SnetDevice.eSnetApiReturnCode.TimeOut)
+                if(returnCode == (int)SnetDevice.eSnetApiReturnCode.InterruptEventFailedWaiting)
                 {
                     Debug.WriteLine("TimeOut!!!");
                 }
