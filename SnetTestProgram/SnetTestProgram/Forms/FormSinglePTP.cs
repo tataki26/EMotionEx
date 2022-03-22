@@ -26,6 +26,8 @@ namespace SnetTestProgram.Forms
             timerSPTP.Start();
             timerCount.Start();
 
+            tbType.Text = _job._type;
+
         }
 
         int axis_1;
@@ -116,11 +118,11 @@ namespace SnetTestProgram.Forms
             // task 끝날 때까지 대기
             await task;
 
-            MessageBox.Show("total: "+time + "msec"+'\n'+"min: "+min+"msec"+'\n'+"avg: "+avg+"msec"+'\n');
+            MessageBox.Show("total: " +time + "msec"+'\n'+"min: "+min+"msec"+'\n'+"avg: "+avg+"msec"+'\n');
             MessageBox.Show("=====Max=====" + '\n' + maxList[0] + "msec" + '\n' + maxList[1] + "msec" + '\n' + maxList[2] + "msec" + '\n');
 
-            Logger.WriteLog("====================================================================================");
-            Logger.WriteLog("total: "+time + "msec, "+ "min: " + min + "msec, " + "avg: " + avg + "msec");
+            Logger.WriteLog("==========<"+_job._type+">===================================================================");
+            Logger.WriteLog("total: "+time + "msec, "+ "min: " + min + "msec, " + "avg: " + avg + "msec, "+"count: " + repeatNum);
             Logger.WriteLog("TOP5: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec, " + maxList[3] + "msec, " + maxList[4] + "msec");
             Logger.WriteLogList(timeList);
             Logger.WriteLog("====================================================================================");

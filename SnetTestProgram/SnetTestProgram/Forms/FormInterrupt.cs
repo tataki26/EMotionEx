@@ -76,11 +76,13 @@ namespace SnetTestProgram.Forms
 
         private void rbPolling_CheckedChanged(object sender, EventArgs e)
         {
+            string type = "Polling";
             bool check = rbEvent.Checked;
 
             if (!check)
             {
                 _job.SetWait(_pollingWait);
+                _job.SetType(type);
             }
 
             _interruptWait.InitInterruptTable(check);
@@ -88,11 +90,13 @@ namespace SnetTestProgram.Forms
 
         private void rbEvent_CheckedChanged(object sender, EventArgs e)
         {
+            string type = "Event";
             bool check = rbEvent.Checked;
 
             if (check)
             {
                 _job.SetWait(_interruptWait);
+                _job.SetType(type);
             }
 
             _interruptWait.InitInterruptTable(check);
@@ -100,11 +104,13 @@ namespace SnetTestProgram.Forms
 
         private void rbFunction_CheckedChanged(object sender, EventArgs e)
         {
+            string type = "Function";
             bool check = rbFunction.Checked;
 
             if (check)
             {
                 _job.SetWait(_interruptFunction);
+                _job.SetType(type);
             }
 
             _interruptFunction.InitInterruptTable();

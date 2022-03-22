@@ -49,9 +49,10 @@ namespace SnetTestProgram.Forms
             this.tbResult = new System.Windows.Forms.TextBox();
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
+            this.tbResult2 = new System.Windows.Forms.TextBox();
             this.timerSPTP = new System.Windows.Forms.Timer(this.components);
             this.timerCount = new System.Windows.Forms.Timer(this.components);
-            this.tbResult2 = new System.Windows.Forms.TextBox();
+            this.tbType = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +84,7 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Controls.Add(this.buttonStart, 4, 6);
             this.tableLayoutPanel1.Controls.Add(this.buttonStop, 5, 6);
             this.tableLayoutPanel1.Controls.Add(this.tbResult2, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbType, 5, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(56, 47);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -265,6 +267,14 @@ namespace SnetTestProgram.Forms
             this.buttonStop.UseVisualStyleBackColor = false;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
+            // tbResult2
+            // 
+            this.tbResult2.Location = new System.Drawing.Point(558, 103);
+            this.tbResult2.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
+            this.tbResult2.Name = "tbResult2";
+            this.tbResult2.Size = new System.Drawing.Size(100, 21);
+            this.tbResult2.TabIndex = 36;
+            // 
             // timerSPTP
             // 
             this.timerSPTP.Tick += new System.EventHandler(this.timerSPTP_Tick);
@@ -273,13 +283,13 @@ namespace SnetTestProgram.Forms
             // 
             this.timerCount.Tick += new System.EventHandler(this.timerCount_Tick);
             // 
-            // tbResult2
+            // tbType
             // 
-            this.tbResult2.Location = new System.Drawing.Point(558, 103);
-            this.tbResult2.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
-            this.tbResult2.Name = "tbResult2";
-            this.tbResult2.Size = new System.Drawing.Size(100, 21);
-            this.tbResult2.TabIndex = 36;
+            this.tbType.Location = new System.Drawing.Point(558, 3);
+            this.tbType.Name = "tbType";
+            this.tbType.ReadOnly = true;
+            this.tbType.Size = new System.Drawing.Size(100, 21);
+            this.tbType.TabIndex = 37;
             // 
             // FormSinglePTP
             // 
@@ -319,5 +329,6 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Timer timerCount;
         private System.Windows.Forms.TextBox tbResult2;
+        private System.Windows.Forms.TextBox tbType;
     }
 }
