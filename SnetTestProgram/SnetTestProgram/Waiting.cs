@@ -140,7 +140,6 @@ namespace SnetTestProgram
         public void OnRoutineIntteruptEvent(int tableIndex)
         {
             eventWaitHanlde.Set();
-            Debug.WriteLine("Table Index" + tableIndex + " Interrupt!!!");
         }
 
         public void InitInterruptTable()

@@ -30,10 +30,6 @@ namespace SnetTestProgram
 
         }
 
-        // int _max;
-        // int _min = 999999999;
-
-        // List<int> _maxList = new List<int>();
         List<int> _timeList = new List<int>();
 
         int _avg = 0;
@@ -45,7 +41,6 @@ namespace SnetTestProgram
             int total=0;
             int time = 0;
 
-            // _maxList.Clear();
             _timeList.Clear();
 
             if (repeatNum >= 0)
@@ -61,17 +56,10 @@ namespace SnetTestProgram
 
                     _timeList.Add(time);
 
-                    /*
-                    _max = time;
-                    _maxList.Add(CalcTimeMax(time));
-
-                    _min = CalcTimeMin(time);
-                    */
-
                     Thread.Sleep(dwell);
                 }
 
-                _avg = total / (repeatNum + 1);
+                _avg = (total-_timeList[0]) / repeatNum;
             }
             else if(repeatNum<0)
             { 
@@ -89,56 +77,26 @@ namespace SnetTestProgram
 
                     _timeList.Add(time);
 
-                    /*
-                    _max = time;
-                    _maxList.Add(CalcTimeMax(time));
-
-                    _min =CalcTimeMin(time);
-                    */
-
                     Thread.Sleep(dwell);
                 }
 
-                _avg = total / (cnt+1);
+                _avg = (total-_timeList[0]) / cnt;
                 
             }
 
-            /*
-            _maxList.Sort();
-            _maxList.Reverse();
-            */
+            timeList = _timeList.Skip(1).ToList();
 
-            maxList = (from element in _timeList
+            maxList = (from element in timeList
                        orderby element descending select element).ToList();
 
             if (maxList.Count > 5)
                 maxList.Take(5).ToList();
 
-            timeList = _timeList;
-
-            // min = _min;
-
-            min = _timeList.Min();
+            min = _timeList.Skip(1).Min();
             avg = _avg;
 
-            return total.ToString();
+            return (total-_timeList[0]).ToString();
         }
-
-        /*
-        public int CalcTimeMax(int time)
-        {
-            if (time > _max) _max = time;
-
-            return _max;
-        }
-
-        public int CalcTimeMin(int time)
-        {
-            if (time < _min) _min = time;
-
-            return _min;
-        }
-        */
 
         public void StopJob()
         {
@@ -166,8 +124,6 @@ namespace SnetTestProgram
 
             return (stopWatch.ElapsedMilliseconds).ToString();
         }
-
-        
 
         public void SetWait(IControllerWait cw)
         {

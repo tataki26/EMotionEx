@@ -30,7 +30,24 @@ namespace SnetTestProgram.Forms
 
         int axis_1;
         int cnt = 0;
+        bool flag = false;
 
+        #region Method
+        public bool isSamePos(int startPos)
+        {
+            int position = 0;
+            _snetDevice.GetCommandPosition(axis_1, ref position);
+
+            if (position == startPos)
+            {
+                MessageBox.Show("지령 위치가 현재 위치와 같습니다" + '\n' + "다른 값을 입력하세요");
+                flag = true;
+            }
+            return flag;
+        }
+        #endregion
+
+        #region Events
         private async void buttonStart_Click(object sender, EventArgs e)
         {
             // Form에 입력된 data 가져오기
@@ -44,7 +61,17 @@ namespace SnetTestProgram.Forms
             int dwell;
 
             int.TryParse(tbAxis_1.Text, out axis_1);
+            
             int.TryParse(tbPosition_1.Text, out startPos);
+            
+            flag=isSamePos(startPos);
+            
+            if (flag)
+            {
+                Close();
+                return;
+            }
+
             int.TryParse(tbPosition_2.Text, out endPos);
 
             int.TryParse(tbVelocity.Text, out velocity);
@@ -62,8 +89,6 @@ namespace SnetTestProgram.Forms
 
             int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
 
-            // _snetDevice.SetHomePosition(axis_1, 0);
-
             Action job1 = () =>
             {
                 returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
@@ -74,16 +99,8 @@ namespace SnetTestProgram.Forms
                 returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, endPos);
             };
 
-            /*
-            Action job3 = () =>
-            {
-                returnCode = _snetDevice.MoveSingleEx(axis_1, moveType, velocity, accTime, decTime, 66, startPos);
-            };
-            */
-
             _job.AddJob(jobQueue, job1);
             _job.AddJob(jobQueue, job2);
-            // _job.AddJob(jobQueue, job3);
 
             List<int> timeList = new List<int>();
             List<int> maxList = new List<int>();
@@ -104,8 +121,7 @@ namespace SnetTestProgram.Forms
 
             Logger.WriteLog("====================================================================================");
             Logger.WriteLog("total: "+time + "msec, "+ "min: " + min + "msec, " + "avg: " + avg + "msec");
-            // Logger.WriteLog("TOP5: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec, " + maxList[3] + "msec, " + maxList[4] + "msec");
-            Logger.WriteLog("TOP3: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec");
+            Logger.WriteLog("TOP5: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec, " + maxList[3] + "msec, " + maxList[4] + "msec");
             Logger.WriteLogList(timeList);
             Logger.WriteLog("====================================================================================");
         }
@@ -128,5 +144,6 @@ namespace SnetTestProgram.Forms
         {
             tbResult2.Text = cnt.ToString();
         }
+        #endregion
     }
 }
