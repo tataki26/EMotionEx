@@ -22,6 +22,21 @@ namespace SnetTestProgram
         public int axis;
         bool enable = true;
 
+        public string Type
+        {
+            get
+            {
+                if (_iControllerWait is PollingWait)
+                    return "Polling";
+
+                if (_iControllerWait is InterruptWait)
+                    return "Event";
+                if (_iControllerWait is InterruptFunction)
+                    return "Function";
+                return _iControllerWait.GetType().Name;
+            }
+        }
+
         #region Methods
         
         public void AddJob(Queue<Action>jobQueue, Action action)

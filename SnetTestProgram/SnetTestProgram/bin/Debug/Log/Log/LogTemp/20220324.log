@@ -1,0 +1,2 @@
+11:46:42.398 SYSTEM(0000001E) UdpServer::Wait : No received data in internal data buffer.
+11:46:42.401 SYSTEM(000004CD) UdpServer::Wait : Not connect to server.

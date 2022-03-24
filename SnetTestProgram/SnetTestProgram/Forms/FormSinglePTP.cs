@@ -26,7 +26,7 @@ namespace SnetTestProgram.Forms
             timerSPTP.Start();
             timerCount.Start();
 
-            tbType.Text = _job._type;
+            tbType.Text = _job.Type;
 
         }
 

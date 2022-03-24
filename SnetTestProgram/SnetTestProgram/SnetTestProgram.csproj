@@ -98,7 +98,6 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SnetCommunicator.cs" />
     <Compile Include="SnetDevice.cs" />
     <Compile Include="Waiting.cs" />
     <EmbeddedResource Include="FormMainMenu.resx">
