@@ -145,13 +145,6 @@ namespace SnetTestProgram
             _iControllerWait = cw;
         }
 
-        public string _type;
-
-        public void SetType(string type)
-        {
-            _type =  type;
-        }
-    
         #endregion
     }
 
