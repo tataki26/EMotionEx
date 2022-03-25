@@ -4818,6 +4818,31 @@ namespace EMotionSnetBase
 		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int eSnetWaitInterruptEvent(int net, int table_index, int timeout);
 
+		/// <summary>
+		/// Interrupt event table의 이벤트 발생 대기 해제
+		/// </summary>
+		/// <remarks>
+		/// Event 발생 대기 중이면('WaitInterruptEvent' API Function 동작 중), event 발생 대기를 강제로 해제한다
+		/// </remarks>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetReleaseWaitingInterruptEvent(int net, int table_index);
+
+		/// <summary>
+		/// Interrupt event table의 이벤트 발생 대기 유무를 확인
+		/// </summary>
+		/// <remarks>
+		/// 'WaitInterruptEvent' API Function이 동작 중인지 확인한다
+		/// </remarks>
+		/// <param name="net">			: Network id(IPv4 4th address)</param>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <param name="waiting">		: 이벤트 발생 대기 유무. 1: 현재 이벤트 발생 대기 중, 0: None</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		[DllImport("EMotionSnetDeviceEx.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int eSnetIsWaitingInterruptEvent(int net, int table_index, out int waiting);
+
 		#endregion
 
 		#endregion
@@ -14703,10 +14728,7 @@ namespace EMotionSnetBase
 
 			try
 			{
-				if (enable)
-					enableTemp = 1;
-				else
-					enableTemp = 0;
+				enableTemp = (enable ? 1 : 0);
 
 				returnCode = eSnetSetInterruptEventTable(NetID, table_index, enableTemp, info);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
@@ -14743,12 +14765,9 @@ namespace EMotionSnetBase
 					Debug.WriteLine("Failed to call 'eSnetGetInterruptEventTable'. error : " + returnCode,
 													"SnetDevice.GetInterruptEventTable");
 				}
-				else 
+				else
 				{
-					if (enableTemp > 0)
-						enable = true;
-					else
-						enable = false;
+					enable = ((enableTemp > 0) ? true : false);
 					info = infoTemp;
 				}
 			}
@@ -14857,10 +14876,7 @@ namespace EMotionSnetBase
 
 			try
 			{
-				if (enable)
-					enableTemp = 1;
-				else
-					enableTemp = 0;
+				enableTemp = (enable ? 1 : 0);
 
 				returnCode = eSnetEnableInterruptEvent(NetID, enableTemp);
 				if (returnCode != (int)eSnetApiReturnCode.Success)
@@ -14897,10 +14913,7 @@ namespace EMotionSnetBase
 				}
 				else
 				{
-					if (enableTemp > 0)
-						enable = true;
-					else
-						enable = false;
+					enable = ((enableTemp > 0) ? true : false);
 				}
 			}
 			catch (Exception ex)
@@ -14937,6 +14950,71 @@ namespace EMotionSnetBase
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex.Message, "SnetDevice.WaitInterruptEvent");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event table의 이벤트 발생 대기 해제
+		/// </summary>
+		/// <remarks>
+		/// Event 발생 대기 중이면('WaitInterruptEvent' API Function 동작 중), event 발생 대기를 강제로 해제한다
+		/// </remarks>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int ReleaseWaitingInterruptEvent(int table_index)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetReleaseWaitingInterruptEvent(NetID, table_index);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetReleaseWaitingInterruptEvent'. error : " + returnCode,
+													"SnetDevice.ReleaseWaitingInterruptEvent");
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.ReleaseWaitingInterruptEvent");
+				returnCode = (int)eSnetApiReturnCode.Exception;
+			}
+
+			return returnCode;
+		}
+
+		/// <summary>
+		/// Interrupt event table의 이벤트 발생 대기 유무를 확인
+		/// </summary>
+		/// <remarks>
+		/// 'WaitInterruptEvent' API Function이 동작 중인지 확인한다
+		/// </remarks>
+		/// <param name="table_index">	: Interrupt event table 번호</param>
+		/// <param name="waiting">		: 이벤트 발생 대기 유무. true: 현재 이벤트 발생 대기 중, false: None</param>
+		/// <returns>					: (see enum "eSnetApiReturnCode")					</returns>
+		public int IsWaitingInterruptEvent(int table_index, ref bool waiting)
+		{
+			int returnCode = (int)eSnetApiReturnCode.Success;
+
+			try
+			{
+				returnCode = eSnetIsWaitingInterruptEvent(NetID, table_index, out int waitingTemp);
+				if (returnCode != (int)eSnetApiReturnCode.Success)
+				{
+					Debug.WriteLine("Failed to call 'eSnetIsWaitingInterruptEvent'. error : " + returnCode,
+													"SnetDevice.IsWaitingInterruptEvent");
+				}
+				else
+				{
+					waiting = ((waitingTemp > 0) ? true : false);
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message, "SnetDevice.IsWaitingInterruptEvent");
 				returnCode = (int)eSnetApiReturnCode.Exception;
 			}
 

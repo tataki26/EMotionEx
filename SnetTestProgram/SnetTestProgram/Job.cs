@@ -19,7 +19,7 @@ namespace SnetTestProgram
             _iControllerWait = controllerWait;
         }
 
-        public int axis;
+        // public int axis;
         bool enable = true;
 
         public string Type
@@ -66,6 +66,7 @@ namespace SnetTestProgram
                     Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
 
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
+
                     total += time;
 
                     _timeList.Add(time);
@@ -84,6 +85,7 @@ namespace SnetTestProgram
                     Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
 
                     int.TryParse(DoJob(tempJobQueue, axis), out time);
+
                     total += time;
                     _cnt++;
 
