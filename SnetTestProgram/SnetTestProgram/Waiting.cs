@@ -69,37 +69,19 @@ namespace SnetTestProgram
 
         }
 
-        public void InitInterruptTable(bool enable)
+        public void InitInterruptTable()
         {
-            if (enable == true)
-            {
-                ieti.oneshot = 0;
-                ieti.axis_index = 2;
-                ieti.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
-                ieti.input_channel = -1;
-                ieti.input_type = -1;
-                ieti.input_port = -1;
-                ieti.input_point = -1;
-                ieti.input_active = 0;
+            ieti.oneshot = 0;
+            ieti.axis_index = 2;
+            ieti.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
+            ieti.input_channel = -1;
+            ieti.input_type = -1;
+            ieti.input_port = -1;
+            ieti.input_point = -1;
+            ieti.input_active = 0;
 
-                _snetDevice.SetInterruptEventTable(0, true, ieti);
-                _snetDevice.EnableInterruptEvent(true);
-
-            }
-            else
-            {
-                ieti.oneshot = 0;
-                ieti.axis_index = 0;
-                ieti.axis_type = 0;
-                ieti.input_channel = -1;
-                ieti.input_type = -1;
-                ieti.input_port = -1;
-                ieti.input_point = -1;
-                ieti.input_active = 0;
-
-                _snetDevice.EnableInterruptEvent(false);
-
-            }
+            _snetDevice.SetInterruptEventTable(0, true, ieti);
+            _snetDevice.EnableInterruptEvent(true);
 
         }
 
