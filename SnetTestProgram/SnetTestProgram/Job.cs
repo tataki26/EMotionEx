@@ -45,14 +45,13 @@ namespace SnetTestProgram
 
         }
 
-        List<int> _timeList = new List<int>();
-
-        int _avg = 0;
-
-        int _cnt = 0;
-
         public string RepeatJob(int repeatNum, int dwell, Queue<Action>jobQueue, int axis, ref List<int> timeList, ref List<int> maxList, ref int min, ref int avg, ref int cnt)
         {
+            List<int> _timeList = new List<int>();
+
+            int _avg = 0;
+            int _cnt = 0;
+
             int total=0;
             int time = 0;
 
@@ -81,8 +80,6 @@ namespace SnetTestProgram
                 while (enable)
                 {
                     cnt = _cnt;
-
-                    if (enable == false) break;
 
                     Queue<Action> tempJobQueue = new Queue<Action>(jobQueue);
 

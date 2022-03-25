@@ -122,7 +122,7 @@ namespace SnetTestProgram.Forms
             MessageBox.Show("=====Max=====" + '\n' + maxList[0] + "msec" + '\n' + maxList[1] + "msec" + '\n' + maxList[2] + "msec" + '\n');
 
             Logger.WriteLog("==========<"+_job.Type+">===================================================================");
-            Logger.WriteLog("total: "+time + "msec, "+ "min: " + min + "msec, " + "avg: " + avg + "msec, "+"count: " + repeatNum);
+            Logger.WriteLog("total: "+time + "msec, "+ "min: " + min + "msec, " + "avg: " + avg + "msec, "+"count: " + cnt);
             Logger.WriteLog("TOP5: " + maxList[0] + "msec, "+ maxList[1] + "msec, " + maxList[2] + "msec, " + maxList[3] + "msec, " + maxList[4] + "msec");
             Logger.WriteLogList(timeList);
             Logger.WriteLog("====================================================================================");
