@@ -50,9 +50,10 @@ namespace SnetTestProgram.Forms
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.tbResult2 = new System.Windows.Forms.TextBox();
+            this.tbType = new System.Windows.Forms.TextBox();
             this.timerSPTP = new System.Windows.Forms.Timer(this.components);
             this.timerCount = new System.Windows.Forms.Timer(this.components);
-            this.tbType = new System.Windows.Forms.TextBox();
+            this.btnRelease = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,10 +82,11 @@ namespace SnetTestProgram.Forms
             this.tableLayoutPanel1.Controls.Add(this.tbPosition_2, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbAxis_1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbResult, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonStart, 4, 6);
             this.tableLayoutPanel1.Controls.Add(this.buttonStop, 5, 6);
             this.tableLayoutPanel1.Controls.Add(this.tbResult2, 5, 2);
             this.tableLayoutPanel1.Controls.Add(this.tbType, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonStart, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnRelease, 4, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(56, 47);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -245,7 +247,7 @@ namespace SnetTestProgram.Forms
             this.buttonStart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStart.Location = new System.Drawing.Point(462, 323);
+            this.buttonStart.Location = new System.Drawing.Point(331, 323);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(90, 30);
             this.buttonStart.TabIndex = 20;
@@ -275,6 +277,14 @@ namespace SnetTestProgram.Forms
             this.tbResult2.Size = new System.Drawing.Size(100, 21);
             this.tbResult2.TabIndex = 36;
             // 
+            // tbType
+            // 
+            this.tbType.Location = new System.Drawing.Point(558, 3);
+            this.tbType.Name = "tbType";
+            this.tbType.ReadOnly = true;
+            this.tbType.Size = new System.Drawing.Size(100, 21);
+            this.tbType.TabIndex = 37;
+            // 
             // timerSPTP
             // 
             this.timerSPTP.Tick += new System.EventHandler(this.timerSPTP_Tick);
@@ -283,13 +293,19 @@ namespace SnetTestProgram.Forms
             // 
             this.timerCount.Tick += new System.EventHandler(this.timerCount_Tick);
             // 
-            // tbType
+            // btnRelease
             // 
-            this.tbType.Location = new System.Drawing.Point(558, 3);
-            this.tbType.Name = "tbType";
-            this.tbType.ReadOnly = true;
-            this.tbType.Size = new System.Drawing.Size(100, 21);
-            this.tbType.TabIndex = 37;
+            this.btnRelease.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRelease.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnRelease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRelease.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRelease.Location = new System.Drawing.Point(462, 323);
+            this.btnRelease.Name = "btnRelease";
+            this.btnRelease.Size = new System.Drawing.Size(90, 30);
+            this.btnRelease.TabIndex = 39;
+            this.btnRelease.Text = "Release";
+            this.btnRelease.UseVisualStyleBackColor = false;
+            this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click);
             // 
             // FormSinglePTP
             // 
@@ -330,5 +346,6 @@ namespace SnetTestProgram.Forms
         private System.Windows.Forms.Timer timerCount;
         private System.Windows.Forms.TextBox tbResult2;
         private System.Windows.Forms.TextBox tbType;
+        private System.Windows.Forms.Button btnRelease;
     }
 }

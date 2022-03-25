@@ -47,6 +47,20 @@ namespace SnetTestProgram.Forms
             }
             return flag;
         }
+
+        public void StopWait()
+        {
+            bool waiting = false;
+            _snetDevice.IsWaitingInterruptEvent(0, ref waiting);
+
+            if (waiting)
+            {
+                _snetDevice.ReleaseWaitingInterruptEvent(0);
+            }
+
+            MessageBox.Show("Release Wait");
+        }
+
         #endregion
 
         #region Events
@@ -147,5 +161,10 @@ namespace SnetTestProgram.Forms
             tbResult2.Text = cnt.ToString();
         }
         #endregion
+
+        private void btnRelease_Click(object sender, EventArgs e)
+        {
+            StopWait();
+        }
     }
 }
