@@ -19,7 +19,6 @@ namespace SnetTestProgram
             _iControllerWait = controllerWait;
         }
 
-        // public int axis;
         bool enable = true;
 
         public string Type
@@ -31,8 +30,10 @@ namespace SnetTestProgram
 
                 if (_iControllerWait is InterruptWait)
                     return "Event";
+
                 if (_iControllerWait is InterruptFunction)
                     return "Function";
+
                 return _iControllerWait.GetType().Name;
             }
         }

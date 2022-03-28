@@ -160,11 +160,13 @@ namespace SnetTestProgram.Forms
         {
             tbResult2.Text = cnt.ToString();
         }
-        #endregion
 
         private void btnRelease_Click(object sender, EventArgs e)
         {
             StopWait();
         }
+        #endregion
+
+
     }
 }
