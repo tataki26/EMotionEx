@@ -1,0 +1,10 @@
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\bin\Debug\DllTestProgram.exe.config
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\bin\Debug\DllTestProgram.exe
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\bin\Debug\DllTestProgram.pdb
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\obj\Debug\DllTestProgram.csproj.AssemblyReference.cache
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\obj\Debug\DllTestProgram.mainForm.resources
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\obj\Debug\DllTestProgram.Properties.Resources.resources
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\obj\Debug\DllTestProgram.csproj.GenerateResource.cache
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\obj\Debug\DllTestProgram.csproj.CoreCompileInputs.cache
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\obj\Debug\DllTestProgram.exe
+D:\LYS\EMotionEx\DllTestProgram\DllTestProgram\obj\Debug\DllTestProgram.pdb
