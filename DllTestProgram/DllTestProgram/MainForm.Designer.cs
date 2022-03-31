@@ -110,6 +110,7 @@ namespace DllTestProgram
             this.btnDisconnect.TabIndex = 3;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // btnStart
             // 

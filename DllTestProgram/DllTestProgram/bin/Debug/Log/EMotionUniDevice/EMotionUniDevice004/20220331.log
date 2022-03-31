@@ -1,0 +1,4 @@
+15:37:09.784 SYSTEM(000013AB) UniDevice::SendComMessage : Send 0: Device sequence number and API sequence number are same.
+15:37:43.268 SYSTEM(000004CD) UniDevice::Reset : Not to connect to device.
+15:41:26.618 SYSTEM(000013AB) UniDevice::SendComMessage : Send 0: Device sequence number and API sequence number are same.
+15:41:30.439 SYSTEM(000004CD) UniDevice::Reset : Not to connect to device.

@@ -1,0 +1,2 @@
+15:37:43.268 SYSTEM(00000000) UdpClient::Disconnect : Replied max time(usec): 389.900000, average time(usec): 389.900000
+15:41:30.439 SYSTEM(00000000) UdpClient::Disconnect : Replied max time(usec): 404.400000, average time(usec): 335.150000
