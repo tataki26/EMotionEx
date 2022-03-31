@@ -423,3 +423,4 @@
 15:41:28.965 SYSTEM(000004CD) UdpClient::Request : Not connect to server.
 15:41:29.479 SYSTEM(000004CD) UdpClient::Request : Not connect to server.
 15:41:29.485 SYSTEM(000004CD) UdpClient::Disconnect : Not connect to server.
+16:27:40.373 EVENT0(00000102) UdpClient::Request : No reply data from server to client(port : 51759). send index 0 to server

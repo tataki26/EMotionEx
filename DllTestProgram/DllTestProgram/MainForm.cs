@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,11 +20,21 @@ namespace DllTestProgram
         private SnetDevice _snetDevice = new SnetDevice();
         private UniDevice _uniDevice = new UniDevice();
 
+        public bool _sFlag = true;
+        public bool _uFlag = true;
+
         public mainForm()
         {
             InitializeComponent();
         }
 
+        [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod")]
+        public static extern uint timeBeginPeriod(uint uMilliseconds);
+
+        [DllImport("winmm.dll", EntryPoint = "timeEndPeriod")]
+        public static extern uint timeEndPeriod(uint uMilliseconds);
+
+        #region Events
         private void btnConnect_Click(object sender, EventArgs e)
         {
             int s_net = 1;
@@ -92,5 +103,80 @@ namespace DllTestProgram
                 Debug.WriteLine("[UNI] Disconnection Success");
             }
         }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            int s_axis = 2;
+            int s_pos = 0;
+
+            int s_status = 0;
+
+            int s_success = 0;
+            int s_fail = 0;
+
+            int u_axis = 0;
+            int u_pos = 0;
+
+            int u_status = 0;
+
+            int u_success = 0;
+            int u_fail = 0;
+
+            var sThread = new Thread(() =>
+            {
+                while (_sFlag)
+                {
+                    s_status = _snetDevice.GetCommandPosition(s_axis, ref s_pos);
+
+                    if (s_status == (int)SnetDevice.eSnetApiReturnCode.Success)
+                    {
+                        s_success++;
+                    }
+                    else s_fail++;
+
+                    timeBeginPeriod(1);
+                    Thread.Sleep(1);
+                    timeEndPeriod(1);
+                }
+                MessageBox.Show("======<SNET>======\n"+"success: " + s_success.ToString() + '\n' + "fail: " + s_fail.ToString());
+            }
+            );
+
+            var uThread = new Thread(() =>
+            {
+                while (_uFlag)
+                {
+                    u_status = _uniDevice.GetCommandPosition(u_axis, ref u_pos);
+
+                    if (u_status == (int)UniDevice.eUniApiReturnCode.Success)
+                    {
+                        u_success++;
+                    }
+                    else u_fail++;
+
+                    timeBeginPeriod(1);
+                    Thread.Sleep(1);
+                    timeEndPeriod(1);
+                }
+                MessageBox.Show("======<UNI>======\n"+"success: " +u_success.ToString()+'\n'+"fail: "+u_fail.ToString());
+            }
+            );
+
+            sThread.Start();
+            uThread.Start();
+
+            // sThread.Join();
+            // uThread.Join();
+
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            _sFlag = false;
+            _uFlag = false;
+
+        }
+
+        #endregion
     }
 }
