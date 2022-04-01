@@ -124,9 +124,34 @@ namespace DllTestProgram
 
             var sThread = new Thread(() =>
             {
-                while (_sFlag)
+                int i = 0;
+                int avg = 0;
+                int time = 0;
+                int total = 0;
+
+                List<int> timeList = new List<int>();
+                timeList.Clear();
+
+                // while (_sFlag)
+                while(i<1000)
                 {
+                    i++;
+
+                    time = 0;
+
+                    Stopwatch s_sw = new Stopwatch();
+
+                    s_sw.Start();
+
                     s_status = _snetDevice.GetCommandPosition(s_axis, ref s_pos);
+
+                    s_sw.Stop();
+
+                    time = (int)s_sw.ElapsedTicks/100;
+                    timeList.Add(time);
+
+                    total += time;
+                    avg = total / i;
 
                     if (s_status == (int)SnetDevice.eSnetApiReturnCode.Success)
                     {
@@ -137,16 +162,47 @@ namespace DllTestProgram
                     timeBeginPeriod(1);
                     Thread.Sleep(1);
                     timeEndPeriod(1);
+
                 }
                 MessageBox.Show("======<SNET>======\n"+"success: " + s_success.ToString() + '\n' + "fail: " + s_fail.ToString());
+                MessageBox.Show("[SNET] avg: " + avg+"nsec");
+
+                Logger.WriteLog("======<SNET>======\n" + "success: " + s_success.ToString() + '\n' + "fail: " + s_fail.ToString());
+                Logger.WriteLogList(timeList);
+                
             }
             );
 
             var uThread = new Thread(() =>
             {
-                while (_uFlag)
+                int i = 0;
+                int avg = 0;
+                int time = 0;
+                int total = 0;
+
+                List<int> timeList = new List<int>();
+                timeList.Clear();
+
+                // while (_uFlag)
+                while (i < 1000)
                 {
+                    i++;
+
+                    time = 0;
+
+                    Stopwatch u_sw = new Stopwatch();
+
+                    u_sw.Start();
+
                     u_status = _uniDevice.GetCommandPosition(u_axis, ref u_pos);
+
+                    u_sw.Stop();
+
+                    time = (int)u_sw.ElapsedTicks / 100;
+                    timeList.Add(time);
+
+                    total += time;
+                    avg = total / i;
 
                     if (u_status == (int)UniDevice.eUniApiReturnCode.Success)
                     {
@@ -158,14 +214,18 @@ namespace DllTestProgram
                     Thread.Sleep(1);
                     timeEndPeriod(1);
                 }
-                MessageBox.Show("======<UNI>======\n"+"success: " +u_success.ToString()+'\n'+"fail: "+u_fail.ToString());
+                // MessageBox.Show("======<UNI>======\n"+"success: " +u_success.ToString()+'\n'+"fail: "+u_fail.ToString());
+                // MessageBox.Show("[UNI] avg: " + avg + "nsec");
+
+                // Logger.WriteLog("======<UNI>======\n" + "success: " + s_success.ToString() + '\n' + "fail: " + s_fail.ToString());
+                // Logger.WriteLogList(timeList);
             }
             );
 
             sThread.Start();
             uThread.Start();
 
-            // sThread.Join();
+            sThread.Join();
             // uThread.Join();
 
         }
