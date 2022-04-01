@@ -168,6 +168,7 @@ namespace DllTestProgram
                 MessageBox.Show("[SNET] avg: " + avg+"nsec");
 
                 Logger.WriteLog("======<SNET>======\n" + "success: " + s_success.ToString() + '\n' + "fail: " + s_fail.ToString());
+                Logger.WriteLog("[SNET] avg: " + avg + "nsec");
                 Logger.WriteLogList(timeList);
                 
             }
@@ -218,6 +219,7 @@ namespace DllTestProgram
                 // MessageBox.Show("[UNI] avg: " + avg + "nsec");
 
                 // Logger.WriteLog("======<UNI>======\n" + "success: " + s_success.ToString() + '\n' + "fail: " + s_fail.ToString());
+                // Logger.WriteLog("[UNI] avg: " + avg + "nsec");
                 // Logger.WriteLogList(timeList);
             }
             );
