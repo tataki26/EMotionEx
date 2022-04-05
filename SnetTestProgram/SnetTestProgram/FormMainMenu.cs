@@ -18,18 +18,16 @@ namespace SnetTestProgram
         private Form activeForm;
 
         private SnetDevice _snetDevice = new SnetDevice();
-        private PollingWait _pollingWait = null;
-        private InterruptWait _interruptWait = null;
         private Job _job = null;
+        private IWait _iWait = null;        
         #endregion
 
         public FormMainMenu()
         {
             InitializeComponent();
 
-            _pollingWait = new PollingWait(_snetDevice);
-            _interruptWait = new InterruptWait(_snetDevice);
-            _job = new Job(_pollingWait);
+            _iWait = new PollingWait(_snetDevice);
+            _job = new Job(_iWait);
         }
 
         #region Methods

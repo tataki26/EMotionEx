@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using EMotionSnetBase;
 using System.Threading;
-using System.Security;
 using System.Diagnostics;
 
 namespace SnetTestProgram
 { 
-    public interface IControllerWait
+    public interface IWait
     {
         int WaitMotionDone(int axis);
     }
 
-    public class PollingWait : IControllerWait
+    public class PollingWait : IWait
     {
         [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod")]
         public static extern uint timeBeginPeriod(uint uMilliseconds);
@@ -58,104 +52,109 @@ namespace SnetTestProgram
 
     }
 
-    public class InterruptWait : IControllerWait
+    public class InterruptEventWait : IWait
     {
         private SnetDevice _snetDevice;
-        SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
+        SnetDevice.InterruptEventTableInfo interruptEventTableInfo = new SnetDevice.InterruptEventTableInfo();
 
-        public InterruptWait(SnetDevice snetDevice)
+        public InterruptEventWait(SnetDevice snetDevice)
         {
             _snetDevice = snetDevice;
 
         }
 
-        public void InitInterruptTable()
+        public void InitInterruptEventTable()
         {
+            bool enable = true;
+
             _snetDevice.ClearInterruptEventTable();
 
-            ieti.oneshot = 0;
-            ieti.axis_index = 2;
-            ieti.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
-            ieti.input_channel = -1;
-            ieti.input_type = -1;
-            ieti.input_port = -1;
-            ieti.input_point = -1;
-            ieti.input_active = 0;
+            interruptEventTableInfo.oneshot = 0;
+            interruptEventTableInfo.axis_index = 2;
+            interruptEventTableInfo.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
+            interruptEventTableInfo.input_channel = -1;
+            interruptEventTableInfo.input_type = -1;
+            interruptEventTableInfo.input_port = -1;
+            interruptEventTableInfo.input_point = -1;
+            interruptEventTableInfo.input_active = 0;
            
-            _snetDevice.SetInterruptEventTable(0, true, ieti);
-            _snetDevice.EnableInterruptEvent(true);
+            _snetDevice.SetInterruptEventTable(0, enable, interruptEventTableInfo);
+            _snetDevice.EnableInterruptEvent(enable);
 
         }
 
         public int WaitMotionDone(int axis)
         {
             bool motionDone = false;
-            int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
-            returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
+            
+            int returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
 
-            if ((!motionDone) && returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
+            if (returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
             {
-                returnCode = _snetDevice.WaitInterruptEvent(0, 0);
-
-                if(returnCode == (int)SnetDevice.eSnetApiReturnCode.InterruptEventFailedWaiting)
-                {
-                    Debug.WriteLine("TimeOut!!!");
-                }
+                if (!motionDone) returnCode = _snetDevice.WaitInterruptEvent(0, 0);
+            }
+            else if (returnCode == (int)SnetDevice.eSnetApiReturnCode.InterruptEventFailedWaiting)
+            {
+                Debug.WriteLine("TimeOut!!!");
             }
 
             return returnCode;
         }
     }
 
-    public class InterruptFunction : IControllerWait
+    public class InterruptFunctionWait : IWait
     {
         private SnetDevice _snetDevice;
-        SnetDevice.InterruptEventTableInfo ieti = new SnetDevice.InterruptEventTableInfo();
-        SnetDevice.InterruptEventHandler ieh;
+        SnetDevice.InterruptEventTableInfo interruptEventTableInfo = new SnetDevice.InterruptEventTableInfo();
+        SnetDevice.InterruptEventHandler interruptEventHandler;
         EventWaitHandle eventWaitHanlde = new EventWaitHandle(false, EventResetMode.ManualReset);
 
-        bool motionDone = false;
-
-        public InterruptFunction(SnetDevice snetDevice)
+        public InterruptFunctionWait(SnetDevice snetDevice)
         {
             _snetDevice = snetDevice;
         }
 
-        public void OnRoutineIntteruptEvent(int tableIndex)
+        public void OnIntteruptEventFunction(int tableIdx)
         {
             eventWaitHanlde.Set();
         }
 
-        public void InitInterruptTable()
+        public void InitInterruptEventTable()
         {
-            ieh = OnRoutineIntteruptEvent;
+            bool enable=true;
+
+            interruptEventHandler = OnIntteruptEventFunction;
 
             _snetDevice.ClearInterruptEventTable();
 
-            ieti.oneshot = 0;
-            ieti.axis_index = 2;
-            ieti.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
-            ieti.input_channel = -1;
-            ieti.input_type = -1;
-            ieti.input_port = -1;
-            ieti.input_point = -1;
-            ieti.input_active = 0;
+            interruptEventTableInfo.oneshot = 0;
+            interruptEventTableInfo.axis_index = 2;
+            interruptEventTableInfo.axis_type = (int)SnetDevice.InterruptEventAxisType.MotionDone;
+            interruptEventTableInfo.input_channel = -1;
+            interruptEventTableInfo.input_type = -1;
+            interruptEventTableInfo.input_port = -1;
+            interruptEventTableInfo.input_point = -1;
+            interruptEventTableInfo.input_active = 0;
             
-            _snetDevice.SetInterruptEventTable(0, true, ieti);
-            _snetDevice.SetInterruptEventFunction(ieh);
-            _snetDevice.EnableInterruptEvent(true);
+            _snetDevice.SetInterruptEventTable(0, enable, interruptEventTableInfo);
+            _snetDevice.SetInterruptEventFunction(interruptEventHandler);
+            _snetDevice.EnableInterruptEvent(enable);
             
         }
 
         public int WaitMotionDone(int axis)
         {
-            int returnCode = (int)SnetDevice.eSnetApiReturnCode.Success;
-            returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
+            bool motionDone = false;
+            
+            int returnCode = _snetDevice.GetMotionDone(axis, ref motionDone);
 
-            if ((!motionDone) && returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
+            if (returnCode == (int)SnetDevice.eSnetApiReturnCode.Success)
             {
-                eventWaitHanlde.WaitOne();
-                eventWaitHanlde.Reset();
+                if (!motionDone)
+                {
+                    eventWaitHanlde.WaitOne();
+                    eventWaitHanlde.Reset();
+                }
             }
 
             return returnCode;

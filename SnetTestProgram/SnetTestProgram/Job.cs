@@ -12,11 +12,11 @@ namespace SnetTestProgram
 {
     public class Job
     {
-        private IControllerWait _iControllerWait;
+        private IWait _iWait;
 
-        public Job(IControllerWait controllerWait)
+        public Job(IWait iWait)
         {
-            _iControllerWait = controllerWait;
+            _iWait = iWait;
         }
 
         bool enable = true;
@@ -25,16 +25,16 @@ namespace SnetTestProgram
         {
             get
             {
-                if (_iControllerWait is PollingWait)
+                if (_iWait is PollingWait)
                     return "Polling";
 
-                if (_iControllerWait is InterruptWait)
+                if (_iWait is InterruptEventWait)
                     return "Event";
 
-                if (_iControllerWait is InterruptFunction)
+                if (_iWait is InterruptFunctionWait)
                     return "Function";
 
-                return _iControllerWait.GetType().Name;
+                return _iWait.GetType().Name;
             }
         }
 
@@ -124,7 +124,7 @@ namespace SnetTestProgram
 
             while (jobQueue.Count > 0)
             {
-                int motionDone = _iControllerWait.WaitMotionDone(axis);
+                int motionDone = _iWait.WaitMotionDone(axis);
 
                 if (motionDone == 0)
                 {
@@ -133,16 +133,16 @@ namespace SnetTestProgram
                 }
             }
 
-            _iControllerWait.WaitMotionDone(axis);
+            _iWait.WaitMotionDone(axis);
 
             stopWatch.Stop();
 
             return (stopWatch.ElapsedMilliseconds).ToString();
         }
 
-        public void SetWait(IControllerWait cw)
+        public void SetWait(IWait iWait)
         {
-            _iControllerWait = cw;
+            _iWait = iWait;
         }
 
         #endregion

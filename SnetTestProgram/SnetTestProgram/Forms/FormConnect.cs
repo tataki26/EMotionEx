@@ -15,7 +15,7 @@ namespace SnetTestProgram.Forms
     public partial class FormConnect : Form
     {
         private int _net = 1;
-        private bool _bConnect = false;
+        private bool _reConnect = false;
 
         private SnetDevice _snetDevice;
 
@@ -30,12 +30,12 @@ namespace SnetTestProgram.Forms
             int status = 0;
             try
             {
-                status = _snetDevice.Connect(_net, false);
+                status = _snetDevice.Connect(_net, _reConnect);
                 if (status == 0)
                 {
                     Debug.WriteLine("Connect Success!!!");
                     MessageBox.Show("Connect Success!!!");
-                    _bConnect = true;
+                    _reConnect = true;
                 }
                 else Debug.WriteLine("Connect Fail!!!");
             }
@@ -44,7 +44,6 @@ namespace SnetTestProgram.Forms
                 Debug.WriteLine(ex.Message);
                 MessageBox.Show(ex.Message);
             }
-           
 
         }
 

@@ -15,9 +15,9 @@ namespace SnetTestProgram.Forms
     {
         private SnetDevice _snetDevice;
         private Job _job;
-        private InterruptWait _interruptWait;
+        private InterruptEventWait _interruptEventWait;
         private PollingWait _pollingWait;
-        private InterruptFunction _interruptFunction;
+        private InterruptFunctionWait _interruptFunctionWait;
 
         public FormInterrupt(SnetDevice snetDevice, Job job)
         {
@@ -27,8 +27,8 @@ namespace SnetTestProgram.Forms
             _job = job;
 
             _pollingWait = new PollingWait(_snetDevice);
-            _interruptWait = new InterruptWait(_snetDevice);
-            _interruptFunction = new InterruptFunction(_snetDevice);
+            _interruptEventWait = new InterruptEventWait(_snetDevice);
+            _interruptFunctionWait = new InterruptFunctionWait(_snetDevice);
 
         }
 
@@ -88,9 +88,9 @@ namespace SnetTestProgram.Forms
             bool check = rbEvent.Checked;
 
             if (check) 
-                _job.SetWait(_interruptWait);
+                _job.SetWait(_interruptEventWait);
 
-            _interruptWait.InitInterruptTable();
+            _interruptEventWait.InitInterruptEventTable();
         }
 
         private void rbFunction_CheckedChanged(object sender, EventArgs e)
@@ -98,9 +98,9 @@ namespace SnetTestProgram.Forms
             bool check = rbFunction.Checked;
 
             if (check) 
-                _job.SetWait(_interruptFunction);
+                _job.SetWait(_interruptFunctionWait);
 
-            _interruptFunction.InitInterruptTable();
+            _interruptFunctionWait.InitInterruptEventTable();
         }
     }
 }
